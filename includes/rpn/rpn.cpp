@@ -16,7 +16,7 @@ void RPN::set_input(Queue<Token *> &tokens, Map<std::string, int> _field_names, 
 vectorlong RPN::operator()()
 {
     Stack<Token *> stack;
-    Queue<ResultSet*> result_queue;
+    Stack<ResultSet*> result_stack;
     Stack<Token*> operator_stack;
 
 
@@ -39,14 +39,14 @@ vectorlong RPN::operator()()
 
             result = static_cast<Relational *>(token)->eval(field_names,table,leftvar, rightvar);
 
-            result_queue.push(result);
+            result_stack.push(result);
         }
         else if(token->TypeOf() == LOGICAL)
         {
 
-            result = static_cast<Logical*>(token)->eval(result_queue.pop(), result_queue.pop());
+            result = static_cast<Logical*>(token)->eval(result_stack.pop(), result_stack.pop());
 
-            result_queue.push(result);
+            result_stack.push(result);
         }
         else if(token->TypeOf() == LEFTPAREN)
         {
@@ -60,7 +60,7 @@ vectorlong RPN::operator()()
 
     }
 
-    ResultSet* res = result_queue.pop();
+    ResultSet* res = result_stack.pop();
 
     vectorlong result_records = res->get_recnos();
 

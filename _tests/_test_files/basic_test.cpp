@@ -24,7 +24,7 @@ const vector<string> command_list = {
 
 /*05*/     "make table student fields  fname,          lname,    major,    age",
 /*06*/     "insert into student values Flo,            Yao, 	Art, 	20",
-/*07*/     "insert into student values Bo, 		     Yang, 	CS, 		28",
+/*07*/     "insert into student values Bo, 		     Yang, 	CS, 	28 ",
 /*08*/     "insert into student values \"Sammuel L.\", Jackson, 	CS, 		40",
 /*09*/     "insert into student values \"Billy\",	     Jackson, 	Math,	27",
 /*10*/     "insert into student values \"Mary Ann\",   Davis,	Math,	30",
