@@ -1,5 +1,26 @@
 #include "sql.h"
 
+////////////BATCH MODE////////////
+SQL::SQL(string txt_file)
+{
+    txt_file_name = txt_file;
+}
+
+void SQL::file_tokenize(string txt_file)
+{
+    
+}
+
+
+
+
+
+
+
+
+
+
+
 Table SQL::command(string command)
 {   
     //convert string to cstring

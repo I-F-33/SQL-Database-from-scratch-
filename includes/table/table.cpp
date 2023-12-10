@@ -453,6 +453,12 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
         open_fileRW(_file, _table_name.c_str());
 
+        for(int i = 0; i < totalrecnums;i++)
+        {
+            result.recnums.push_back(i);
+        }
+
+
         //iterate through the record numbers
         for(int i = 0; i < recnums.size(); i++)
         {   
