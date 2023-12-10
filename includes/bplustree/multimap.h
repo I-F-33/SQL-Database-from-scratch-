@@ -265,12 +265,34 @@ public:
         
         while(lowerb != upperb)
         {
-
             MPair<K, V> m = *lowerb;
-            for(V element : m.value_list)
+
+            if(upperb == Iterator())
             {
-                v.push_back(element);
+                 for(V element : m.value_list)
+                {
+                    v.push_back(element);
+                }
             }
+            else 
+            {
+                MPair<K, V> m2 = *upperb;
+
+                if(m.key < m2.key)
+                {
+                    for(V element : m.value_list)
+                    {
+                        v.push_back(element);
+                    }
+                }
+                else
+                {
+                    break;
+                }
+
+            }
+            
+            
 
             lowerb++;
         }

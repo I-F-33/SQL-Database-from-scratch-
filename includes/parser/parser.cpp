@@ -209,7 +209,21 @@
             }
             else if(t.type_string() == "OPERATOR")
             {
-                input_queue.push(t.token_str());
+                if(t.token_str() == "((")
+                {
+                    input_queue.push("(");
+                    input_queue.push("(");
+                }
+                else if(t.token_str() == "))")
+                {
+                    input_queue.push(")");
+                    input_queue.push(")");
+                }
+                else
+                {
+                    input_queue.push(t.token_str());
+                }
+                
             }
             else if(t.type_string() == "PUNCTUATION")
             {

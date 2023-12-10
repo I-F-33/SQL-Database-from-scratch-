@@ -379,21 +379,23 @@ class BPlusTree
     Iterator lower_bound(const T& key)  //return first that goes NOT BEFORE key entry or next if does not exist: >= entry
     {
         Iterator it = begin();
+       // Iterator next = begin();
+      //  next++;
 
         while(next != end())
         {
-            Iterator next = it++;
-            if(*it < key && *next >= key)
+            
+           /*  if(*it < key && *next >= key)
             {
                 return it;
             }
-            else if(*it >= key)
+            else  */if(*it >= key)
             {
                 return it;
             }
 
             it++;
-            next++;
+          //  next++;
         }
 
         return Iterator(NULL);
