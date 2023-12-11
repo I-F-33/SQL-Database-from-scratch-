@@ -23,18 +23,15 @@ void SQL::file_tokenize(string txt_file)
 
 Table SQL::command(string command)
 {   
-    //convert string to cstring
-    char* command_cstr = new char[command.length()];
-    strcpy(command_cstr, command.c_str());
 
     //create parser object
-    Parser p(command_cstr);
+    Parser p(command.c_str());
 
-    delete[] command_cstr;
     //if the parse tree is valid, run the command
-   
-        mmap_ss parse_map = p.parse_tree();
-        return run_command(parse_map);
+    mmap_ss parse_map = p.parse_tree();
+
+
+    return run_command(parse_map);
     
   
 }

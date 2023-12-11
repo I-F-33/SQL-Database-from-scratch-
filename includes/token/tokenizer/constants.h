@@ -6,9 +6,9 @@ const int MAX_BUFFER = 200;
 
 const char ALFA[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ*";
 const char DIGITS[] = "0123456789";
-const char OPERATORS[] = "><=!+-%&|()";
+const char OPERATORS[] = "><=!+-%&|";
 const char SPACES[] = {' ', '\t', '\n', '\0'};
-const char PUNC[] = "?.,:;'`~!\"";
+const char PUNC[] = "?.,:;'`~!\"()";
 const int START_DOUBLE = 0;
 const int START_SPACES = 4;
 const int START_ALPHA = 6;

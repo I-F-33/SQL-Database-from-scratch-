@@ -180,15 +180,16 @@
 
     }
 
-    Parser::Parser(char* s)
+    Parser::Parser(const char* s)
     {
         init_keywords_map();
         init_parse_table();
         set_string(s);
     }
 
-    void Parser::set_string(char* s)
+    void Parser::set_string(const char* s)
     {
+
         _ptree.clear();
 
         _stk.set_string(s);
@@ -209,20 +210,10 @@
             }
             else if(t.type_string() == "OPERATOR")
             {
-                if(t.token_str() == "((")
-                {
-                    input_queue.push("(");
-                    input_queue.push("(");
-                }
-                else if(t.token_str() == "))")
-                {
-                    input_queue.push(")");
-                    input_queue.push(")");
-                }
-                else
-                {
+                
+                
                     input_queue.push(t.token_str());
-                }
+                
                 
             }
             else if(t.type_string() == "PUNCTUATION")

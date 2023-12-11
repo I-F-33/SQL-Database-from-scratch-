@@ -13,7 +13,7 @@ class STokenizer
 public:
     STokenizer();   //default constructor
 
-    STokenizer(char str[]);   //constructor that sets the string
+    STokenizer(const char str[]);   //constructor that sets the string
 
 
     bool done();            //true: there are no more tokens
@@ -45,7 +45,7 @@ public:
 
 
     //set a new string as the input string
-    void set_string(char str[]);
+    void set_string(const char str[]);
 
 private:
     //create table for all the tokens we will recognize

@@ -10,7 +10,7 @@
 
     };   //default constructor
 
-    STokenizer::STokenizer(char str[]): _pos(0), _done(false)   //constructor that sets the string
+    STokenizer::STokenizer(const char str[]): _pos(0), _done(false)   //constructor that sets the string
     {
         set_string(str);
         make_table(_table);
@@ -66,7 +66,7 @@
     //@PARAM str, the string that will be tokenized
     //set a new string as the input string
     //position is set to 0 and _done is set to false
-    void STokenizer::set_string(char str[])
+    void STokenizer::set_string(const char str[])
     {
         strcpy(_buffer,str);
         _pos = 0;

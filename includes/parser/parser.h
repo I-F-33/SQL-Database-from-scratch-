@@ -9,9 +9,9 @@ class Parser
 {
     public : 
 
-        Parser(char* s);
+        Parser(const char* s);
 
-        void set_string(char* s);
+        void set_string(const char* s);
 
         int get_column(string s);
 
