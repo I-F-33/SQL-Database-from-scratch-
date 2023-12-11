@@ -185,8 +185,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         for(int i = 0; i < values.size(); i++)
         {
 
-            table.at(i)[values[i]] += recno;
-            
+            table[i].insert(values[i], recno);            
             
 
         }
@@ -290,7 +289,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //organize the record to the columns
             for(int j = 0; j < columns.size(); j++)
             {
-                resultrecord.push_back(record[field_names.get(columns.at(j))]);
+                resultrecord.push_back(record[field_names.get(columns[j])]);
             }
 
             //insert the record into the result table
@@ -471,7 +470,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //organize the record to the columns
             for(int j = 0; j < columns.size(); j++)
             {
-                resultrecord.push_back(record[field_names.get(columns.at(j))]);
+                resultrecord.push_back(record[field_names.get(columns[j])]);
             }
 
             //insert the record into the result table
@@ -533,7 +532,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         for(int i = 0; i < recnos.size(); i++)
         {   
             //read the record
-            fileRecord.read(_file, recnos.at(i));
+            fileRecord.read(_file, recnos[i]);
 
             //get the record values
             vectorstr record = fileRecord.get_record();
@@ -541,13 +540,13 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //organize the record to the columns
             for(int j = 0; j < field_names_vectr.size(); j++)
             {
-                resultrecord.push_back(record[field_names.get(field_names_vectr.at(j))]);
+                resultrecord.push_back(record[field_names.get(field_names_vectr[j])]);
             }
 
             //insert the record into the result table
             result.insert_into(resultrecord);
 
-            result.recnums.push_back(recnos.at(i));
+            result.recnums.push_back(recnos[i]);
 
             resultrecord.clear();
         }
