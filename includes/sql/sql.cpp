@@ -24,7 +24,7 @@ void SQL::file_tokenize(string txt_file)
 Table SQL::command(string command)
 {   
     //convert string to cstring
-    char* command_cstr = new char[command.length() + 1];
+    char* command_cstr = new char[command.length()];
     strcpy(command_cstr, command.c_str());
 
     //create parser object

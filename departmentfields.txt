@@ -1,0 +1,4 @@
+depid
+depname
+location
+manager

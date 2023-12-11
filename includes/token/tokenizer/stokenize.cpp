@@ -144,7 +144,7 @@
         mark_success(_table,25);
 
         mark_cells(0,_table,PUNC,25);
-        mark_cells(25,_table,PUNC,25);
+      //  mark_cells(25,_table,PUNC,25);
 
 
     }

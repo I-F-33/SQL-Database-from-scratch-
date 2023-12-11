@@ -1,3 +1,4 @@
-last
-first
-dep
+fname
+lname
+major
+age

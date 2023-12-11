@@ -171,7 +171,7 @@
         mark_cell(28,_table,COMMA,29);
         mark_cell(29,_table,20,28);
         mark_cell(29,_table,QUOTES,30);
-        mark_cell(28, _table, SPECIALQ,30);
+        mark_cell(28, _table, QUOTES,30);
         mark_cell(30,_table,20,31);
         mark_cell(31,_table,QUOTES,32);
         mark_cell(31, _table, SPECIALQ,29);
@@ -298,23 +298,20 @@
                 //INSERT
                 case VALUES:
 
-                    if((s == ",\"" || s == "\"," || s == "\"")&& !quoted_string_flag)
+                    if((s == "\"" || s == "\"")&& !quoted_string_flag)
                     {
                         quoted_string_flag = true;
                     }
-                    else if((s != ",\"" && s != "\"," )&& !quoted_string_flag) 
+                    else if((s != "\"" && s != "\"" )&& !quoted_string_flag) 
                     {
                         if(s != "," && s != "\"")
                         _ptree.at("values").push_back(s);
                     }
-                    else if((s != ",\"" && s != "\",")&& quoted_string_flag)
+                    else if((s != "\"")&& quoted_string_flag)
                     {
-                         if(s == ".\"" || s == ".\",")
+                         if(s == ".")
                         {
                             quoted_string = quoted_string + ".";
-                            quoted_string_flag = false;
-                            _ptree.at("values").push_back(quoted_string);
-                            quoted_string.clear();
 
                         }
                         else
@@ -331,7 +328,7 @@
 
                         }
                     }
-                    else if((s == ",\"" || s == "\",") && quoted_string_flag)
+                    else if((s == "\"") && quoted_string_flag)
                     {
                         _ptree.at("values").push_back(quoted_string);
                         quoted_string.clear();
