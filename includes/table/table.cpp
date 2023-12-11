@@ -42,7 +42,7 @@ Table::Table(std::string tableName):_table_name(tableName){
 
         for(int i = 0; i < field_names.size();i++)
         {
-            table.at(i).at(record_values[i]) += counter;
+            table.at(i)[record_values[i]] += counter;
         }
 
         recnums.push_back(counter);
@@ -73,9 +73,9 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
         for(int i = 0; i < ftype.size(); i++)   
         {
-            f << ftype.at(i) + "\n";
+            f << ftype[i] + "\n";
 
-            field_names.insert(ftype.at(i), i);
+            field_names.insert(ftype[i], i);
 
             table.push_back(MMap<std::string, long>());
 
@@ -123,39 +123,39 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
         for(int i = 0; i < strings.size(); i++)
         {
-            if(strings.at(i) == "and")
+            if(strings[i] == "and")
             {
                 tokens.push(new Logical("and"));
             }
-            else if(strings.at(i) == "or")
+            else if(strings[i] == "or")
             {
                 tokens.push(new Logical("or"));
             }
-            else if(strings.at(i) == "=")
+            else if(strings[i] == "=")
             {
                 tokens.push(new Relational("="));
             }
-            else if(strings.at(i) == "<")
+            else if(strings[i] == "<")
             {
                 tokens.push(new Relational("<"));
             }
-            else if(strings.at(i) == ">")
+            else if(strings[i] == ">")
             {
                 tokens.push(new Relational(">"));
             }
-            else if(strings.at(i) == "<=")
+            else if(strings[i] == "<=")
             {
                 tokens.push(new Relational("<="));
             }
-            else if(strings.at(i) == ">=")
+            else if(strings[i] == ">=")
             {
                 tokens.push(new Relational(">="));
             }
-            else if(strings.at(i) == "(")
+            else if(strings[i] == "(")
             {
                 tokens.push(new LeftParen());
             }
-            else if(strings.at(i) == ")")
+            else if(strings[i] == ")")
             {
                 tokens.push(new RightParen());
             }
@@ -185,7 +185,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         for(int i = 0; i < values.size(); i++)
         {
 
-            table.at(i)[values.at(i)] += recno;
+            table.at(i)[values[i]] += recno;
             
             
 
@@ -249,7 +249,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //organize the record to the columns
             for(int j = 0; j < field_names_vectr.size(); j++)
             {
-                resultrecord.push_back(record.at(field_names.get(field_names_vectr.at(j))));
+                resultrecord.push_back(record[field_names.get(field_names_vectr.at(j))]);
             }
 
             //insert the record into the result table
@@ -290,7 +290,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //organize the record to the columns
             for(int j = 0; j < columns.size(); j++)
             {
-                resultrecord.push_back(record.at(field_names.get(columns.at(j))));
+                resultrecord.push_back(record[field_names.get(columns.at(j))]);
             }
 
             //insert the record into the result table
@@ -341,7 +341,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //organize the record to the columns
             for(int j = 0; j < columns.size(); j++)
             {
-                resultrecord.push_back(record.at(field_names.get(columns.at(j))));
+                resultrecord.push_back(record[field_names.get(columns.at(j))]);
             }
 
             //insert the record into the result table
@@ -370,7 +370,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         int queryfield = field_names.get(field);
 
         //get the map of the field
-        MMap<std::string, long> querymap = table.at(queryfield);
+        MMap<std::string, long> querymap = table[queryfield];
 
         vectorlong recnos;
 
@@ -428,7 +428,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //organize the record to the columns
             for(int j = 0; j < columns.size(); j++)
             {
-                resultrecord.push_back(record.at(field_names.get(columns.at(j))));
+                resultrecord.push_back(record[field_names.get(columns.at(j))]);
             }
 
             //insert the record into the result table
@@ -471,7 +471,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //organize the record to the columns
             for(int j = 0; j < columns.size(); j++)
             {
-                resultrecord.push_back(record.at(field_names.get(columns.at(j))));
+                resultrecord.push_back(record[field_names.get(columns.at(j))]);
             }
 
             //insert the record into the result table
@@ -541,7 +541,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //organize the record to the columns
             for(int j = 0; j < field_names_vectr.size(); j++)
             {
-                resultrecord.push_back(record.at(field_names.get(field_names_vectr.at(j))));
+                resultrecord.push_back(record[field_names.get(field_names_vectr.at(j))]);
             }
 
             //insert the record into the result table

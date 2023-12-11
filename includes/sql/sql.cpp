@@ -41,13 +41,13 @@ Table SQL::command(string command)
 
 Table SQL::run_command(mmap_ss& parse_map)
 {
-    vectorstr command = parse_map.at("command");
+    vectorstr command = parse_map["command"];
 
     //if the command is make
     if(command[0] == "make")
     {
-        vectorstr tablename = parse_map.at("table_name");
-        vectorstr column_names = parse_map.at("columns");
+        vectorstr tablename = parse_map["table_name"];
+        vectorstr column_names = parse_map["columns"];
         //create a table with the name specified
         Table result(tablename[0], column_names);
 
@@ -55,14 +55,14 @@ Table SQL::run_command(mmap_ss& parse_map)
     }
 
     //then table exists
-    vectorstr table_name = parse_map.at("table_name");
+    vectorstr table_name = parse_map["table_name"];
 
     Table result(table_name[0]);
 
     //if the command is insert
     if(command[0] == "insert")
     {
-        vectorstr values = parse_map.at("values");
+        vectorstr values = parse_map["values"];
 
         //insert the values into the table
         result.insert_into(values);
@@ -71,9 +71,9 @@ Table SQL::run_command(mmap_ss& parse_map)
     //if the command is select
     else if(command[0] == "select")
     {
-        vectorstr fields = parse_map.at("fields");
-        vectorstr where = parse_map.at("where");
-        vectorstr condition = parse_map.at("condition");
+        vectorstr fields = parse_map["fields"];
+        vectorstr where = parse_map["where"];
+        vectorstr condition = parse_map["condition"];
 
         //create a table with the name specified
 
@@ -87,11 +87,8 @@ Table SQL::run_command(mmap_ss& parse_map)
 
                 recnos = t.select_recnos();
 
-
-
                 return t;
                 
-
             }
             //else select the columns specified
             else
