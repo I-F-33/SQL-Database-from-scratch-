@@ -12,7 +12,6 @@ Table::Table(std::string tableName):_table_name(tableName){
     fstream field_file(fields_filename,field_file.in);
 
     //open the table data
-    open_fileRW(_file,tableName.c_str());
 
     //set the table field names to "tablename" field names
     long counter = 0;
@@ -28,7 +27,12 @@ Table::Table(std::string tableName):_table_name(tableName){
         counter++;
     }
 
+    field_file.close();
+
+    int field_names_size = counter;
     
+    open_fileRW(_file,tableName.c_str());
+
 
     //insert the records from "tablename" to this table
 
@@ -40,9 +44,9 @@ Table::Table(std::string tableName):_table_name(tableName){
     {
         record_values = recordHolder.get_record();
 
-        for(int i = 0; i < field_names.size();i++)
+        for(int i = 0; i < field_names_size;i++)
         {
-            table.at(i)[record_values[i]] += counter;
+            table.at(i).insert(record_values[i],counter);
         }
 
         recnums.push_back(counter);
@@ -53,7 +57,6 @@ Table::Table(std::string tableName):_table_name(tableName){
 
 
     //close streams
-    field_file.close();
 
     _file.close();
         
@@ -84,7 +87,6 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         f.close();
 
         _file.close();
-
     }
 
     // big three
@@ -185,7 +187,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         for(int i = 0; i < values.size(); i++)
         {
 
-            table[i].insert(values[i], recno);            
+            table[i].insert(values[i], recno);      
             
 
         }
@@ -371,13 +373,15 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         //get the map of the field
         MMap<std::string, long> querymap = table[queryfield];
 
+        cout << querymap << endl;
+
         vectorlong recnos;
 
 
         if(operato == "=")
         {
             //get the record numbers
-            recnos = querymap.get(query);
+            recnos = querymap[query];
             
         }
         else if(operato == "<")
@@ -419,7 +423,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         for(int i = 0; i < recnos.size(); i++)
         {   
             //read the record
-            fileRecord.read(result._file, recnos.at(i));
+            fileRecord.read(_file, recnos.at(i));
 
             //get the record values
             vectorstr record = fileRecord.get_record();

@@ -112,9 +112,9 @@ public:
     }
 
 //  Capacity
-    int size() const
+    int size()
     {
-        return key_count;
+        return map.size();
     }
 
     bool empty() const
@@ -271,6 +271,7 @@ public:
     }
 private:
     int key_count;
+
     BPlusTree<Pair<K, V> > map;
 };
 

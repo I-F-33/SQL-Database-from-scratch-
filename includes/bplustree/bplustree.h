@@ -261,7 +261,8 @@ class BPlusTree
 
     bool contains (const T &entry) // true if entry can be found in the array
     {
-        int index = first_ge(data, data_count, entry);
+        int index = first_ge(data, data_count, entry);// > data_count ? data_count - 1 : first_ge(data, data_count, entry);
+
 
         bool found = data[index] == entry;
 
@@ -379,26 +380,19 @@ class BPlusTree
     Iterator lower_bound(const T& key)  //return first that goes NOT BEFORE key entry or next if does not exist: >= entry
     {
         Iterator it = begin();
-       // Iterator next = begin();
-      //  next++;
+     
 
-        while(next != end())
+        while(it != end())
         {
-            
-           /*  if(*it < key && *next >= key)
-            {
-                return it;
-            }
-            else  */if(*it >= key)
+         if(*it >= key)
             {
                 return it;
             }
 
             it++;
-          //  next++;
         }
 
-        return Iterator(NULL);
+        return Iterator(nullptr,0);
     }
 
     Iterator upper_bound(const T& key)  //return first that goes AFTER key exist or not, the next entry  >entry
@@ -450,11 +444,19 @@ class BPlusTree
     {
         int size = 0;
 
-        Iterator it = begin();
+        if (!is_leaf())
+        {
+            size += subset[child_count - 1]->size();
+        }
 
-        for(; it != end(); it++)
+        for (int i = data_count - 1; i >= 0; i--)
         {
             size++;
+
+            if (!is_leaf())
+            {
+                size += subset[i]->size();
+            }
         }
 
         return size;
@@ -750,12 +752,14 @@ private:
     void loose_insert(const T &entry, bool dup_found = false) // allows MAXIMUM+1 data elements in the root
     {
         
+        int index = first_ge(data, data_count, entry);
+
          // insert into the leaf
         if (is_leaf())
         {
             if(dup_found)
             {
-                data[0] = entry;
+                data[index]  = data[index] + entry;
             }
             else{
 
@@ -765,16 +769,15 @@ private:
             return;
         }
 
-        int index = first_ge(data, data_count, entry);
 
         // if this is a duplicate then return and terminate program
         if (data[index] == entry && !is_leaf())
         {
-            subset[index + 1]->loose_insert(entry,true);
+            subset[index + 1]->loose_insert(entry,dup_found);
         }        
         else
         { // if its not a leaf then recurse
-            subset[index]->loose_insert(entry);
+            subset[index]->loose_insert(entry, dup_found);
         }
 
         // if the child is too big then fix excess

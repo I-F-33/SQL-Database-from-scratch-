@@ -84,9 +84,15 @@ struct MPair{
     {
         return lhs.key > rhs.key;
     }
-    friend MPair<K, V> operator += (const MPair<K, V>& lhs, const MPair<K, V>& rhs)
+    friend MPair<K, V> operator + (const MPair<K, V>& lhs, const MPair<K, V>& rhs)
     {
-        return MPair<K, V>(lhs.key, lhs.value_list + rhs.value_list);
+        vector<V> new_vector;
+
+        new_vector.reserve( lhs.value_list.size() + rhs.value_list.size() ); // preallocate memory
+        new_vector.insert( new_vector.end(), lhs.value_list.begin(), lhs.value_list.end() );
+        new_vector.insert( new_vector.end(), rhs.value_list.begin(), rhs.value_list.end() );
+
+        return MPair<K, V>(lhs.key, new_vector);
     }
 };
 

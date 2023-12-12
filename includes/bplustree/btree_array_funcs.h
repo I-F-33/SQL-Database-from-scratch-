@@ -66,8 +66,12 @@ int first_ge(const T data[ ], int n, const T& entry)   //return the first elemen
     
     for(int i = 0; i < n; i++)
     {
+        
         if(data[i] >= entry)
+        {
             return i;
+
+        }
     }
 
     return n;
