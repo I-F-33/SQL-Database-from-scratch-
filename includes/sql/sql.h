@@ -16,7 +16,7 @@ class SQL
 
         SQL(){};
 
-        ~SQL(){};
+        //~SQL(){};
 
         /// @brief returns a table based on the command
         /// @param command 
@@ -39,6 +39,9 @@ class SQL
         vectorlong recnos;
 
         string txt_file_name = "";
+
+        //Parser parser;
+
     
 };
 

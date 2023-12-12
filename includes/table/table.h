@@ -40,10 +40,16 @@ class Table{
     /// @param other 
     /// @return this is the new table, this
     Table operator = (const Table& other){
+        fstream _file;
+
         open_fileRW(_file, other._table_name.c_str());
         _table_name = other._table_name;
         field_names = other.field_names;
         totalrecnums = other.totalrecnums;
+        table = other.table;
+        recnums = other.recnums;
+
+        _file.close();
         return *this;
     }
 
@@ -107,11 +113,13 @@ class Table{
     /// @param t 
     /// @return outs
     friend ostream& operator << (ostream& outs, Table t){
-        t._file.close();
-        open_fileRW(t._file, t._table_name.c_str());
+        
+        fstream _file;
+
+        open_fileRW(_file, t._table_name.c_str());
         
         int i = 0;
-        long bytes = t.fileRecord.read(t._file, i);
+        long bytes = t.fileRecord.read(_file, i);
         
         outs << "Table name: " << t._table_name << ", records: " << t.totalrecnums << endl;
 
@@ -147,10 +155,12 @@ class Table{
             outs << "     " << i << setw(20) << t.fileRecord << endl;
             vectorstr vecs = t.fileRecord.get_record();
             i++;
-            bytes = t.fileRecord.read(t._file, i);
+            bytes = t.fileRecord.read(_file, i);
         }
 
-        t._file.close();
+        _file.close();
+
+        f.close();
 
         return outs;
     } 
@@ -171,7 +181,6 @@ class Table{
 
         vector<long> recnums;
 
-        fstream _file;
 };
 
 

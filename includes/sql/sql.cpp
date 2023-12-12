@@ -22,16 +22,22 @@ void SQL::file_tokenize(string txt_file)
 
 
 Table SQL::command(string command)
-{   
+
+{   Table t;
+
+    const char* c = command.c_str();
 
     //create parser object
-    Parser p(command.c_str());
-
+    Parser p(c);
+    
     //if the parse tree is valid, run the command
     mmap_ss parse_map = p.parse_tree();
 
+    t = run_command(parse_map);
 
-    return run_command(parse_map);
+    recnos = t.select_recnos();
+
+    return t;
     
   
 }
@@ -80,21 +86,17 @@ Table SQL::run_command(mmap_ss& parse_map)
             //if fields is a "*" then select all columns
             if(fields[0] == "*")
             {
-                Table t = result.select_all_condition(condition);
+               return result.select_all_condition(condition);
 
-                recnos = t.select_recnos();
-
-                return t;
+                
                 
             }
             //else select the columns specified
             else
             {
-                Table t = result.select(fields, condition);
+                return result.select(fields, condition);
 
-                recnos = t.select_recnos();
-
-                 return t;
+                
                
             }
         }
@@ -103,21 +105,19 @@ Table SQL::run_command(mmap_ss& parse_map)
             //if fields is a "*" then select all columns
             if(fields[0] == "*")
             {
-                Table t = result.select_all();
+                return result.select_all();
 
-                recnos = t.select_recnos();
-
-                return t;
+                
                
             }
             //else select the columns specified
             else
             {
-                Table t = result.select_all_columns(fields);
+                return result.select_all_columns(fields);
 
-                recnos = t.select_recnos();
+                
 
-                return t;
+                
             }
         }
         

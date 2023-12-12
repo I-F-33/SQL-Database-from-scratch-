@@ -1,6 +1,0 @@
-projectid
-project
-name
-depid
-startdate
-enddate

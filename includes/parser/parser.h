@@ -9,7 +9,11 @@ class Parser
 {
     public : 
 
+        Parser();
+
         Parser(const char* s);
+
+        ~Parser();
 
         void set_string(const char* s);
 

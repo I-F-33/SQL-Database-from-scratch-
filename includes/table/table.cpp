@@ -31,6 +31,8 @@ Table::Table(std::string tableName):_table_name(tableName){
 
     int field_names_size = counter;
     
+    fstream _file;
+
     open_fileRW(_file,tableName.c_str());
 
 
@@ -68,6 +70,8 @@ Table::Table(std::string tableName):_table_name(tableName){
     /// @param ftype 
 Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(fname){
 
+        fstream _file;
+
         open_fileW(_file, fname.c_str());  
         
         string fields_filename = fname+"fields.txt";
@@ -94,17 +98,19 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
     /// @brief destructor
     Table::~Table(){
-        _file.close();
+
     }
 
     /// @brief copy constructor
     /// @param other table to be copied
     /// set the fields and ready to read
     Table::Table(const Table& other): totalrecnums(other.totalrecnums), _table_name(other._table_name), field_names(other.field_names){
+        fstream _file;
         open_fileRW(_file, other._table_name.c_str());
         // _table_name = other._table_name;
         // field_names = other.field_names;
         // trecno = other.trecno;
+        _file.close();
     }
 
     // member functions
@@ -175,6 +181,8 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
     /// @return 
     int Table::insert_into(vectorstr values){
 
+        fstream _file;
+
         open_fileRW(_file, _table_name.c_str());
 
         //write the file record to the file - store its record number
@@ -231,6 +239,8 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
         Table result("table_select_" + to_string(serial++), field_names_vectr);
 
+        fstream _file;
+
         open_fileRW(_file, _table_name.c_str());
 
         for(int i = 0; i < totalrecnums;i++)
@@ -275,6 +285,8 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         vectorlong recnos = rpn();
 
         vectorstr resultrecord;
+
+        fstream _file;
 
         open_fileRW(_file, _table_name.c_str());
 
@@ -327,6 +339,8 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         vectorlong recnos = rpn();
 
         vectorstr resultrecord;
+        fstream _file;
+
 
         open_fileRW(_file, _table_name.c_str());
 
@@ -417,6 +431,9 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         sort(recnos.begin(), recnos.end());
         vectorstr resultrecord;
 
+        fstream _file;
+
+
         open_fileRW(_file, _table_name.c_str());
 
         //iterate through the record numbers
@@ -453,6 +470,8 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         Table result("table_select_" + to_string(serial++), columns);
 
         vectorstr resultrecord;
+
+        fstream _file;
 
         open_fileRW(_file, _table_name.c_str());
 
@@ -529,6 +548,9 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         RPN rpn(postfix, field_names, table);
 
         vectorlong recnos = rpn();
+        
+        fstream _file;
+
 
         open_fileRW(_file, _table_name.c_str());
 

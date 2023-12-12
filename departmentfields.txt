@@ -1,4 +1,0 @@
-depid
-depname
-location
-manager

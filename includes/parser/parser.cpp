@@ -187,6 +187,18 @@
         set_string(s);
     }
 
+    Parser::Parser()
+    {
+        init_keywords_map();
+        init_parse_table();
+    }
+
+    Parser::~Parser()
+    {
+        _ptree.clear();
+        
+    }
+
     void Parser::set_string(const char* s)
     {
 

@@ -7,7 +7,8 @@ using namespace std;
 
   
 bool test_parentheses(bool debug){
-  string s1 = "make table student fields fname, lname, major, age"; 
+  
+    string s1 = "make table student fields fname, lname, major, age"; 
     string s2 = "insert into student values Flo, Yao, CS, 20"; 
     string s3 = "insert into student values \"Flo\", \"Jackson\", Math,21"; 
     string s4 = "insert into student values Calvin, Woo, Physics,22"; 
