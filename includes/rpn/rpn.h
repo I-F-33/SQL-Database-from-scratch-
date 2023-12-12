@@ -25,9 +25,9 @@ class RPN
 
     private:
     
-            Queue<Token*> _tokens;
-            Map<std::string, int> field_names;
-            vector<MMap<std::string, long> >table;
+            Queue<Token*> _tokens = {};
+            Map<std::string, int> field_names = {};
+            vector<MMap<std::string, long> >table = {};
 
 };
 #endif // RPN_H

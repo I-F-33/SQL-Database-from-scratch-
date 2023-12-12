@@ -37,7 +37,7 @@ bool test_parentheses(bool debug){
 
     }
 
-  if(debug){
+/*   if(debug){
     cout<<"full table\n"; 
     cout<<sql.command("select * from student")<<endl; 
 
@@ -105,7 +105,7 @@ bool test_parentheses(bool debug){
     sql.select_recnos();
 
   }
-
+ */
   if(true){
     cout<<"full table\n";
     cout<<sql.command("select * from student")<<endl;
@@ -528,50 +528,55 @@ bool condition_from_strings(bool debug = false){
 
 bool insert_test(bool debug = false)
 {
-  MMap<int, int> mmap;
+  srand(1);
+  
+  vector<int> v;
+  
+  std::string data = "1082|1156|1156|1214|1214|1236|1236|1288|1347|1347|1456|1456|1478|1521|1521|1693|1702|1702|2127|2206|2206|2319|2319|2513|2513|2953|2953|2967|3077|3077|3110|3170|3170|3605|3605|3644|4024|4024|4406|4623|4623|4695|4695|4767|4885|4885|4909|4909|5001|5001|5445|5823|5823|5905|5905|6202|6202|6259|6261|6261|6342|6342|6640|6640|6769|6769|6842|6844|6844|7029|7029|7050|7050|7132|7139|7139|7177|7177|7187|7187|7251|7251|7416|7484|7484|7635|7670|7670|8013|8013|8025|8061|8061|8215|8215|8424|8424|8548|8732|8732|8768|8768|8907|9006|9006|9012|9012|9074|9074|9103|9384|9384|9504|9504|9566|9566|9663|9663|9809";
 
-  mmap.insert(1, 1);
+  std::replace(data.begin(), data.end(), '|', ' '); // Replace "|" with space
 
-  cout << mmap << endl;
+  istringstream iss(data);
+  string token;
+  set<int> uniqueNumbers;
 
-  mmap.insert(2, 2);
-  cout << mmap << endl;
+  // Extracting numbers and adding them to the set to filter out duplicates
+  while (iss >> token) {
 
-  mmap.insert(3, 3);
-  cout << mmap << endl;
+    int number = std::stoi(token);
+    uniqueNumbers.insert(number);
 
-  mmap.insert(4, 4);
-  cout << mmap << endl;
+  }
 
-  mmap.insert(5, 5);
-  cout << mmap << endl;
+  // Converting the set to a vector (array-like structure)
+  vector<int> result(uniqueNumbers.begin(), uniqueNumbers.end());
 
-  mmap.insert(6, 6);
-  cout << mmap << endl;
+  vector<int> v2;
 
-  mmap.insert(7, 7);
-  cout << mmap << endl;
+  BPlusTree<int> bpt(false);
 
-  mmap.insert(1, 2);
-  cout << mmap << endl;
+  for(int i = 0; i < 30; i++)
+  {
 
-  mmap.insert(2, 1);
-  cout << mmap << endl;
+    int a = rand();
+    v2.push_back(a);
+    bpt.insert(a);
 
-  mmap.insert(3, 4);
-  cout << mmap << endl;
 
-  mmap.insert(4, 3);
-  cout << mmap << endl;
+  }
 
-  mmap.insert(5, 6);
-  cout << mmap << endl;
 
-  mmap.insert(6, 5);
+  
+  //cout << bpt.in_order() << endl;
 
-  cout << mmap << endl;
+    bpt.print_tree();
 
-  return true;
+
+cout << endl << endl;
+
+  cout << bpt.in_order() << endl;
+  cout << "end of testB.cpp" << endl;
+  return 1;
 
 }
 
@@ -803,13 +808,13 @@ build git:(master) ✗  😊 $>
 
 
  */
-
+/* 
  TEST(TEST_STUB, TestStub) {
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
 
   EXPECT_EQ(1, test_parentheses(true));
-} 
+}  */
 
 /*  TEST(TEST_BPLUS_TREE, BPlusTreeTest) {
   bool success = bplustree_test();
@@ -846,12 +851,12 @@ TEST(TABLE_ADVANCED, TableStringCondition) {
      bool success = condition_from_strings(false);
 } 
  */
-/* TEST(TEST_STUB, TestStub) {
+TEST(TEST_STUB, TestStub) {
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
 
   EXPECT_EQ(1, insert_test(true));
-} */
+} 
 
 
 

@@ -270,9 +270,9 @@ public:
         return outs;
     }
 private:
-    int key_count;
+    int key_count = 0;
 
-    BPlusTree<Pair<K, V> > map;
+    BPlusTree<Pair<K, V> > map = BPlusTree<Pair<K, V> >();
 };
 
 

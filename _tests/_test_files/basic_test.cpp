@@ -47,7 +47,9 @@ const int SELECT_COMMANDS = 20;
 
 bool sql_basic(bool debug = false)
 {
+     
      SQL sql;
+
      Table t;
      cout << ">" << command_list[0] << endl;
      sql.command(command_list[0]);

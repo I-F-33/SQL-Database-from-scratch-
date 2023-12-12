@@ -25,6 +25,6 @@ public:
     Queue<Token *> postfix( Queue<Token*> infix);
 
 private:
-    Queue<Token *> infix_queue;
+    Queue<Token *> infix_queue = {};
 };
 #endif // SHUNTING_YARD_H

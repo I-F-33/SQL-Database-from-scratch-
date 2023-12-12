@@ -132,7 +132,7 @@ public:
 
 private:
     node<T> *_top;
-    int _size;
+    int _size = 0;
 };
 
 template <typename TT>

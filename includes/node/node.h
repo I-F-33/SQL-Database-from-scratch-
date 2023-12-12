@@ -17,8 +17,8 @@ public:
   template <typename T>
   friend std::ostream &operator<<(std::ostream &outs, const node<T> &printMe);
 
-  ITEM_TYPE _item;
-  node *_next;
+  ITEM_TYPE _item = ITEM_TYPE();
+  node *_next = nullptr;
 };
 
 template <typename U>

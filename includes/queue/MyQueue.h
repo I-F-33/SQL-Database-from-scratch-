@@ -143,9 +143,9 @@ public:
     friend ostream &operator<<(ostream &outs, const Queue<TT> &printMe);
 
 private:
-    node<T> *_front;
-    node<T> *_rear;
-    int _size;
+    node<T> *_front = nullptr;
+    node<T> *_rear = nullptr;
+    int _size = 0;
 };
 template <typename U>
 ostream &operator<<(ostream &outs, const Queue<U> &printMe)

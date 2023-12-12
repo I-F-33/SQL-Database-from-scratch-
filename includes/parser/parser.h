@@ -30,12 +30,12 @@ class Parser
         void init_keywords_map();
 
     private:
-        STokenizer _stk;
-        MMap<string,string> _ptree; //parse tree
+        STokenizer _stk = STokenizer();
+        MMap<string,string> _ptree;//parse tree
         Map<string,int> keywords_map; //map of keywords
         static int _table[MAX_ROWS][MAX_COLUMNS];
-        bool fail_flag;
-        Queue<string> input_queue;
+        bool fail_flag = false;
+        Queue<string> input_queue = {};
         enum keys {UNKNOWN,SELECT,FROM,WHERE,AND,OR,INSERT,INTO,VALUES,STAR,MAKE,COMMA,RIGHTPAREN,LEFTPAREN,TABLE,FIELDS,QUOTES,SPECIALQ};
 
 

@@ -1,10 +1,10 @@
 #ifndef SQL_H
 #define SQL_H
-
+#include "../table/table.h"
 #include "../parser/parser.h"
-#include "../token/tokenizer/ftokenize.h"
+//#include "../token/tokenizer/ftokenize.h"
 
-
+using namespace std;
 class SQL
 {
     public:
@@ -12,16 +12,16 @@ class SQL
         //Batch Mode
         SQL(string txt_file);
 
-        
+        SQL(){
+            cout << "intializing SQL" << endl;
+        };
 
-        SQL(){};
-
-        //~SQL(){};
+        ~SQL(){};
 
         /// @brief returns a table based on the command
         /// @param command 
         /// @return 
-        Table command(string command);
+        Table command(const string& command);
 
         /// @brief returns a vector of record numbers
         /// @return 
@@ -34,15 +34,12 @@ class SQL
         //file tokenize
         void file_tokenize(string txt_file);
 
-        Table run_command(mmap_ss& parse_map);
+        Table run_command(mmap_ss& parse_map); 
     
-        vectorlong recnos;
+        vectorlong recnos = {};
 
         string txt_file_name = "";
 
-        //Parser parser;
-
-    
 };
 
 

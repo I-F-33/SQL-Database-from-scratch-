@@ -330,7 +330,7 @@ public:
     }
 
 private:
-    BPlusTree<MPair<K, V> > mmap;
+    BPlusTree<MPair<K, V> > mmap = BPlusTree<MPair<K, V> >();
 };
 
 #endif

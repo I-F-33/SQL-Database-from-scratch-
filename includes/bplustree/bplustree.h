@@ -358,7 +358,7 @@ class BPlusTree
     {
         if(contains(key) == false)
         {
-            return NULL;
+            return Iterator(nullptr,0);
         }
 
         Iterator it = begin();
@@ -374,7 +374,7 @@ class BPlusTree
             it++;
         }
 
-        return NULL;
+        return Iterator(nullptr,0);
     }
 
     Iterator lower_bound(const T& key)  //return first that goes NOT BEFORE key entry or next if does not exist: >= entry
@@ -565,23 +565,30 @@ class BPlusTree
     }
 
     string in_order(){
-    string result = "";
-    int j = child_count - 1;
-    if(!is_leaf() && child_count > 1){
-        result.insert(0, subset[j]->in_order());
-        j--;
-    }
 
-    // then print the right most sub trees (right to left)
-    for(int i = data_count - 1; i >= 0; i--){
-        result.insert(0, to_string(data[i]) + "|");
-        if(!is_leaf()){
-            result.insert(0, subset[j]->in_order());
-            j--;
+        string result = "";
+        
+        if(is_leaf())
+        {
+            for(int i = 0; i < data_count; i++)
+            {
+                result += to_string(data[i]);
+                 result += "|";
+            }
+            return result;
         }
+
+        for(int i = 0; i < data_count; i++)
+        {
+            result += subset[i]->in_order();
+            result += to_string(data[i]);
+            result += "|";
+        }
+
+        result += subset[child_count-1]->in_order();
+
+        return result;
     }
-    return result;
-}
  
 
     string pre_order()
@@ -670,12 +677,12 @@ private:
     static const int MINIMUM = 1;
     static const int MAXIMUM = 2 * MINIMUM;
 
-    bool dups_ok;        // true if duplicate keys may be inserted
-    int data_count;      // number of data elements
+    bool dups_ok = false;       // true if duplicate keys may be inserted
+    int data_count =0;      // number of data elements
     T data[MAXIMUM + 1]; // holds the keys
-    int child_count;     // number of children
+    int child_count = 0;     // number of children
     BPlusTree*subset[MAXIMUM + 2]; // suBPlusTrees
-    BPlusTree* next;
+    BPlusTree* next = nullptr;
 
 
     bool is_leaf() const { return child_count == 0; } // true if this is a leaf node
@@ -754,12 +761,14 @@ private:
         
         int index = first_ge(data, data_count, entry);
 
+        bool found = data[index] == entry && index < data_count;
+
          // insert into the leaf
         if (is_leaf())
         {
             if(dup_found)
             {
-                data[index]  = data[index] + entry;
+                data[index] = data[index] + entry;
             }
             else{
 
@@ -771,7 +780,7 @@ private:
 
 
         // if this is a duplicate then return and terminate program
-        if (data[index] == entry && !is_leaf())
+        if (found && !is_leaf())
         {
             subset[index + 1]->loose_insert(entry,dup_found);
         }        

@@ -169,17 +169,17 @@ class Table{
 
         static int serial;
 
-        FileRecord fileRecord;
+        FileRecord fileRecord = FileRecord();
 
-        Map<std::string, int> field_names;
+        Map<std::string, int> field_names = {};
 
-        vector<MMap<std::string, long> >table;
+        vector<MMap<std::string, long> >table  = {};
         
-        std::string _table_name;
+        std::string _table_name = "";
 
-        int totalrecnums;
+        int totalrecnums = 0;
 
-        vector<long> recnums;
+        vector<long> recnums = {};
 
 };
 

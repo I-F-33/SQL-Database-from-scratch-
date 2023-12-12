@@ -44,7 +44,7 @@ public:
 
     static const int MAX = 100;
     char _record[MAX + 1][MAX + 1]; //NULL char
-    int recno;
+    int recno = 0;
 };
 
 #endif

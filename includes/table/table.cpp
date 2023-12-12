@@ -17,15 +17,19 @@ Table::Table(std::string tableName):_table_name(tableName){
     long counter = 0;
     string buffer;
 
-
-    while(getline(field_file,buffer))
+    if(field_file.good())
     {
-        field_names.insert(buffer,counter);
+        while(getline(field_file,buffer))
+        {
+            field_names.insert(buffer,counter);
 
-        table.push_back(MMap<std::string, long>());
+            table.push_back(MMap<std::string, long>());
 
-        counter++;
+            counter++;
+        }
     }
+
+    
 
     field_file.close();
 
@@ -523,7 +527,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
         string temp;
 
-        if(a.is_open())
+        if(a.good())
         {
             while(getline(a,temp))
             {

@@ -26,8 +26,7 @@
         keywords_map.at("!=") = OPERATOR;
         keywords_map.at(">=") = OPERATOR;
         keywords_map.at("<=") = OPERATOR;
-        keywords_map.at(",\"") = SPECIALQ;
-        keywords_map.at("\",") = SPECIALQ;
+       
 
 
 

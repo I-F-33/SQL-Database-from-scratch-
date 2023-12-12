@@ -21,9 +21,10 @@ void SQL::file_tokenize(string txt_file)
 
 
 
-Table SQL::command(string command)
-
-{   Table t;
+Table SQL::command(const string& command)
+{   
+    
+    Table t;
 
     const char* c = command.c_str();
 
@@ -31,7 +32,7 @@ Table SQL::command(string command)
     Parser p(c);
     
     //if the parse tree is valid, run the command
-    mmap_ss parse_map = p.parse_tree();
+     mmap_ss parse_map = p.parse_tree();
 
     t = run_command(parse_map);
 
