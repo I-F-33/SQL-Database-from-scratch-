@@ -808,13 +808,13 @@ build git:(master) ✗  😊 $>
 
 
  */
-/* 
+
  TEST(TEST_STUB, TestStub) {
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
 
   EXPECT_EQ(1, test_parentheses(true));
-}  */
+}  
 
 /*  TEST(TEST_BPLUS_TREE, BPlusTreeTest) {
   bool success = bplustree_test();
@@ -851,13 +851,13 @@ TEST(TABLE_ADVANCED, TableStringCondition) {
      bool success = condition_from_strings(false);
 } 
  */
-TEST(TEST_STUB, TestStub) {
+/* TEST(TEST_STUB, TestStub) {
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
 
   EXPECT_EQ(1, insert_test(true));
 } 
-
+ */
 
 
 
