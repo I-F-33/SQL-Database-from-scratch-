@@ -141,7 +141,7 @@ class BPlusTree
         }
         else
         {
-            loose_insert(entry, contains(entry));
+            loose_insert(entry);
         }
         if (data_count > MAXIMUM)
         {
@@ -756,7 +756,7 @@ private:
     }
 
     // insert element functions
-    void loose_insert(const T &entry, bool dup_found = false) // allows MAXIMUM+1 data elements in the root
+    void loose_insert(const T &entry) // allows MAXIMUM+1 data elements in the root
     {
         
         int index = first_ge(data, data_count, entry);
@@ -766,7 +766,7 @@ private:
          // insert into the leaf
         if (is_leaf())
         {
-            if(dup_found)
+            if(found)
             {
                 data[index] = data[index] + entry;
             }
@@ -782,11 +782,11 @@ private:
         // if this is a duplicate then return and terminate program
         if (found && !is_leaf())
         {
-            subset[index + 1]->loose_insert(entry,dup_found);
+            subset[index + 1]->loose_insert(entry);
         }        
         else
         { // if its not a leaf then recurse
-            subset[index]->loose_insert(entry, dup_found);
+            subset[index]->loose_insert(entry);
         }
 
         // if the child is too big then fix excess
