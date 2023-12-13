@@ -200,20 +200,20 @@ class BPlusTree
 
     void clear_tree() // clear this object (delete all nodes etc.)
     {
-        for (int i = 0; i < data_count; i++)
-        {
-            data[i] = T();
-        }
+        // for (int i = 0; i < data_count; i++)
+        // {
+        //     data[i] = T();
+        // }
 
         for (int i = 0; i < child_count; i++)
         {
             subset[i]->clear_tree();
             
-            if(subset[i]->is_leaf())
-            {
-                subset[i]->next = nullptr;
-            }
-            
+            // if(subset[i]->is_leaf())
+            // {
+            //     subset[i]->next = nullptr;
+            // }
+            delete subset[i];
             subset[i] = nullptr;
 
         }
@@ -794,6 +794,44 @@ private:
         {
             fix_excess(index);
         }
+
+               
+      /*   int index = first_ge(data, data_count, entry);
+
+        bool found = data[index] == entry && index < data_count;
+
+         // insert into the leaf
+        if (is_leaf())
+        {
+            if(found)
+            {
+                data[index] = entry;
+            }
+            else{
+
+                ordered_insert(data, data_count, entry);
+            }
+            
+            return;
+        }
+
+
+        // if this is a duplicate then return and terminate program
+        if (found && !is_leaf())
+        {
+            subset[index + 1]->loose_insert(entry);
+        }        
+        else
+        { // if its not a leaf then recurse
+            subset[index]->loose_insert(entry);
+        }
+
+        // if the child is too big then fix excess
+        if (subset[index] && subset[index]->data_count > MAXIMUM)
+        {
+            fix_excess(index);
+        } */
+
 
     }
 

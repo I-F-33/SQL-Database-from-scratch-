@@ -180,10 +180,6 @@ public:
 
         MPair<K, V> p(key);
 
-        if(!mmap.contains(p))
-        {
-            mmap.insert(p);
-        }
         
         return mmap.get(p).value_list;
     }
@@ -192,10 +188,6 @@ public:
     {
         MPair<K, V> p(key);
 
-        if(mmap.empty() || !mmap.contains(p))
-        {
-            mmap.insert(p);
-        }
 
         return mmap.get(p).value_list;
     }

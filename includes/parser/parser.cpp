@@ -4,28 +4,28 @@
 
      void Parser::init_keywords_map()
     {
-        keywords_map.at("select") = SELECT;
-        keywords_map.at("from") = FROM;
-        keywords_map.at("where") = WHERE;
-        keywords_map.at("and") = AND;
-        keywords_map.at("or") = OR;
-        keywords_map.at("insert") = INSERT;
-        keywords_map.at("into") = INTO;
-        keywords_map.at("values") = VALUES;
-        keywords_map.at("*") = STAR;
-        keywords_map.at("make") = MAKE;
-        keywords_map.at(",") = COMMA;
-        keywords_map.at("(") = LEFTPAREN;
-        keywords_map.at(")") = RIGHTPAREN;
-        keywords_map.at("table") = TABLE;
-        keywords_map.at("fields") = FIELDS;
-        keywords_map.at("\"") = QUOTES;
-        keywords_map.at(">") = OPERATOR;
-        keywords_map.at("<") = OPERATOR;
-        keywords_map.at("=") = OPERATOR;
-        keywords_map.at("!=") = OPERATOR;
-        keywords_map.at(">=") = OPERATOR;
-        keywords_map.at("<=") = OPERATOR;
+        keywords_map.insert("select",SELECT);
+        keywords_map.insert("from", FROM);
+        keywords_map.insert("where", WHERE);
+        keywords_map.insert("and", AND);
+        keywords_map.insert("or", OR);
+        keywords_map.insert("insert",  INSERT);
+        keywords_map.insert("into",  INTO);
+        keywords_map.insert("values", VALUES);
+        keywords_map.insert("*" , STAR);
+        keywords_map.insert("make", MAKE);
+        keywords_map.insert(",", COMMA);
+        keywords_map.insert("(" , LEFTPAREN);
+        keywords_map.insert(")", RIGHTPAREN);
+        keywords_map.insert("table", TABLE);
+        keywords_map.insert("fields", FIELDS);
+        keywords_map.insert("\"", QUOTES);
+        keywords_map.insert(">", OPERATOR);
+        keywords_map.insert("<", OPERATOR);
+        keywords_map.insert("=", OPERATOR);
+        keywords_map.insert("!=", OPERATOR);
+        keywords_map.insert(">=", OPERATOR);
+        keywords_map.insert("<=", OPERATOR);
        
 
 
@@ -284,7 +284,7 @@
             {
                 case SELECT:
                     if(s != "," and s != "from")
-                    _ptree.at("fields").push_back(s);
+                    _ptree.insert("fields", s);
 
                     if(s == "*")
                     {
@@ -294,7 +294,7 @@
                 case TABLE:
                 case FROM:
                 case INTO:
-                    _ptree.at("table_name").push_back(s);
+                    _ptree.insert("table_name", s);
                     last_key = 0;
                     break;
                 //INSERT
@@ -307,7 +307,7 @@
                     else if((s != "\"" && s != "\"" )&& !quoted_string_flag) 
                     {
                         if(s != "," && s != "\"")
-                        _ptree.at("values").push_back(s);
+                        _ptree.insert("values", s);
                     }
                     else if((s != "\"")&& quoted_string_flag)
                     {
@@ -332,7 +332,7 @@
                     }
                     else if((s == "\"") && quoted_string_flag)
                     {
-                        _ptree.at("values").push_back(quoted_string);
+                        _ptree.insert("values", quoted_string);
                         quoted_string.clear();
                         quoted_string_flag = quoted_string_flag == false ? true : false;
                         
@@ -344,13 +344,13 @@
                 case FIELDS:
 
                     if(s != ",")
-                    _ptree.at("columns").push_back(s);
+                    _ptree.insert("columns", s);
 
                     break;
                 case WHERE:
                     if(s != "\"" && !quoted_string_flag)
                     {
-                        _ptree.at("condition").push_back(s);
+                        _ptree.insert("condition", s);
                     }
                     else if(s != "\"" && quoted_string_flag)
                     {
@@ -366,7 +366,7 @@
                     }
                     else if(s == "\"" && quoted_string_flag)
                     {
-                        _ptree.at("condition").push_back(quoted_string);
+                        _ptree.insert("condition", quoted_string);
                         quoted_string.clear();
                         quoted_string_flag = false;
                         
@@ -384,7 +384,7 @@
 
             if(s == "select" || s == "make" || s == "insert")
             {
-                _ptree.at("command").push_back(s);
+                _ptree.insert("command", s);
 
                 if(s == "select")
                 {
@@ -421,10 +421,10 @@
         
         //if select and no where then where is "false"
         //and condition is "none"
-        if(_ptree.at("command").at(0) == "select" && !_ptree.contains("where"))
+        if(_ptree.at("command")[0] == "select" && !_ptree.contains("where"))
         {
-            _ptree.at("where").push_back("false");
-            _ptree.at("condition").push_back("none");
+            _ptree.insert("where", "false");
+            _ptree.insert("condition", "none");
         }
         
         return success;

@@ -23,7 +23,7 @@ Table::Table(std::string tableName):_table_name(tableName){
         {
             field_names.insert(buffer,counter);
 
-            table.push_back(MMap<std::string, long>());
+            table += MMap<std::string, long>();
 
             counter++;
         }
@@ -88,7 +88,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
             field_names.insert(ftype[i], i);
 
-            table.push_back(MMap<std::string, long>());
+            table += MMap<std::string, long>();
 
         }
 
@@ -366,7 +366,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
             //insert the record into the result table
             result.insert_into(resultrecord);
 
-            recnums.push_back(recnos.at(i));
+            result.recnums.push_back(recnos.at(i));
 
             resultrecord.clear();
         }
