@@ -18,29 +18,35 @@ string s7 = "insert into student values \"Lilli\", \"Sutton\", \"Communications\
 string s8 = "insert into student values \"Oliver\", \"Knox\", \"Math\", 25";
 string s9 = "insert into student values \"Johnathan\", \"Salinas\", \"Biology\", 18";
 string s10 = "insert into student values \"Justin\", \"Wang\", \"History\", 19";
- std::string s11 = "insert into student values \"Sophie\", \"Turner\", \"Film Studies\", 23";
-    std::string s12 = "insert into student values \"Alexander\", \"Graham\", \"Mechanical Engineering\", 20";
-    std::string s13 = "insert into student values \"Haley\", \"Porter\", \"Environmental Science\", 21";
-    std::string s14 = "insert into student values \"Ethan\", \"Spencer\", \"Chemical Engineering\", 24";
-    std::string s15 = "insert into student values \"Madison\", \"Harper\", \"Graphic Design\", 22";
-    std::string s16 = "insert into student values \"Carter\", \"West\", \"Business Administration\", 23";
-    std::string s17 = "insert into student values \"Zoe\", \"Fisher\", \"Music\", 19";
-    std::string s18 = "insert into student values \"Brandon\", \"Lawrence\", \"Computer Engineering\", 20";
-    std::string s19 = "insert into student values \"Grace\", \"Harrison\", \"Chemistry\", 25";
-    std::string s20 = "insert into student values \"Leo\", \"Keller\", \"Mathematics\", 22";
+string s11 = "create table course fields course_id, course_name, credits";
+string s12 = "insert into course values \"CS101\", \"Introduction to Computer Science\", 3";
+string s13 = "insert into course values \"MATH201\", \"Calculus II\", 4";
+string s14 = "insert into course values \"PHYS101\", \"Physics for Beginners\", 3";
+string s15 = "insert into course values \"ENG202\", \"Advanced English Composition\", 3";
+string s16 = "create table enrollment fields studentid, courseid, grade";
+string s17 = "insert into enrollment values 1, \"CS101\", \"A\"";
+string s18 = "insert into enrollment values 2, \"MATH201\", \"B\"";
+string s19 = "insert into enrollment values 3, \"PHYS101\", \"C\"";
+string s20 = "insert into enrollment values 4, \"ENG202\", \"A\"";
+string s21 = "create table department fields deptid, deptname, location";
+string s22 = "insert into department values \"D001\", \"Computer Science\", \"Building A\"";
+string s23 = "insert into department values \"D002\", \"Mathematics\", \"Building B\"";
+string s24 = "insert into department values \"D003\", \"Physics\", \"Building C\"";
+string s25 = "insert into department values \"D004\", \"English\", \"Building D\"";
+
 
     vector<string> commands = {
-      s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20//,s21,s22,s23,s24,s25
+      s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25
     };
   
     
     SQL sql; 
     for(int i = 0; i < commands.size(); i++){
-     cout <<  sql.command(commands[i]) << endl;; 
+      sql.command(commands[i]); 
 
     }
 
-  if(true){
+  if(debug){
     cout<<"full table\n"; 
     cout<<sql.command("select * from student")<<endl; 
 
@@ -109,7 +115,7 @@ string s10 = "insert into student values \"Justin\", \"Wang\", \"History\", 19";
 
   }
  
-  if(false){
+  if(true){
     cout<<"full table\n";
     cout<<sql.command("select * from student")<<endl;
     
@@ -356,7 +362,7 @@ build git:(master) ✗  😊 $>
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
 
-  EXPECT_EQ(1, test_parentheses(false));
+  EXPECT_EQ(1, test_parentheses(true));
 }  
 
 /*  TEST(TEST_BPLUS_TREE, BPlusTreeTest) {

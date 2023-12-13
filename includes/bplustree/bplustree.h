@@ -431,7 +431,7 @@ class BPlusTree
 
     Iterator begin(){
 
-        return Iterator(get_smallest_node());
+        return Iterator(get_smallest_node(),0);
 
     }
 

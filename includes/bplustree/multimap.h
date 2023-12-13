@@ -114,7 +114,7 @@ public:
 
         Iterator()
         {
-            _it = NULL;
+            _it = nullptr;
         }
 
         Iterator operator ++(int unused)
@@ -260,13 +260,15 @@ public:
     vector<V> equal_range(Iterator lowerb, Iterator upperb)
     {
         vector<V> v;
-        
-        while(lowerb != upperb)
+
+        for(; lowerb != upperb; lowerb++)
         {
-            MPair<K, V> m = *lowerb;
+
+           MPair<K, V> m = *lowerb;
 
             if(upperb == Iterator())
             {
+
                  for(V element : m.value_list)
                 {
                     v.push_back(element);
@@ -276,24 +278,51 @@ public:
             {
                 MPair<K, V> m2 = *upperb;
 
-                if(m.key <= m2.key)
+                if(m.key < m2.key)
                 {
                     for(V element : m.value_list)
                     {
                         v.push_back(element);
                     }
                 }
-                else
-                {
-                    break;
-                }
 
-            }
+        }}
+        
+        // for()
+        // while(lowerb != upperb)
+        // {
+        //     MPair<K, V> m = *lowerb;
+
+        //     if(upperb == Iterator())
+        //     {
+        //          for(V element : m.value_list)
+        //         {
+        //             v.push_back(element);
+        //         }
+        //     }
+        //     else 
+        //     {
+        //         MPair<K, V> m2 = *upperb;
+
+        //         if(m.key < m2.key)
+        //         {
+        //             cout << "lowerb: " << m.key << endl;
+        //             for(V element : m.value_list)
+        //             {
+        //                 v.push_back(element);
+        //             }
+        //         }
+        //         else
+        //         {
+        //             break;
+        //         }
+
+        //     }
             
             
 
-            lowerb++;
-        }
+        //     lowerb++;
+        // }
 
         return v;
     }
