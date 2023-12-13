@@ -36,6 +36,9 @@ bool sql_basic(bool debug = false)
 /*08*/     "insert into student values \"Sammuel L.\", Jackson, 	CS, 		40",
 /*09*/     "insert into student values \"Billy\",	     Jackson, 	Math,	27",
 /*10*/     "insert into student values \"Mary Ann\",   Davis,	Math,	30",
+/*11*/     "insert into student values John,           Marks,	CS,	     22",
+/*12*/     "insert into student values \"Benny\",	     Barker, 	Science,	24",
+
 
 /*11*/     "select * from employee",
 /*12*/     "select last, first, dep from employee",

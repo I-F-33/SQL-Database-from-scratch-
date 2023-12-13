@@ -3,7 +3,7 @@
 ResultSet* Relational::eval(Map<string,int> field_names, vector<MMap<string,long>> _table, Token* left, Token* right)
 {
     //get the field number
-        int queryfield = field_names.get(static_cast<TokenStr *>(left)->get_value());
+        int queryfield = field_names[static_cast<TokenStr *>(left)->get_value()];
 
         //get the map of the field
         MMap<std::string, long> querymap = _table[queryfield];

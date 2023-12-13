@@ -408,7 +408,7 @@
             {
                 last_key = keywords_map.at(s);
             }
-            else if(s == "fields")
+            else if(s == "fields" || s == "cols")
             {
                 last_key = keywords_map.at(s);
             }
