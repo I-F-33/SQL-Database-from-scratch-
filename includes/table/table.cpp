@@ -253,28 +253,50 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
         string table_file_name = _table_name + ".bin";
         open_fileRW(_file, table_file_name.c_str());
 
-        result.recnums = recnums;
+        for(int i = 0; i < totalrecnums;i++)
+        {
+            result.recnums.push_back(i);
+        }
+
+        result.totalrecnums = totalrecnums;
+
+        vectorstr record;
+
+        int i = 0;
 
         //iterate through the record numbers
-        for(int i = 0; i < recnums.size(); i++)
+        while(fileRecord.read(_file, i) > 0)
         {   
             //read the record
-            fileRecord.read(_file, recnums.at(i));
-
             //get the record values
-            vectorstr record = fileRecord.get_record();
+            record = fileRecord.get_record();
 
             //organize the record to the columns
-            for(int j = 0; j < field_names_vectr.size(); j++)
-            {
-                resultrecord.push_back(record[field_names.get(field_names_vectr.at(j))]);
-            }
+            result.insert_into(record);
 
-            //insert the record into the result table
-            result.insert_into(resultrecord);
 
-            resultrecord.clear();
+            i++;
         }
+
+        //  vectorstr record;
+
+        // int i = 0;
+
+        // //iterate through the record numbers
+        // while(fileRecord.read(_file, i) > 0)
+        // {   
+        //     //read the record
+        //     //get the record values
+        //     record = fileRecord.get_record();
+
+        //     //insert the record into the result table
+        //     result.insert_into(resultrecord);
+
+        //     recnos.push_back(i);
+
+        //     i++;
+
+        // }
 
 
         _file.close();
@@ -414,22 +436,26 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
         vectorstr record;
 
-        int i = 0;
-
         //iterate through the record numbers
-        while(fileRecord.read(_file, i) > 0)
+        for(int i = 0; i < recnos.size(); i++)
         {   
             //read the record
+            fileRecord.read(_file, recnos.at(i));
+
             //get the record values
             record = fileRecord.get_record();
+
+            //organize the record to the columns
+            for(int j = 0; j < columns.size(); j++)
+            {
+                resultrecord.push_back(record[field_names.get(columns.at(j))]);
+            }
 
             //insert the record into the result table
             result.insert_into(resultrecord);
 
-            recnos.push_back(i);
 
-            i++;
-
+            resultrecord.clear();
         }
 
 
