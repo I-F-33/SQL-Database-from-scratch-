@@ -7,6 +7,7 @@
 
 - Not Implemented:
   - DELETE and DROP functionality
+  
 
 <br><br>
 
@@ -14,6 +15,18 @@
   - INSERTION
   - CREATE / MAKE
   - SELECT
+  - STORAGE OF RECORDS in .bin files
+  - STROAGE OF TABLE COLUMNS IN .TXT FILE
+
+- DATA STRUCTURES (CREATED BY ME AND USED IN THIS PROJECT)
+  - B+ TREE
+  - MULTIMAP
+  - MAP
+  - B TREE
+  - QUEUE
+  - STACK
+  - LINKED LIST
+  - NODE
 
 
 <br><br>
