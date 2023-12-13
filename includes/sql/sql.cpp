@@ -89,10 +89,6 @@ Table SQL::run_command(const mmap_ss& parse_map)
             else
             {
                 return result.select_all_columns(fields);
-
-                
-
-                
             }
         }
         

@@ -1,5 +1,0 @@
-project
-id
-project
-name
-deadline

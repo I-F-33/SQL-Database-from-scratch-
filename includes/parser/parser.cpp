@@ -20,6 +20,7 @@
         keywords_map.insert(")", RIGHTPAREN);
         keywords_map.insert("table", TABLE);
         keywords_map.insert("fields", FIELDS);
+        keywords_map.insert("cols", FIELDS);
         keywords_map.insert("\"", QUOTES);
         keywords_map.insert(">", OPERATOR);
         keywords_map.insert("<", OPERATOR);

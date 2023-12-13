@@ -1,5 +1,0 @@
-student
-id
-course
-id
-grade

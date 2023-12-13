@@ -1,6 +1,0 @@
-emp
-id
-emp
-name
-job
-title

@@ -1,4 +1,0 @@
-instructor
-id
-name
-department

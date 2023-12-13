@@ -1,5 +1,0 @@
-dept
-id
-dept
-name
-location
