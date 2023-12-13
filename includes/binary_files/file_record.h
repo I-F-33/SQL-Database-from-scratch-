@@ -26,6 +26,9 @@ public:
         }
         _record[size + 1][0] = '\0';
     }
+
+    /// @brief returns the size of the record
+    /// @return 
     int size_of() const{
         return size;
     }
@@ -43,6 +46,7 @@ public:
 private:
     static const int MAX = 100;
     char _record[MAX + 1][MAX + 1]; //NULL char
+    //size of the record
     int size;
 };
 

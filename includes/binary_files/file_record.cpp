@@ -24,14 +24,16 @@ long FileRecord::read(fstream &ins, long recno){
     //returns the number of bytes read.
     //    r.read(f, 6);
     //    cout<<r<<endl;
+    size = 0;
     long pos = recno * sizeof(_record);
     ins.seekg(pos, ios_base::beg);
 
     //ins.read(&__record[0], sizeof(__record))
     ins.read(_record[0], sizeof(_record));
 
-    size = 0;
     //iterate through and get the size of the record
+    //  by checking if the first element is null
+    //  if it is not null, then increment the size
     for(; _record[size][0] != '\0'; ++size){
 
       } // get the size of the record
@@ -54,6 +56,7 @@ ostream& operator<<(ostream& outs, const FileRecord& r){
 
 
     for(int i = 0; i < r.size; i++){
+
         outs<< setw(30) << r._record[i] << "";
     }
     return outs;
