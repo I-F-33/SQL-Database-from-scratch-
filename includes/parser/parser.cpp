@@ -302,20 +302,20 @@
                 //INSERT
                 case VALUES:
 
-                    if((s == "\"" || s == "\"")&& !quoted_string_flag)
+                    if((s == "\"" )&& !quoted_string_flag)
                     {
                         quoted_string_flag = true;
                     }
-                    else if((s != "\"" && s != "\"" )&& !quoted_string_flag) 
+                    else if((s != "\"" )&& !quoted_string_flag) 
                     {
                         if(s != "," && s != "\"")
                         _ptree.insert("values", s);
                     }
                     else if((s != "\"")&& quoted_string_flag)
                     {
-                         if(s == ".")
+                         if(s == "." || s == "_")
                         {
-                            quoted_string = quoted_string + ".";
+                            quoted_string = quoted_string + s;
 
                         }
                         else
@@ -384,7 +384,7 @@
                 
             };
 
-            if(s == "select" || s == "make" || s == "insert" || s == "create" || s == "drop")
+            if(s == "select" || s == "make" || s == "insert" || s == "create")
             {
                 _ptree.insert("command", s);
 

@@ -205,7 +205,6 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
             table[i].insert(values[i], recno);      
             
-
         }
 
         //increment record numbers

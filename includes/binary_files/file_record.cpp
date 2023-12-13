@@ -54,7 +54,7 @@ ostream& operator<<(ostream& outs, const FileRecord& r){
 
 
     for(int i = 0; i < r.size; i++){
-        outs<< setw(20) << r._record[i] << "";
+        outs<< setw(30) << r._record[i] << "";
     }
     return outs;
 }

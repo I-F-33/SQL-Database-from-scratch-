@@ -67,16 +67,12 @@ Table SQL::run_command(const mmap_ss& parse_map)
             {
                return result.select_all_condition(condition);
 
-                
-                
             }
             //else select the columns specified
             else
             {
                 return result.select(fields, condition);
 
-                
-               
             }
         }
         //else if where is "false"

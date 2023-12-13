@@ -1,0 +1,4 @@
+instructor
+id
+name
+department

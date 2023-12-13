@@ -18,49 +18,33 @@ string s7 = "insert into student values \"Lilli\", \"Sutton\", \"Communications\
 string s8 = "insert into student values \"Oliver\", \"Knox\", \"Math\", 25";
 string s9 = "insert into student values \"Johnathan\", \"Salinas\", \"Biology\", 18";
 string s10 = "insert into student values \"Justin\", \"Wang\", \"History\", 19";
-string s11 = "create table course fields courseid, coursename, credits";
-string s12 = "insert into course values \"CS101\", \"Introduction to Computer Science\", 3";
-string s13 = "insert into course values \"MATH201\", \"Calculus II\", 4";
-string s14 = "insert into course values \"PHYS101\", \"Physics for Beginners\", 3";
-string s15 = "insert into course values \"ENG202\", \"Advanced English Composition\", 3";
-string s16 = "create table enrollment fields studentid, courseid, grade";
-string s17 = "insert into enrollment values 1, \"CS101\", \"A\"";
-string s18 = "insert into enrollment values 2, \"MATH201\", \"B\"";
-string s19 = "insert into enrollment values 3, \"PHYS101\", \"C\"";
-string s20 = "insert into enrollment values 4, \"ENG202\", \"A\"";
-string s21 = "create table department fields deptid, deptname, location";
-string s22 = "insert into department values \"D001\", \"Computer Science\", \"Building A\"";
-string s23 = "insert into department values \"D002\", \"Mathematics\", \"Building B\"";
-string s24 = "insert into department values \"D003\", \"Physics\", \"Building C\"";
-string s25 = "insert into department values \"D004\", \"English\", \"Building D\"";
-
+ std::string s11 = "insert into student values \"Sophie\", \"Turner\", \"Film Studies\", 23";
+    std::string s12 = "insert into student values \"Alexander\", \"Graham\", \"Mechanical Engineering\", 20";
+    std::string s13 = "insert into student values \"Haley\", \"Porter\", \"Environmental Science\", 21";
+    std::string s14 = "insert into student values \"Ethan\", \"Spencer\", \"Chemical Engineering\", 24";
+    std::string s15 = "insert into student values \"Madison\", \"Harper\", \"Graphic Design\", 22";
+    std::string s16 = "insert into student values \"Carter\", \"West\", \"Business Administration\", 23";
+    std::string s17 = "insert into student values \"Zoe\", \"Fisher\", \"Music\", 19";
+    std::string s18 = "insert into student values \"Brandon\", \"Lawrence\", \"Computer Engineering\", 20";
+    std::string s19 = "insert into student values \"Grace\", \"Harrison\", \"Chemistry\", 25";
+    std::string s20 = "insert into student values \"Leo\", \"Keller\", \"Mathematics\", 22";
 
     vector<string> commands = {
-      s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25
+      s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20//,s21,s22,s23,s24,s25
     };
   
     
     SQL sql; 
     for(int i = 0; i < commands.size(); i++){
-      sql.command(commands[i]); 
+     cout <<  sql.command(commands[i]) << endl;; 
 
     }
 
-  if(debug){
+  if(true){
     cout<<"full table\n"; 
     cout<<sql.command("select * from student")<<endl; 
 
-    cout<<"full table\n";
-    cout<<sql.command("select * from course")<<endl;
-
-    cout<<"full table\n";
-    cout<<sql.command("select * from enrollment")<<endl;
-
-    cout<<"full table\n";
-
-    cout<<sql.command("select * from department")<<endl;
-
-  /*   string command; 
+    string command; 
     command = "select * from student where age < 30 and ((major = CS or major = Physics) and (lname < Y))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
@@ -122,10 +106,10 @@ string s25 = "insert into department values \"D004\", \"English\", \"Building D\
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
     sql.select_recnos();
- */
+
   }
  
-  if(true){
+  if(false){
     cout<<"full table\n";
     cout<<sql.command("select * from student")<<endl;
     
@@ -138,466 +122,6 @@ string s25 = "insert into department values \"D004\", \"English\", \"Building D\
   return true;
 }
 
-#include "gtest/gtest.h"
-#include <cmath>
-#include <iostream>
-#include <iomanip>
-#include <set>
-#include <vector>
-
-
-//------------------------------------------------------------------------------------------
-//Files we are testing:
-#include "../../includes/bplustree/btree_array_funcs.h"
-#include "../../includes/bplustree/bplustree.h"
-#include "../../includes/bplustree/map.h"
-#include "../../includes/bplustree/multimap.h"
-
-
-//------------------------------------------------------------------------------------------
-
-using namespace std;
-
-bool bplustree_test(){
-  int a[] = {43, 20, 96, 100, 69};
-  BPlusTree<int> bt(a, 5);
-  cout << "Here is the tree: " << endl
-      << bt << endl;
-
-  cout << "in order:    " << bt.in_order() << endl;
-  cout << "pre order:   " << bt.pre_order() << endl;
-  cout << "post order:  " << bt.post_order() << endl;
-  cout << "adding 10, 50, 200: " << endl;
-  bt.insert(10);
-  bt.insert(50);
-  bt.insert(200);
-  cout << "in order:    " << bt.in_order() << endl;
-  cout << "pre order:   " << bt.pre_order() << endl;
-  cout << "post order:  " << bt.post_order() << endl;
-
-  cout << "Here is the tree: " << endl
-       << bt << endl;
-  cout << "bt.contains(20): " << boolalpha << bt.contains(20) << endl;
-  cout << "bt.contains(0): " << boolalpha << bt.contains(0) << endl;
-  cout << "bt.find(20): " << *(bt.find(20)) << endl;
-  
-  cout << "\nfind nonexisting key: " << endl;
-  cout << "bt.find(0): ";
-  bt.find(0).print_Iterator();
-  cout << endl;
-
-  cout << "\n\nexcess + grow: " << endl;
-
-  bt.insert(12);
-  cout << "adding 12: " << endl;
-  cout << "Here is the tree: " << endl
-       << bt << endl;
-  cout << "in order:    " << bt.in_order() << endl;
-  cout << "pre order:   " << bt.pre_order() << endl;
-  cout << "post order:  " << bt.post_order() << endl;
-  bt.insert(300);
-  cout << "added 300: " << endl;
-  cout << "Here is the tree: " << endl
-       << bt << endl;
-  cout << "in order:    " << bt.in_order() << endl;
-  cout << "pre order:   " << bt.pre_order() << endl;
-  cout << "post order:  " << bt.post_order() << endl;
-  bt.insert(55);
-  cout << "added 55: " << endl;
-  cout << "Here is the tree: " << endl
-       << bt << endl;
-  cout << "in order:    " << bt.in_order() << endl;
-  cout << "pre order:   " << bt.pre_order() << endl;
-  cout << "post order:  " << bt.post_order() << endl;
-
-  
-  
-  
-  //Iterator test:
-  cout << "\n---- iterator test: list of data: ------------\n\n";
-  BPlusTree<int>::Iterator it = bt.begin();
-  for (; it != bt.end(); it++){
-      cout<<setw(5) << *it;
-
-  }
-  cout <<"\n---------------------------------------------\n\n";
-
-  cout << "\n\nremove test: " << endl;
-
-/*   int b[] = {43, 20, 96, 10, 50, 200, 12, 300, 55, 100, 69};
-  for (int i = 0; i < 11; i++){
-    cout << "\n removing: [" << b[i] << "]" << endl;
-    bt.remove(b[i]);
-    cout << bt << endl;
-    cout << "in order:    " << bt.in_order() << endl;
-    cout << "pre order:   " << bt.pre_order() << endl;
-    cout << "post order:  " << bt.post_order() << endl;
-    cout << "\nbt.empty()?" <<boolalpha<<bt.empty() << endl;
-  }
-
-
-
-  cout << "\nremove on empty:" << endl;
-  bt.remove(666); */
-  return true;
-}
-
- bool map_test(){
-  int keys[] = {43, 20, 96, 100, 69};
-  string values[] = {"431", "201", "961", "1001", "691"};
-  Map<int, string> map;
-  for (int i = 0; i < 5; i++){
-    map[keys[i]] = values[i];
-  }
-  for (int i = 0; i < 5; i++){
-    cout << "map[" << keys[i] << "]: " << map[keys[i]] << endl;
-  }
-  for (int i = 0; i < 5; i++){
-    map[keys[i]] = to_string(keys[i]*10+1);
-  }
-  cout << "\n----------\n";
-  cout << map << endl;
-  cout << "\n----------\n";
-  for (int i = 0; i < 5; i++)
-  {
-    cout << "map[" << keys[i] << "]: " << map[keys[i]] << endl;
-  }
-
-  cout << "\n\n\n-------- iterator / range test ----------\n\n";
-  Map<int, string>::Iterator it;
-  for (it = map.begin(); it != map.end(); it++)
-  {
-    cout << *it << " | ";
-  }
-  
-  cout << endl;
-  cout << ". . .  lower_bound(): greater or equal to" << endl;
-  it = map.lower_bound(10);
-  cout << "lower_bound(10): " << *it << endl;
-  //((it != map.end()) ? "NULL" : *it) << endl;
-  it = map.lower_bound(20);
-  cout << "lower_bound(20): " << *it << endl;
-  it = map.lower_bound(42);
-  cout << "lower_bound(42): " << *it << endl;
-  it = map.lower_bound(150);
-  if (it!=map.end())
-    cout << "lower_bound(150): " << *it << endl;
-  else
-      cout << "lower_bound(150): " <<  "NULL"  << endl;
-  
-  
-  cout << endl;
-  cout << ". . .  upper_bound(): greater than" << endl;
-  it = map.upper_bound(10);
-  cout << "upper_bound(10): " << *it << endl;
-  //((it != map.end()) ? "NULL" : *it) << endl;
-  it = map.upper_bound(20);
-  cout << "upper_bound(20): " << *it << endl;
-  it = map.upper_bound(42);
-  cout << "upper_bound(42): " << *it << endl;
-  it = map.upper_bound(150);
-  if (it!=map.end())
-    cout << "upper_bound(150): " << *it << endl;
-  else
-      cout << "upper_bound(150): " <<  "NULL"  << endl;
-
-  cout << "\n\n--- other functions --------\n\n";
-  cout << "map.size():        " << map.size() << endl;
-  cout << "map.empty():       " << map.empty() << endl;
-  cout << "map.at(20):        " << map.at(20) << endl;
-  cout << "map.find(43):      " << *map.find(43) << endl;
-  cout << "map.contains(45):  " << boolalpha << map.contains(45) << endl;
-  cout << "map.contains(100): " << boolalpha << map.contains(100) << endl;
-  cout << "map.contains(150): " << boolalpha << map.contains(150) << endl;
-  cout << "map.is_valud():    " << map.is_valid() << endl;
-  return true;
-} 
-
-
- bool multimap_test(){
-  int keys[] = {43, 20, 96, 100, 69};
-  string values[] = {"430", "200", "960", "1000", "690"};
-  MMap<int, string> mmap;
-  for (int i = 0; i < 5; i++){
-    mmap[keys[i]] += values[i];
-  }
-  for (int i = 0; i < 5; i++){
-    cout << "mmap[" << keys[i] << "]: " << mmap[keys[i]] << endl;
-  }
-  for (int i = 0; i < 5; i++){
-    mmap[keys[i]] += to_string(keys[i]*10+1);
-  }
-  for (int i = 0; i < 5; i++){
-    mmap[keys[i]] += to_string(keys[i]*10+3);
-  }
-  cout << "\n----------\n";
-  cout << mmap << endl;
-  for (int i = 0; i < 5; i++)
-  {
-    cout << "mmap[" << keys[i] << "]: " << mmap[keys[i]] << endl;
-  }
-
-  cout << "\n\n\n-------- iterator / range test ----------\n\n";
-  MMap<int, string>::Iterator it;
-  for (it = mmap.begin(); it != mmap.end(); it++)
-  {
-    cout << *it << " | ";
-  }
-  
-  cout << endl;
-  cout << ". . .  lower_bound(): greater or equal to" << endl;
-  it = mmap.lower_bound(10);
-  cout << "lower_bound(10): " << *it << endl;
-  //((it != mmap.end()) ? "NULL" : *it) << endl;
-  it = mmap.lower_bound(20);
-  cout << "lower_bound(20): " << *it << endl;
-  it = mmap.lower_bound(42);
-  cout << "lower_bound(42): " << *it << endl;
-  it = mmap.lower_bound(150);
-  if (it!=mmap.end())
-    cout << "lower_bound(150): " << *it << endl;
-  else
-      cout << "lower_bound(150): " <<  "NULL"  << endl;
-  
-  
-  cout << endl;
-  cout << ". . .  upper_bound(): greater than" << endl;
-  it = mmap.upper_bound(10);
-  cout << "upper_bound(10): " << *it << endl;
-  //((it != mmap.end()) ? "NULL" : *it) << endl;
-  it = mmap.upper_bound(20);
-  cout << "upper_bound(20): " << *it << endl;
-  it = mmap.upper_bound(42);
-  cout << "upper_bound(42): " << *it << endl;
-  it = mmap.upper_bound(150);
-  if (it!=mmap.end())
-    cout << "upper_bound(150): " << *it << endl;
-  else
-      cout << "upper_bound(150): " <<  "NULL"  << endl;
-  
-  cout << "\n\n--- other functions --------\n\n";
-  cout << "mmap.size():        " << mmap.size() << endl;
-  cout << "mmap.empty():       " << mmap.empty() << endl;
-  cout << "mmap.at(20):        " << mmap.at(20) << endl;
-  cout << "mmap.find(43):      " << *mmap.find(43) << endl;
-  cout << "mmap.contains(45):  " << boolalpha << mmap.contains(45) << endl;
-  cout << "mmap.contains(100): " << boolalpha << mmap.contains(100) << endl;
-  cout << "mmap.contains(150): " << boolalpha << mmap.contains(150) << endl;
-  cout << "mmap.is_valud():    " << mmap.is_valid() << endl;
-  
-  
-  return true;
-} 
-
-
-
-
-
-#include "gtest/gtest.h"
-#include <cmath>
-#include <iostream>
-#include <iomanip>
-#include <set>
-#include <vector>
-
-//------------------------------------------------------------------------------------------
-//Files we are testing:
-#include "../../includes/table/table.h"
-
-
-//------------------------------------------------------------------------------------------
-
-using namespace std;
-
-Table make_table(){
-    vectorstr fields={"fname", "lname", "age"};
-
-    Table t("student", fields);
-    vectorstr row;
-    row = {"Joe", "Gomez", "20"};
-    t.insert_into(row);
-    row = {"Karen", "Orozco", "21"};
-    t.insert_into(row);
-    row = {"Flo", "Yao", "29"};
-    t.insert_into(row);
-    row = {"Jack", "Yao", "19"};
-    t.insert_into(row);
-    row = {"Flo", "Jackson", "20"};
-    t.insert_into(row);
-    row = {"Flo", "Gomez", "20"};
-    t.insert_into(row);
-    row = {"Karen", "Jackson", "15"};
-    t.insert_into(row);
-    return t;
-}
-
-
-bool table_basic(bool debug = false){
-     Table t = make_table();
-     cout<< "Here is table t: " << endl << t << endl;
-
-     cout << "Here are all the Yaos:" << endl;
-     cout << t.select({"age", "fname", "lname"}, "lname", "=", "yao");
-
-     Table tbl_student("student");
-     cout << "\n\nhere is the student table: " << tbl_student << endl;
-
-     cout << "\n20 year-olds:" << endl;
-     cout << tbl_student.select({"age", "fname", "lname"}, "age", "=", "20");
-     cout <<"record numbers from original table: "<< tbl_student.select_recnos() << endl
-          << endl;
-
-     cout << "\nolder than 20 years old:" << endl;
-     cout << tbl_student.select({"age", "fname", "lname"}, "age", ">", "20");
-     cout <<"record numbers from original table: "<< tbl_student.select_recnos() << endl
-          << endl;
-
-     cout << "\nyounger than 20 years old:" << endl;
-     cout << tbl_student.select({"age", "fname", "lname"}, "age", "<", "20");
-     cout <<"record numbers from original table: "<< tbl_student.select_recnos() << endl
-          << endl;
-
-     cout << "\n20 or younger:" << endl;
-     cout << tbl_student.select({"age", "fname", "lname"}, "age", "<=", "20");
-     cout <<"record numbers from original table: "<< tbl_student.select_recnos() << endl
-          << endl;
-
-
-     cout << "\n20 or older:" << endl;
-     cout << tbl_student.select({"age", "fname", "lname"}, "age", ">=", "20");
-     cout <<"record numbers from original table: "<< tbl_student.select_recnos() << endl
-          << endl;
-
-
-     cout << "----- END TEST --------" << endl;
-     return true;
-}
-
-bool table_relational(bool debug = false){
-  Queue<Token *> post;
-  Table t = make_table();
-  post.push(new TokenStr("lname"));
-  post.push(new TokenStr("Yao"));
-  post.push(new Relational("="));
-  Table selected = t.select({"lname", "age"}, post);
-  cout << "recnos from all the Yaos query: " << t.select_recnos() << endl;
-  cout << "all the Yaos: " << endl
-     << selected << endl;
-  return true;
-}
-
-bool table_logical(bool debug = false){
-  Queue<Token *> post;
-  Table t = make_table();
-  cout << "here is the table: " << endl
-       << t << endl;
-  post = Queue<Token *>();
-  post.push(new TokenStr("age"));
-  post.push(new TokenStr("20"));
-  post.push(new Relational("<="));
-  post.push(new TokenStr("age"));
-  post.push(new TokenStr("17"));
-  post.push(new Relational(">="));
-  post.push(new Logical("and"));
-  Table selected = t.select({"lname", "age"}, post);
-  cout << "recnos from all the 17 to 20 year olds: " << t.select_recnos() << endl;
-  cout << "all the 17 to 20 year olds : " << endl
-     << selected << endl;
-  return true;
-
-}
-
-bool table_full_condition(bool debug = false){
-  Queue<Token *> post;
-  Table t = make_table();
-  cout << "here is the table: " << endl
-       << t << endl;
-  post = Queue<Token *>();
-  post.push(new TokenStr("age"));
-  post.push(new TokenStr("20"));
-  post.push(new Relational("<"));
-  post.push(new TokenStr("age"));
-  post.push(new TokenStr("17"));
-  post.push(new Relational(">"));
-  post.push(new Logical("and"));
-  post.push(new TokenStr("lname"));
-  post.push(new TokenStr("Gomez"));
-  post.push(new Relational("="));
-  post.push(new Logical("or"));
-  Table selected = t.select({"lname", "age"}, post);
-  cout << "recnos from all all the 17 to 20 year olds (non inclusive) along with all the Gomezes: " << t.select_recnos() << endl;
-  cout << "" << endl
-     << selected << endl;
-  return true;
-
-}
-
-bool condition_from_strings(bool debug = false){
-     vector<string> condition = {"(", "age", "<", "17", "or", "age", ">", "20", ")", "and", "(","lname", "=", "Jackson", "or", "lname", "=", "Yao", ")"};
-     Table t = make_table();
-     cout << "here is the table: " << endl
-          << t << endl;
-     Table selected = t.select({"lname", "age"}, condition);
-     cout << "recnos from all all younger than 17, all older than 20, who are Jacksons: " << t.select_recnos() << endl;
-     cout << endl
-          << selected << endl;
-     return true;
-
-}
-
-bool insert_test(bool debug = false)
-{
-  srand(1);
-  
-  vector<int> v;
-  
-  std::string data = "1082|1156|1156|1214|1214|1236|1236|1288|1347|1347|1456|1456|1478|1521|1521|1693|1702|1702|2127|2206|2206|2319|2319|2513|2513|2953|2953|2967|3077|3077|3110|3170|3170|3605|3605|3644|4024|4024|4406|4623|4623|4695|4695|4767|4885|4885|4909|4909|5001|5001|5445|5823|5823|5905|5905|6202|6202|6259|6261|6261|6342|6342|6640|6640|6769|6769|6842|6844|6844|7029|7029|7050|7050|7132|7139|7139|7177|7177|7187|7187|7251|7251|7416|7484|7484|7635|7670|7670|8013|8013|8025|8061|8061|8215|8215|8424|8424|8548|8732|8732|8768|8768|8907|9006|9006|9012|9012|9074|9074|9103|9384|9384|9504|9504|9566|9566|9663|9663|9809";
-
-  std::replace(data.begin(), data.end(), '|', ' '); // Replace "|" with space
-
-  istringstream iss(data);
-  string token;
-  set<int> uniqueNumbers;
-
-  // Extracting numbers and adding them to the set to filter out duplicates
-  while (iss >> token) {
-
-    int number = std::stoi(token);
-    uniqueNumbers.insert(number);
-
-  }
-
-  // Converting the set to a vector (array-like structure)
-  vector<int> result(uniqueNumbers.begin(), uniqueNumbers.end());
-
-  vector<int> v2;
-
-  BPlusTree<int> bpt(false);
-
-  for(int i = 0; i < 30; i++)
-  {
-
-    int a = rand();
-    v2.push_back(a);
-    bpt.insert(a);
-
-
-  }
-
-
-  
-  //cout << bpt.in_order() << endl;
-
-    bpt.print_tree();
-
-
-cout << endl << endl;
-
-  cout << bpt.in_order() << endl;
-  cout << "end of testB.cpp" << endl;
-  return 1;
-
-}
 
 
 
@@ -832,7 +356,7 @@ build git:(master) ✗  😊 $>
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
 
-  EXPECT_EQ(1, test_parentheses(true));
+  EXPECT_EQ(1, test_parentheses(false));
 }  
 
 /*  TEST(TEST_BPLUS_TREE, BPlusTreeTest) {

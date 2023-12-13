@@ -1,0 +1,6 @@
+course
+id
+instructor
+id
+room
+time

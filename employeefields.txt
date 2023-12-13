@@ -1,5 +1,6 @@
-last
-first
-dep
-salary
-year
+emp
+id
+emp
+name
+job
+title

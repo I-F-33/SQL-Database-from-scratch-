@@ -142,7 +142,7 @@ class Table{
                 cout << "record";
             }
 
-            cout << setw(20) << fnames[i];
+            cout << setw(30) << fnames[i];
         }
 
         cout << endl;
@@ -156,7 +156,7 @@ class Table{
 
         while (bytes > 0){
             
-            outs << "     " << i << setw(20) << fileRecord << endl;
+            outs << "     " << i << setw(30) << fileRecord << endl;
             vectorstr vecs = fileRecord.get_record();
             i++;
             bytes = fileRecord.read(_file, i);
