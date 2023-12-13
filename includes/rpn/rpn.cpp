@@ -4,9 +4,9 @@ RPN::RPN()
 {
 }
 
-RPN::RPN(Queue<Token *> &tokens,Map<std::string, int> _field_names, vector<MMap<std::string, long> >_table) : _tokens(tokens),table(_table),field_names(_field_names){};
+RPN::RPN(Queue<Token *> tokens,Map<std::string, int> _field_names, vector<MMap<std::string, long> >_table) : _tokens(tokens),table(_table),field_names(_field_names){};
 
-void RPN::set_input(Queue<Token *> &tokens, Map<std::string, int> _field_names, vector<MMap<std::string, long> >_table)
+void RPN::set_input(Queue<Token *> tokens, Map<std::string, int> _field_names, vector<MMap<std::string, long> >_table)
 {
     _tokens = tokens;
     field_names = _field_names;

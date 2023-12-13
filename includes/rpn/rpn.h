@@ -17,9 +17,9 @@ class RPN
 
         RPN();
 
-        RPN(Queue<Token*> &tokens, Map<std::string, int> _field_names, vector<MMap<std::string, long> >_table);
+        RPN(Queue<Token*> tokens, Map<std::string, int> _field_names, vector<MMap<std::string, long> >_table);
 
-        void set_input(Queue<Token*> &tokens, Map<std::string, int> _field_names, vector<MMap<std::string, long> >_table);
+        void set_input(Queue<Token*> tokens, Map<std::string, int> _field_names, vector<MMap<std::string, long> >_table);
 
         vector<long> operator()();
 
