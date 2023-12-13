@@ -1,50 +1,48 @@
 
-# Work Report
+# SQL DATABASE
 
-## Name: <ins> your name goes here </ins>
+## Name: <ins> Ivan Flores </ins>
 
 ## Features:
 
 - Not Implemented:
-  - what features have been implemented
+  - DELETE and DROP functionality
 
 <br><br>
 
 - Implemented:
-  - what has been implemented
+  - INSERTION
+  - CREATE / MAKE
+  - SELECT
 
-<br><br>
-
-- Partly implemented:
-  - what features have not been implemented
 
 <br><br>
 
 - Bugs
-  - Known bugs
+  - NONE
 
 <br><br>
 
 # Reflections:
 
-- Any thoughts you may have and would like to share.
+- In this SQL project, every data structure used was created by me with exception to vectors. This project took a total 4 months and a half to create. Within that time I learned and got a very good understanding of how datastructures such as Trees, Graphs and Maps work and the variations of all of them. It was very challenging considering how demanding C++ is and how sensitive it is to shitty code. In all, I'm very satisfied with how the SQL Database project turned out. Clone it, run the main and enjoy the SQL Database.
 
-# **output**
+# HELP / DIRECTIONS
 <pre>
 <br/><br/><br/><br/>
-## Delete this line and paste the output of your basic test and then testB here
+<CREATE | MAKE> : {  <create | make> table <TABLE_NAME> fields <FIELD_NAME> [, <FIELD_NAME>...]  }
+<INSERT> : { insert <INTO> <TABLE_NAME> values <VALUE> [, <VALUE>...]      }
+<SELECT> : {  select <* | FIELD_NAME> [, ,FIELD_NAME>...]
+					from <TABLE_NAME>
+					where <FIELD_NAME> <RELATIONAL_OPERATOR> <VALUE>
+						[<LOGICAL_OPERATOR>
+							<FIELD_NAME> <RELATIONAL_OPERATOR> <VALUE>...]
+			}
+
+<VALUE>  : A string of alphanumeric characters, or a string of alphanumeric
+ 			characters and spaces enclosed by double quotation marks:
+ 			"Jean Luise", Finch, 1923
+<RELATIONAL OPERATOR> : [ = | > | < | >= | <= ]
+<LOGICAL OPERATOR>    : [and | or]
 </pre>
-
-
-<br/><br/>
-
-# basic_test.cpp output:
-<pre>
-<br/><br/><br/><br/>
-</pre>
-# testB.cpp output:
-<pre>
-<br/><br/><br/><br/>
-</pre>
-
 

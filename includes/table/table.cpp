@@ -271,32 +271,12 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
             //get the record values
             record = fileRecord.get_record();
 
-            //organize the record to the columns
+            //insert into the reuslt table
             result.insert_into(record);
 
-
+            //read the next record
             i++;
         }
-
-        //  vectorstr record;
-
-        // int i = 0;
-
-        // //iterate through the record numbers
-        // while(fileRecord.read(_file, i) > 0)
-        // {   
-        //     //read the record
-        //     //get the record values
-        //     record = fileRecord.get_record();
-
-        //     //insert the record into the result table
-        //     result.insert_into(resultrecord);
-
-        //     recnos.push_back(i);
-
-        //     i++;
-
-        // }
 
 
         _file.close();
