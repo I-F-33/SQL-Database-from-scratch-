@@ -1,35 +1,13 @@
 #include "sql.h"
 
-////////////BATCH MODE////////////
-SQL::SQL(string txt_file)
-{
-    txt_file_name = txt_file;
-}
-
-void SQL::file_tokenize(string txt_file)
-{
-    
-}
-
-
-
-
-
-
-
-
-
 
 
 Table SQL::command(const string& command)
 {   
-    
     Table t;
 
-    const char* c = command.c_str();
-
     //create parser object
-    Parser p(c);
+    Parser p(command.c_str());
     
     //if the parse tree is valid, run the command
      mmap_ss parse_map = p.parse_tree();
@@ -43,7 +21,7 @@ Table SQL::command(const string& command)
   
 }
 
-Table SQL::run_command(mmap_ss& parse_map)
+Table SQL::run_command(const mmap_ss& parse_map)
 {
     vectorstr command = parse_map["command"];
 

@@ -181,6 +181,7 @@
 
     Parser::Parser(const char* s)
     {
+
         init_keywords_map();
         init_parse_table();
         set_string(s);

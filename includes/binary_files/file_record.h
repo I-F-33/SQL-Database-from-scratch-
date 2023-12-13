@@ -6,45 +6,46 @@
 #include <vector>
 #include <string.h>
 #include "utilities.h"
-#include <vector>
+#include "../table/typedefs.h"
 
 using namespace std;
 
 class FileRecord{
 public:
-    
-    /// @brief default constructor
+    //when you construct a FileRecord, it's either empty or it
+    //  contains a word
     FileRecord(){
         _record[0][0] = '\0';
-        recno = -1;
+        size = -1;
+        //['\0'|  | G | a | r | b | a   |  g  |  e |    ]
     }
 
-    /// @brief constructor that takes a vector of strings
-    /// @param v 
-    FileRecord(vector<string> v){
+    FileRecord(vectorstr v): size(-1){
         for(int i = 0; i < v.size(); i++){
             strncpy(_record[i], v.at(i).c_str(), MAX);
             _record[i][v.at(i).size()] = '\0';
+            size++;
         }
-        recno = v.size();
-        _record[recno][0] = '\0';
+        _record[size + 1][0] = '\0';
     }
-    
+    int size_of() const{
+        return size;
+    }
 
     long write(fstream& outs);              //returns the record number
     long read(fstream& ins, long recno);    //returns the number of bytes
                                             //      read = MAX, or zero if
                                             //      read passed the end of file
-    vector<string> get_record() const;
+    vectorstr get_record() const;
 
 
     friend ostream& operator<<(ostream& outs, const FileRecord& r);
     
 
-
+private:
     static const int MAX = 100;
     char _record[MAX + 1][MAX + 1]; //NULL char
-    int recno = 0;
+    int size;
 };
 
 #endif

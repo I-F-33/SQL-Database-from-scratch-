@@ -9,9 +9,6 @@ class SQL
 {
     public:
 
-        //Batch Mode
-        SQL(string txt_file);
-
         SQL(){
             cout << "intializing SQL" << endl;
         };
@@ -31,14 +28,9 @@ class SQL
     
     private:
 
-        //file tokenize
-        void file_tokenize(string txt_file);
-
-        Table run_command(mmap_ss& parse_map); 
+        Table run_command(const mmap_ss& parse_map); 
     
         vectorlong recnos = {};
-
-        string txt_file_name = "";
 
 };
 

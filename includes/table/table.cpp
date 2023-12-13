@@ -2,14 +2,14 @@
 
 int Table::serial = 0;
 
-Table::Table(std::string tableName):_table_name(tableName){      
+Table::Table(const std::string& tableName):_table_name(tableName){      
 
 
     FileRecord recordHolder;
 
     //open field file name
     string fields_filename = tableName + "fields.txt";
-    fstream field_file(fields_filename,field_file.in);
+    fstream field_file(fields_filename, ios::in);
 
     //open the table data
 
@@ -37,7 +37,9 @@ Table::Table(std::string tableName):_table_name(tableName){
     
     fstream _file;
 
-    open_fileRW(_file,tableName.c_str());
+    string table_file_name = tableName + ".bin";
+
+    open_fileRW(_file,table_file_name.c_str());
 
 
     //insert the records from "tablename" to this table
@@ -72,15 +74,15 @@ Table::Table(std::string tableName):_table_name(tableName){
     /// @brief creates a new table with the name of fname and the fields of ftype
     /// @param fname 
     /// @param ftype 
-Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(fname){
+Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0), _table_name(fname){
 
         fstream _file;
-
-        open_fileW(_file, fname.c_str());  
+        string table_file_name = fname + ".bin";
+        open_fileW(_file, table_file_name.c_str());  
         
         string fields_filename = fname+"fields.txt";
         
-        fstream f(fields_filename,f.out);
+        fstream f(fields_filename,ios::out);
 
         for(int i = 0; i < ftype.size(); i++)   
         {
@@ -109,8 +111,9 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
     /// @param other table to be copied
     /// set the fields and ready to read
     Table::Table(const Table& other): totalrecnums(other.totalrecnums), _table_name(other._table_name), field_names(other.field_names){
-        fstream _file;
-        open_fileRW(_file, other._table_name.c_str());
+        fstream _file;  
+        string table_name_file = other._table_name + ".bin";
+        open_fileRW(_file, table_name_file.c_str());
         // _table_name = other._table_name;
         // field_names = other.field_names;
         // trecno = other.trecno;
@@ -129,7 +132,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
     /// @brief create a queue of tokens to use in the select function
     /// @param strings 
     /// @return 
-    Queue<Token*> Table::parse_strings(vectorstr strings)
+    Queue<Token*> Table::parse_strings(const vectorstr& strings)
     {
         Queue<Token*> tokens;
 
@@ -183,14 +186,15 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
     /// @brief 
     /// @param values 
     /// @return 
-    int Table::insert_into(vectorstr values){
+    long Table::insert_into(const vectorstr& values){
 
         fstream _file;
 
-        open_fileRW(_file, _table_name.c_str());
+        string table_file_name = _table_name + ".bin";
+        open_fileRW(_file, table_file_name.c_str());
 
         //write the file record to the file - store its record number
-        fileRecord = FileRecord(values);
+        FileRecord fileRecord(values);
 
         long recno = fileRecord.write(_file);
 
@@ -217,12 +221,14 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
     {
         //create new table with the columns
 
+        FileRecord fileRecord;
+
         vectorstr resultrecord;
 
         //get columns
         string fields_filename = _table_name+"fields.txt";
 
-        fstream a(fields_filename, a.in);
+        fstream a(fields_filename, ios::in);
 
         vectorstr field_names_vectr;
 
@@ -245,7 +251,8 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
         fstream _file;
 
-        open_fileRW(_file, _table_name.c_str());
+        string table_file_name = _table_name + ".bin";
+        open_fileRW(_file, table_file_name.c_str());
 
         for(int i = 0; i < totalrecnums;i++)
         {
@@ -279,7 +286,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         return result;
     }
 
-    Table Table::select(vectorstr columns, Queue<Token*> tokens)
+    Table Table::select(const vectorstr& columns, Queue<Token*> tokens)
     {
         //create new table with the columns
         Table result("table_select_" + to_string(serial++), columns);
@@ -288,11 +295,15 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
         vectorlong recnos = rpn();
 
+        FileRecord fileRecord;
+
         vectorstr resultrecord;
 
         fstream _file;
 
-        open_fileRW(_file, _table_name.c_str());
+        string table_file_name = _table_name + ".bin";
+
+        open_fileRW(_file, table_file_name.c_str());
 
 
         //iterate through the record numbers
@@ -326,7 +337,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
     }
 
-    Table Table::select(vectorstr columns, vectorstr strings)
+    Table Table::select(const vectorstr& columns, const vectorstr& strings)
     {
         //create new table with the columns
         Table result("table_select_" + to_string(serial++), columns);
@@ -335,6 +346,8 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         Queue<Token*> tokens = parse_strings(strings);
 
         ShuntingYard sy(tokens);
+
+        FileRecord fileRecord;
 
         Queue<Token*> postfix = sy.postfix();
 
@@ -345,8 +358,9 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         vectorstr resultrecord;
         fstream _file;
 
+        string table_file_name = _table_name + ".bin";
 
-        open_fileRW(_file, _table_name.c_str());
+        open_fileRW(_file, table_file_name.c_str());
 
         //iterate through the record numbers
         for(int i = 0; i < recnos.size(); i++)
@@ -380,13 +394,15 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
     }
 
 
-    Table Table::select(vectorstr columns, std::string field, std::string operato, std::string query)
+    Table Table::select(const vectorstr& columns, const std::string& field, const std::string& operato, const std::string& query)
     {
         //create new table with the columns
         Table result("table_select_" + to_string(serial++), columns);
 
         //get the field number
         int queryfield = field_names.get(field);
+
+        FileRecord fileRecord;
 
         //get the map of the field
         MMap<std::string, long> querymap = table[queryfield];
@@ -437,8 +453,9 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
         fstream _file;
 
+        string table_file_name = _table_name + ".bin";
 
-        open_fileRW(_file, _table_name.c_str());
+        open_fileRW(_file, table_file_name.c_str());
 
         //iterate through the record numbers
         for(int i = 0; i < recnos.size(); i++)
@@ -468,16 +485,20 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         return result;
     }
 
-    Table Table::select_all_columns(vectorstr columns)
+    Table Table::select_all_columns(const vectorstr& columns)
     {
         //create new table with the columns
         Table result("table_select_" + to_string(serial++), columns);
+
+        FileRecord fileRecord;
 
         vectorstr resultrecord;
 
         fstream _file;
 
-        open_fileRW(_file, _table_name.c_str());
+        string table_file_name = _table_name + ".bin";
+
+        open_fileRW(_file, table_file_name.c_str());
 
         for(int i = 0; i < totalrecnums;i++)
         {
@@ -512,7 +533,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         return result;
     }
 
-    Table Table::select_all_condition(vectorstr condition)
+    Table Table::select_all_condition(const vectorstr& condition)
     {
         //create new table with the columns
 
@@ -521,7 +542,7 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         //get columns
         string fields_filename = _table_name+"fields.txt";
 
-        fstream a(fields_filename, a.in);
+        fstream a(fields_filename, ios::in);
 
         vectorstr field_names_vectr;
 
@@ -547,6 +568,8 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
 
         ShuntingYard sy(tokens);
 
+        FileRecord fileRecord;
+
         Queue<Token*> postfix = sy.postfix();
 
         RPN rpn(postfix, field_names, table);
@@ -555,8 +578,9 @@ Table::Table(std::string fname, vectorstr ftype): totalrecnums(0), _table_name(f
         
         fstream _file;
 
+        string table_file_name = _table_name + ".bin";
 
-        open_fileRW(_file, _table_name.c_str());
+        open_fileRW(_file, table_file_name.c_str());
 
         //iterate through the record numbers
         for(int i = 0; i < recnos.size(); i++)

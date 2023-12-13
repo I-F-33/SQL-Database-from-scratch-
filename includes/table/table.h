@@ -27,12 +27,12 @@ class Table{
     Table(){};
     /// @brief opens a table with the name of tname
     /// @param tname 
-    Table(std::string tname);
+    Table(const std::string& tname);
 
     /// @brief creates a new table with the name of fname and the fields of ftype
     /// @param fname 
     /// @param ftype 
-    Table(std::string fname, vectorstr ftype);
+    Table(const std::string& fname, const vectorstr& ftype);
 
     // big three
 
@@ -70,40 +70,40 @@ class Table{
     /// @brief inserts a record into the table
     /// @param values 
     /// @return 
-    int insert_into(vectorstr values);
+    long insert_into(const vectorstr& values);
 
     /// @brief returns a table with all the records
     /// @return 
     Table select_all();
 
-    Table select(vectorstr columns, std::string field, std::string operato, std::string query);
+    Table select(const vectorstr& columns, const std::string& field, const std::string& operato, const std::string& query);
 
     /// @brief returns a table with the records specified by the condition and the columns specified
     /// @param columns 
     /// @param tokens 
     /// @return 
-    Table select(vectorstr columns, Queue<Token*> tokens);
+    Table select(const vectorstr& columns, Queue<Token*> tokens);
 
     /// @brief returns a table with the records specified by the condition and the columns specified
     /// @param columns 
     /// @param strings 
     /// @return 
-    Table select(vectorstr columns, vectorstr strings);
+    Table select(const vectorstr& columns, const vectorstr& strings);
 
     /// @brief returns a table with all the records,per condition, and all columns 
     /// @param condition 
     /// @return 
-    Table select_all_condition(vectorstr condition);
+    Table select_all_condition(const vectorstr& condition);
 
     /// @brief returns a table with all the records and the columns specified
     /// @param columns 
     /// @return 
-    Table select_all_columns(vectorstr columns);
+    Table select_all_columns(const vectorstr& columns);
 
     /// @brief tokenizes the string and returns a queue of tokens
     /// @param strings 
     /// @return 
-    Queue<Token*> parse_strings(vectorstr strings);
+    Queue<Token*> parse_strings(const vectorstr& strings);
 
 
 
@@ -112,22 +112,19 @@ class Table{
     /// @param outs 
     /// @param t 
     /// @return outs
-    friend ostream& operator << (ostream& outs, Table t){
+    friend ostream& operator << (ostream& outs, const Table& t){
         
         fstream _file;
 
-        open_fileRW(_file, t._table_name.c_str());
-        
-        int i = 0;
-        long bytes = t.fileRecord.read(_file, i);
-        
+        FileRecord fileRecord;
+
         outs << "Table name: " << t._table_name << ", records: " << t.totalrecnums << endl;
         
         vectorstr fnames;
 
         string fields_filename = t._table_name + "fields.txt";
         fstream f;
-        f.open(fields_filename, f.in);
+        f.open(fields_filename, ios::in);
         string temp;
 
         if(f.is_open())
@@ -150,12 +147,19 @@ class Table{
 
         cout << endl;
 
+        string table_file_name = t._table_name + ".bin";
+
+        open_fileRW(_file, table_file_name.c_str());
+        
+        int i = 0;
+        long bytes = fileRecord.read(_file, i);
+
         while (bytes > 0){
             
-            outs << "     " << i << setw(20) << t.fileRecord << endl;
-            vectorstr vecs = t.fileRecord.get_record();
+            outs << "     " << i << setw(20) << fileRecord << endl;
+            vectorstr vecs = fileRecord.get_record();
             i++;
-            bytes = t.fileRecord.read(_file, i);
+            bytes = fileRecord.read(_file, i);
         }
 
         _file.close();
@@ -168,8 +172,6 @@ class Table{
     private:
 
         static int serial;
-
-        FileRecord fileRecord = FileRecord();
 
         Map<std::string, int> field_names = {};
 

@@ -88,7 +88,7 @@ bool debug = true;
 // ==============================
 
 TEST(SQL_BASIC, SQLBasic) {
-  EXPECT_EQ(1, sql_basic(debug));
+  EXPECT_EQ(1, sql_basic(true));
 }
 
 int main(int argc, char **argv) {

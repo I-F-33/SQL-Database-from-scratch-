@@ -308,7 +308,24 @@ class BPlusTree
 
     const T& get(const T& entry)const   //return a reference to entry
     {
-        return get(entry);
+        int index = first_ge(data, data_count, entry);
+
+        if (data[index] == entry && !is_leaf())
+        {
+            return subset[index + 1]->get(entry);
+        }
+        else if(data[index] == entry && is_leaf())
+        {
+            return data[index];
+        }
+         else if(is_leaf() && data[index] != entry)
+        {   
+            return data[index];
+        } 
+        else
+        {
+            return subset[index]->get(entry);
+        }
     }
 
     T& get_existing(const T& entry) {
