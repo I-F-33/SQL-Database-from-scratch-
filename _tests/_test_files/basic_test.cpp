@@ -16,8 +16,8 @@ using namespace std;
 
 
 
-const int MAKE_TABLE_COMMANDS = 11;
-const int SELECT_COMMANDS = 20;
+const int MAKE_TABLE_COMMANDS = 12;
+const int SELECT_COMMANDS = 21;
 
 bool sql_basic(bool debug = false)
 {
