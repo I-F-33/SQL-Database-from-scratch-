@@ -14,7 +14,15 @@
 
 using namespace std;
 
-const vector<string> command_list = {
+
+
+const int MAKE_TABLE_COMMANDS = 11;
+const int SELECT_COMMANDS = 20;
+
+bool sql_basic(bool debug = false)
+{
+
+     const vector<string> command_list = {
 
 /*00*/     "make table employee fields  last,       first,         dep,      salary, year",
 /*01*/     "insert into employee values Blow,       Joe,           CS,       100000, 2018",
@@ -42,15 +50,10 @@ const vector<string> command_list = {
 
 };
 
-const int MAKE_TABLE_COMMANDS = 11;
-const int SELECT_COMMANDS = 20;
-
-bool sql_basic(bool debug = false)
-{
-     
      SQL sql;
 
      Table t;
+
      cout << ">" << command_list[0] << endl;
      sql.command(command_list[0]);
      cout << "basic_test: table created." << endl<<endl;
@@ -85,8 +88,7 @@ bool debug = true;
 // ==============================
 
 TEST(SQL_BASIC, SQLBasic) {
-  bool success = sql_basic(debug);
-  EXPECT_EQ(success, true);
+  EXPECT_EQ(1, sql_basic(debug));
 }
 
 int main(int argc, char **argv) {

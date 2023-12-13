@@ -39,8 +39,8 @@ class Table{
     /// @brief copy constructor
     /// @param other 
     /// @return this is the new table, this
-    Table operator = (const Table& other){
-        fstream _file;
+  /*   Table operator = (const Table& other){
+         fstream _file;
 
         open_fileRW(_file, other._table_name.c_str());
         _table_name = other._table_name;
@@ -51,7 +51,7 @@ class Table{
 
         _file.close();
         return *this;
-    }
+    } */
 
     /// @brief destructor
     ~Table();
@@ -122,7 +122,7 @@ class Table{
         long bytes = t.fileRecord.read(_file, i);
         
         outs << "Table name: " << t._table_name << ", records: " << t.totalrecnums << endl;
-
+        
         vectorstr fnames;
 
         string fields_filename = t._table_name + "fields.txt";
@@ -137,7 +137,7 @@ class Table{
                 fnames.push_back(temp);
             }
         }
-        
+
         for(int i = 0; i < fnames.size(); i++)
         {
             if(i == 0)

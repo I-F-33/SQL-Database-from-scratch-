@@ -795,44 +795,6 @@ private:
             fix_excess(index);
         }
 
-               
-      /*   int index = first_ge(data, data_count, entry);
-
-        bool found = data[index] == entry && index < data_count;
-
-         // insert into the leaf
-        if (is_leaf())
-        {
-            if(found)
-            {
-                data[index] = entry;
-            }
-            else{
-
-                ordered_insert(data, data_count, entry);
-            }
-            
-            return;
-        }
-
-
-        // if this is a duplicate then return and terminate program
-        if (found && !is_leaf())
-        {
-            subset[index + 1]->loose_insert(entry);
-        }        
-        else
-        { // if its not a leaf then recurse
-            subset[index]->loose_insert(entry);
-        }
-
-        // if the child is too big then fix excess
-        if (subset[index] && subset[index]->data_count > MAXIMUM)
-        {
-            fix_excess(index);
-        } */
-
-
     }
 
     void fix_excess(int i) // fix excess of data elements in child i

@@ -37,7 +37,7 @@ bool test_parentheses(bool debug){
 
     }
 
-/*   if(debug){
+  if(debug){
     cout<<"full table\n"; 
     cout<<sql.command("select * from student")<<endl; 
 
@@ -105,7 +105,7 @@ bool test_parentheses(bool debug){
     sql.select_recnos();
 
   }
- */
+ 
   if(true){
     cout<<"full table\n";
     cout<<sql.command("select * from student")<<endl;
