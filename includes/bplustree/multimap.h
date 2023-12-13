@@ -276,7 +276,7 @@ public:
             {
                 MPair<K, V> m2 = *upperb;
 
-                if(m.key < m2.key)
+                if(m.key <= m2.key)
                 {
                     for(V element : m.value_list)
                     {

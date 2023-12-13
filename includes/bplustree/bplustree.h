@@ -395,38 +395,42 @@ class BPlusTree
     }
 
     Iterator lower_bound(const T& key)  //return first that goes NOT BEFORE key entry or next if does not exist: >= entry
-    {
-        Iterator it = begin();
-     
-
-        while(it != end())
-        {
-         if(*it >= key)
-            {
-                return it;
-            }
-
+    {int where_to_go = first_ge(data, data_count, key);
+    if(!is_leaf()){
+        return subset[where_to_go]->lower_bound(key);
+    }else if(is_leaf()){    
+        int index = where_to_go == data_count ? where_to_go - 1 : where_to_go; 
+        Iterator it(this, index);
+        if(key > *it){
             it++;
         }
+        return it;
+    }    
 
-        return Iterator(nullptr,0);
+    cout << "wtf how did we get here"; 
+    return Iterator(nullptr,0);
     }
 
     Iterator upper_bound(const T& key)  //return first that goes AFTER key exist or not, the next entry  >entry
     {
-        Iterator it = begin();
-
-        while(it != end())
-        {
-            if(*it > key)
-            {
-                return it;
+        int where_to_go = first_ge(data, data_count, key);
+    
+    if(!is_leaf()){
+        if(!(data[where_to_go] == key) && !subset[0]->is_leaf())
+            return subset[where_to_go]->upper_bound(key);
+        else if(subset[0]->is_leaf()){
+            int index = where_to_go == subset[where_to_go]->data_count ? where_to_go - 1 : where_to_go;
+            where_to_go = data[where_to_go] == key ? where_to_go + 1 : where_to_go;
+            Iterator it(this->subset[where_to_go], index);
+            if(!(key < *it)){
+                it++;
             }
-
-            it++;
+            return it;
         }
+        
+    }
 
-        return end();
+    return Iterator(nullptr,0);
     }
 
     Iterator begin(){

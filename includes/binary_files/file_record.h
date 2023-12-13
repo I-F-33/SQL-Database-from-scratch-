@@ -12,12 +12,10 @@ using namespace std;
 
 class FileRecord{
 public:
-    //when you construct a FileRecord, it's either empty or it
-    //  contains a word
+    
     FileRecord(){
         _record[0][0] = '\0';
         size = -1;
-        //['\0'|  | G | a | r | b | a   |  g  |  e |    ]
     }
 
     FileRecord(vectorstr v): size(-1){

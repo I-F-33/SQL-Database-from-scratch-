@@ -54,7 +54,7 @@ Table::Table(const std::string& tableName):_table_name(tableName){
 
         for(int i = 0; i < field_names_size;i++)
         {
-            table.at(i).insert(record_values[i],counter);
+            table[i].insert(record_values[i],counter);
         }
 
         recnums.push_back(counter);
@@ -194,7 +194,7 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
         open_fileRW(_file, table_file_name.c_str());
 
         //write the file record to the file - store its record number
-        FileRecord fileRecord(values);
+        FileRecord fileRecord = FileRecord(values);
 
         long recno = fileRecord.write(_file);
 
@@ -339,56 +339,15 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
     Table Table::select(const vectorstr& columns, const vectorstr& strings)
     {
-        //create new table with the columns
-        Table result("table_select_" + to_string(serial++), columns);
-
+        
         //build token queue
         Queue<Token*> tokens = parse_strings(strings);
 
         ShuntingYard sy(tokens);
 
-        FileRecord fileRecord;
-
         Queue<Token*> postfix = sy.postfix();
 
-        RPN rpn(postfix, field_names, table);
-
-        vectorlong recnos = rpn();
-
-        vectorstr resultrecord;
-        fstream _file;
-
-        string table_file_name = _table_name + ".bin";
-
-        open_fileRW(_file, table_file_name.c_str());
-
-        //iterate through the record numbers
-        for(int i = 0; i < recnos.size(); i++)
-        {   
-            //read the record
-            fileRecord.read(_file, recnos.at(i));
-
-            //get the record values
-            vectorstr record = fileRecord.get_record();
-
-            //organize the record to the columns
-            for(int j = 0; j < columns.size(); j++)
-            {
-                resultrecord.push_back(record[field_names.get(columns.at(j))]);
-            }
-
-            //insert the record into the result table
-            result.insert_into(resultrecord);
-
-            result.recnums.push_back(recnos.at(i));
-
-            resultrecord.clear();
-        }
-
-
-        _file.close();
-
-        return result;
+        return select(columns, postfix);
         
 
     }

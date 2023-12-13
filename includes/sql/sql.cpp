@@ -26,7 +26,7 @@ Table SQL::run_command(const mmap_ss& parse_map)
     vectorstr command = parse_map["command"];
 
     //if the command is make
-    if(command[0] == "make")
+    if(command[0] == "make" || command[0] == "create")
     {
         vectorstr tablename = parse_map["table_name"];
         vectorstr column_names = parse_map["columns"];

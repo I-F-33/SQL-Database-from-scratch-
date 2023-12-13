@@ -14,6 +14,7 @@
         keywords_map.insert("values", VALUES);
         keywords_map.insert("*" , STAR);
         keywords_map.insert("make", MAKE);
+        keywords_map.insert("create", MAKE);
         keywords_map.insert(",", COMMA);
         keywords_map.insert("(" , LEFTPAREN);
         keywords_map.insert(")", RIGHTPAREN);
@@ -383,7 +384,7 @@
                 
             };
 
-            if(s == "select" || s == "make" || s == "insert")
+            if(s == "select" || s == "make" || s == "insert" || s == "create" || s == "drop")
             {
                 _ptree.insert("command", s);
 

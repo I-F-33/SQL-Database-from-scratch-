@@ -8,29 +8,38 @@ using namespace std;
   
 bool test_parentheses(bool debug){
   
-    string s1 = "make table student fields fname, lname, major, age"; 
-    string s2 = "insert into student values Flo, Yao, CS, 20"; 
-    string s3 = "insert into student values \"Flo\", \"Jackson\", Math,21"; 
-    string s4 = "insert into student values Calvin, Woo, Physics,22"; 
-    string s5 = "insert into student values \"Anna Grace\", \"Del Rio\", CS, 22"; 
-    string s6 = "insert into student values \"Anna Kat\", \"The Bat\", Art, 33"; 
-    string s7 = "insert into student values Lilli, Sutton, Communications, 34"; 
-    string s8 = "insert into student values Oliver, Knox, Math, 25"; 
-    string s9 = "insert into student values Johnathan, Salinas, Biology, 18";
-    string s10 = "insert into student values Justin, Wang, History, 19"; 
+string s1 = "create table student fields fname, lname, major, age";
+string s2 = "insert into student values \"Flo\", \"Yao\", \"CS\", 20";
+string s3 = "insert into student values \"Flo\", \"Jackson\", \"Math\", 21";
+string s4 = "insert into student values \"Calvin\", \"Woo\", \"Physics\", 22";
+string s5 = "insert into student values \"Anna Grace\", \"Del Rio\", \"CS\", 22";
+string s6 = "insert into student values \"Anna Kat\", \"The Bat\", \"Art\", 33";
+string s7 = "insert into student values \"Lilli\", \"Sutton\", \"Communications\", 34";
+string s8 = "insert into student values \"Oliver\", \"Knox\", \"Math\", 25";
+string s9 = "insert into student values \"Johnathan\", \"Salinas\", \"Biology\", 18";
+string s10 = "insert into student values \"Justin\", \"Wang\", \"History\", 19";
+string s11 = "create table course fields courseid, coursename, credits";
+string s12 = "insert into course values \"CS101\", \"Introduction to Computer Science\", 3";
+string s13 = "insert into course values \"MATH201\", \"Calculus II\", 4";
+string s14 = "insert into course values \"PHYS101\", \"Physics for Beginners\", 3";
+string s15 = "insert into course values \"ENG202\", \"Advanced English Composition\", 3";
+string s16 = "create table enrollment fields studentid, courseid, grade";
+string s17 = "insert into enrollment values 1, \"CS101\", \"A\"";
+string s18 = "insert into enrollment values 2, \"MATH201\", \"B\"";
+string s19 = "insert into enrollment values 3, \"PHYS101\", \"C\"";
+string s20 = "insert into enrollment values 4, \"ENG202\", \"A\"";
+string s21 = "create table department fields deptid, deptname, location";
+string s22 = "insert into department values \"D001\", \"Computer Science\", \"Building A\"";
+string s23 = "insert into department values \"D002\", \"Mathematics\", \"Building B\"";
+string s24 = "insert into department values \"D003\", \"Physics\", \"Building C\"";
+string s25 = "insert into department values \"D004\", \"English\", \"Building D\"";
 
-    vector<string> commands; 
-    commands.push_back(s1);  
 
-    //insertions
-    commands.push_back(s2); 
-    commands.push_back(s3); 
-    commands.push_back(s4); 
-    commands.push_back(s5);
-    commands.push_back(s6); 
-    commands.push_back(s7);
-    commands.push_back(s8); 
-
+    vector<string> commands = {
+      s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25
+    };
+  
+    
     SQL sql; 
     for(int i = 0; i < commands.size(); i++){
       sql.command(commands[i]); 
@@ -41,7 +50,17 @@ bool test_parentheses(bool debug){
     cout<<"full table\n"; 
     cout<<sql.command("select * from student")<<endl; 
 
-    string command; 
+    cout<<"full table\n";
+    cout<<sql.command("select * from course")<<endl;
+
+    cout<<"full table\n";
+    cout<<sql.command("select * from enrollment")<<endl;
+
+    cout<<"full table\n";
+
+    cout<<sql.command("select * from department")<<endl;
+
+  /*   string command; 
     command = "select * from student where age < 30 and ((major = CS or major = Physics) and (lname < Y))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
@@ -103,7 +122,7 @@ bool test_parentheses(bool debug){
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
     sql.select_recnos();
-
+ */
   }
  
   if(true){
