@@ -27,10 +27,7 @@
         keywords_map.insert("!=", OPERATOR);
         keywords_map.insert(">=", OPERATOR);
         keywords_map.insert("<=", OPERATOR);
-       
-
-
-
+    
     }
 
     void Parser::init_parse_table()
