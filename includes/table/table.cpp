@@ -253,10 +253,7 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
         string table_file_name = _table_name + ".bin";
         open_fileRW(_file, table_file_name.c_str());
 
-        for(int i = 0; i < totalrecnums;i++)
-        {
-            result.recnums.push_back(i);
-        }
+        result.recnums = recnums;
 
         //iterate through the record numbers
         for(int i = 0; i < recnums.size(); i++)

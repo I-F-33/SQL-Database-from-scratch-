@@ -101,6 +101,7 @@
         mark_cell(7,_table,20,14);
 
         mark_cell(8, _table,20,9);
+        mark_cell(8,_table,LEFTPAREN, 8);
 
         mark_cell(9,_table,OPERATOR,10);
 
@@ -116,16 +117,26 @@
         mark_cell(38,_table, AND, 13);
         mark_cell(38,_table, OR, 13);
 
-        mark_cell(39,_table, AND, 13);
-        mark_cell(39,_table,OR,13);
+        mark_cell(39,_table, AND, 17);
+        mark_cell(39,_table,OR,17);
+        mark_cell(39,_table,RIGHTPAREN,39);
+
+        mark_cell(15,_table,QUOTES,40);
+        mark_cell(40,_table,20,41);
+        mark_cell(41,_table,20,41);
+        mark_cell(41,_table,QUOTES,42);
+
+        mark_cell(42,_table,AND,17);
+        mark_cell(42,_table, OR, 17);
 
 
         mark_cell(11,_table,RIGHTPAREN,12);
         mark_cell(11,_table,AND,13);
         mark_cell(11,_table,OR,13);
 
-        mark_cell(12,_table,AND,13);
-        mark_cell(12,_table,OR,13);
+        mark_cell(12,_table,AND,17);
+        mark_cell(12,_table,OR,17);
+        mark_cell(12,_table,RIGHTPAREN,12);
 
         mark_cell(13,_table,20,9);
         mark_cell(13,_table,LEFTPAREN,8);
@@ -145,10 +156,11 @@
         mark_cell(35,_table, OR, 17);
 
 
-        mark_cell(16,_table,AND,17);
-        mark_cell(16,_table,OR,17);
+        mark_cell(16,_table,AND,13);
+        mark_cell(16,_table,OR,13);
 
         mark_cell(17,_table,20,14);
+        mark_cell(17,_table,LEFTPAREN,8);
 
         //MAKE workflow
         mark_cell(18,_table,TABLE,19);
@@ -237,7 +249,7 @@
 
         bool valid = get_parse_tree();
 
-        fail_flag = valid == false ? true : false;
+        fail_flag = valid != true ? true : false;
     }
 
     int Parser::get_column(string s)

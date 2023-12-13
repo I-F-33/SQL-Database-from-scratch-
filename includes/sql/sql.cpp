@@ -33,6 +33,8 @@ Table SQL::run_command(const mmap_ss& parse_map)
         //create a table with the name specified
         Table result(tablename[0], column_names);
 
+        cout << setw(80) << "Table " << tablename[0] << " successfully created" << endl;
+
         return result;
     }
 
