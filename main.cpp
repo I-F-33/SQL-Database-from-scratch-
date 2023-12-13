@@ -25,7 +25,6 @@ int main(int argv, char** argc) {
         
         getline(cin, input);
 
-        cout << input << endl;
         if(input == "help")
         {
             cout << endl;
