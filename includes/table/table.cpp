@@ -339,52 +339,7 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
         Queue<Token*> postfix = sy.postfix();
 
-        //create new table with the columns
-        Table result("table_select_" + to_string(serial++), columns);
-
-        RPN rpn(tokens, field_names, table);
-
-        vectorlong recnos = rpn();
-
-        recnums = recnos;
-
-        FileRecord fileRecord;
-
-        vectorstr resultrecord;
-
-        fstream _file;
-
-        string table_file_name = _table_name + ".bin";
-
-        open_fileRW(_file, table_file_name.c_str());
-
-        vectorstr record ;
-
-        //iterate through the record numbers
-        for(int i = 0; i < recnos.size(); i++)
-        {   
-            //read the record
-            fileRecord.read(_file, recnos.at(i));
-
-            //get the record values
-            record = fileRecord.get_record();
-
-            //organize the record to the columns
-            for(int j = 0; j < columns.size(); j++)
-            {
-                resultrecord.push_back(record[field_names[columns[j]]]);
-            }
-
-            //insert the record into the result table
-            result.insert_into(resultrecord);
-    
-
-            resultrecord.clear();
-        }
-
-        _file.close();
-
-        return result;
+        return select(columns, postfix);
         
 
     }
