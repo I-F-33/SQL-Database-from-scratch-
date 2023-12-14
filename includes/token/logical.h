@@ -16,11 +16,11 @@ public:
     {
         if(_logical == "and" || _logical == "AND")
         {
-            return 2;
+            return 1;
         }
         else if(_logical == "or" || _logical == "OR")
         {
-            return 1;
+            return 2;
         }
         else
         {
