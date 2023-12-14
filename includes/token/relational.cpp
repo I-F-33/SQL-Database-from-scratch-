@@ -41,7 +41,7 @@ ResultSet* Relational::eval(Map<string,int> field_names, vector<MMap<string,long
         }
         else if(_relation == ">=")
         {
-            //just add them and start from after them
+            //just add them and start from after them  
             recnos = querymap.equal_range(querymap.lower_bound(static_cast<TokenStr *>(right)->get_value()), querymap.end());
 
         }

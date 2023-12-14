@@ -12,70 +12,52 @@ using namespace std;
   if(debug)
   {
     SQL sql;
-    Table t;
-    Table playerTable;
-    Table clubsTable;
-    vectorstr commands = {
-      "make table players fields fname, lname, age, position, team",
-      "insert into players values Julian, Marin, 17, Winger, \"18AA\"",
-      "insert into players values Adam, Scott, 17, Winger, \"18AA\"",
-      "insert into players values Jared, Padilla, 18, Center, \"18AA\"",
-      "insert into players values Anthony, Aceves, 17, Defense, \"18AA\"",
-      "insert into players values Jayden, Deguzman, 16, Defense, \"16AA\"",
-      "insert into players values Aiden, Zakaria, 16, Center, \"16AA\"",
-      "insert into players values Collin, \"O'Brian\", 15, Winger, \"16AA\"",
-      "insert into players values Rafe, Armstrong, 16, Defense, \"16AA\"",
-      "insert into players values Taiki, Schneider, 16, Winger, \"16AA\"",
-      "insert into players values Garion, Barber, 16, Center, \"16AA\"",
-      "insert into players values Sebastian, Benavente, 16, Winger, \"16AA\"",
-      "insert into players values Liam, Carson, 11, Defense, \"12B\"",
-      "insert into players values Damien, Boucher, 11, Center, \"12B\"",
-      "insert into players values Bella, Gao, 11, Winger, \"12B\"",
-      "insert into players values Reagan, Ludlow, 11, Winger, \"12B\"",
-      "insert into players values Patrick, Guerra, 12, Defense, \"12B\"",
-      "insert into players values Qnoxx, \"Decker-Knealing\", 11, Winger, \"12B\"",
-      "make table clubs fields name, numTeams, championships, \"year founded\"",
-      "insert into clubs values Empire, 10, 06, 2010",
-      "insert into clubs values \"Jr. Kings\", 20, 45, 1996",
-      "insert into clubs values Wave, 16, 25, 2002",
-      "insert into clubs values \"Jr. Ducks\", 22, 40, 1998",
-      "insert into clubs values Bears, 18, 17, 1999",
-      "insert into clubs values \"Maple Leafs\", 08, 03, 2004",
-      "insert into clubs values OC, 12, 08, 2008"
+    
+
+     std::vector<std::string> commands = {
+        "make table players fields fname, lname, age, position, team",
+        "insert into players values LeBron, James, 36, Forward, \"Los Angeles Lakers\"",
+        "insert into players values Kevin, Durant, 33, Forward, \"Brooklyn Nets\"",
+        "insert into players values Stephen, Curry, 33, Guard, \"Golden State Warriors\"",
+        "insert into players values Giannis, Antetokounmpo, 27, Forward, \"Milwaukee Bucks\"",
+        "insert into players values Luka, Doncic, 30, Guard, \"Dallas Mavericks\"",
+        "insert into players values James, Harden, 32, Guard, \"Brooklyn Nets\"",
+        "insert into players values Anthony, Davis, 28, Forward, \"Los Angeles Lakers\"",
+        "insert into players values Kawhi, Leonard, 30, Forward, \"Los Angeles Clippers\"",
+        "insert into players values Joel, Embiid, 27, Center, \"Philadelphia 76ers\""
+        // "insert into players values Devin, Booker, 25, Guard, \"Phoenix Suns\"",
+        // "insert into players values Jayson, Tatum, 23, Forward, \"Boston Celtics\"",
+        // "insert into players values \"Karl Anthony\", Towns, 26, Center, \"Minnesota Timberwolves\"",
+        // "insert into players values Trae, Young, 23, Guard, \"Atlanta Hawks\"",
+        // "insert into players values Jimmy, Butler, 32, Forward, \"Miami Heat\"",
+        // "insert into players values Donovan, Mitchell, 25, Guard, \"Utah Jazz\"",
+        // "insert into players values Bam, Adebayo, 24, Center, \"Miami Heat\"",
+        // "insert into players values Rudy, Gobert, 29, Center, \"Utah Jazz\"",
+        // "insert into players values Chris, Paul, 37, Guard, \"Phoenix Suns\"",
+        // "insert into players values Russell, Westbrook, 33, Guard, \"Los Angeles Lakers\""
     };
+
     for(int i = 0; i < commands.size(); i++)
     {
       cout << ">" << commands[i] << endl;
-      t = sql.command(commands[i]);
-      if(i == 17)
-        playerTable = t;
-      // cout << "__________\n\n" << t << "________\n"; //inserts and makes work
+      sql.command(commands[i]);
+     
     }
-    clubsTable = t;
-    cout << playerTable << "______\n\n" << clubsTable << "\n_____\n";
-    vectorstr select_commands = {
-      // "select lname, age, fname from players where lname > G and fname < H or age <= 16"
-      "select * from clubs",
-      "select name from clubs where \"year founded\" <= 2001 and \"year founded\" > 2001",//and
-      "select fname from players where position = Defense or age >= 17 and fName > J",//or and
-      "select fname, lname from players where fname > H and lname < K and position = Defense",//and and
-      "select team, fname from players where fname > J and fname < T or team >= \"16\" and age <= 17",//and or and
-      "select lname, fname, age from players where position = Winger or age >=16 and position = Defense or lname < N",//or and or
-      "select * from players where age > 19 or fname > J",//empty or full solution
-      "select * from players where age <= 17 or fname = Alex",//full or empty
-      "select * from players where age > 19 or fname = Alex",//empty or empty
-      "select * from players where age > 19 and fname > J",//empty and full
-      "select lname, fname, position from players where age <= 17 and fname = Alex",//full and empty
-      "select lname, fname, position from players where age > 18 and fname = Alex",//empty and empty
-      "select lname, fname, position from players where (age <= 16 or fname > J and (lname > D)) and position = Defense"
-    };
+ 
+ cout << "ere" << endl;
+    cout << sql.command("select * from players where age < \"30\" and team > \"Los Angeles Lakers\" or team = \"Dallas Mavericks\"") << endl;
 
-    for(int i = 0; i < select_commands.size(); i++)
-    {
-      cout << "\n_____________\n\n" << ">" << select_commands[i] << endl << sql.command(select_commands[i]);
-      cout << sql.select_recnos() << "_________\n\n";
-    }
-    
+    cout << sql.command("select * from players where team > \"Los Angeles Lakers\"") ;
+
+    cout << sql.command("select * from players where team < \"Los Angeles Lakers\"") ;
+
+    cout << sql.command("select * from players where team <= \"Los Angeles Lakers\"") ;
+
+
+
+
+
+
   }
   
   return true;

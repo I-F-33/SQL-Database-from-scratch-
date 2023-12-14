@@ -375,29 +375,33 @@ class BPlusTree
     }
     Iterator find(const T& key)         //return an iterator to this key. NULL if not there.
     {
-        if(contains(key) == false)
+        int index = first_ge(data, data_count, key);
+
+        bool found = data[index] == key && index < data_count;
+
+        if(found && is_leaf())
+        {
+            return Iterator(this,index);
+        }
+        else if(found && !is_leaf())
+        {
+            return subset[index + 1]->find(key);
+        }
+        else if(!found && !is_leaf())
+        {
+            return subset[index]->find(key);
+        }
+        else if(!found && is_leaf())
         {
             return Iterator(nullptr,0);
         }
-
-        Iterator it = begin();
-
-
-        while(it != end())
-        {
-            if(*it == key)
-            {
-                return it;
-            }
-
-            it++;
-        }
-
+        
         return Iterator(nullptr,0);
     }
 
     Iterator lower_bound(const T& key)  //return first that goes NOT BEFORE key entry or next if does not exist: >= entry
     {
+        
         Iterator it = begin();
      
 

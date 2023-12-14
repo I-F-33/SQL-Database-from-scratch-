@@ -1,7 +1,0 @@
-name
-numTeams
-championships
-"
-year
-founded
-"

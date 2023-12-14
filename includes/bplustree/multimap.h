@@ -269,7 +269,7 @@ public:
 
             if(upperb == Iterator())
             {
-
+                cout << "m: " << m.key << endl;
                  for(V element : m.value_list)
                 {
                     v.push_back(element);
@@ -278,7 +278,8 @@ public:
             else 
             {
                 MPair<K, V> m2 = *upperb;
-
+                cout << "m: " << m.key << endl;
+                cout << "m2: " << m2.key << endl;
                 if(m.key < m2.key)
                 {
                     for(V element : m.value_list)
