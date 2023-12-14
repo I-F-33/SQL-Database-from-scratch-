@@ -1,0 +1,7 @@
+course
+_
+id
+course
+_
+name
+credits
