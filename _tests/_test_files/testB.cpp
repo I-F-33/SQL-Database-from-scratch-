@@ -73,6 +73,7 @@ cout << "select where x and y or z or a" << endl;
 cout << sql.command("select * from players where team = \"Los Angeles Lakers\" and age > 25 or age < 30 or age = \"30\"") << endl;
 
 cout << "select where x or y or z and a" << endl;
+cout << "select * from players where team = \"Los Angeles Lakers\" or age < 30 or age = \"30\" and team = \"Utah Jazz\"" << endl;
 
 cout << sql.command("select * from players where team = \"Los Angeles Lakers\" or age < 30 or age = \"30\" and team = \"Utah Jazz\"") << endl;
 

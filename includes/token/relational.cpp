@@ -20,30 +20,83 @@ ResultSet* Relational::eval(Map<string,int> field_names, vector<MMap<string,long
         else if(_relation == "<")
         {
             //bounds
-            recnos = querymap.equal_range(querymap.begin(), querymap.lower_bound(static_cast<TokenStr *>(right)->get_value()));
+            MMap<string,long>::Iterator begin = querymap.begin();
+            MMap<string,long>::Iterator end = querymap.end();
+
+            for(; begin != end; begin++)
+            {
+                MPair<string,long> m = *begin;
+                if(m.key < static_cast<TokenStr *>(right)->get_value())
+                {
+                    for(long element : m.value_list)
+                    {
+                        recnos.push_back(element);
+                    }
+                }
+            }
 
 
         }
         else if(_relation == ">")
         {
 
-             recnos = querymap.equal_range(querymap.upper_bound(static_cast<TokenStr *>(right)->get_value()), querymap.end());
+            MMap<string,long>::Iterator begin = querymap.begin();
+            MMap<string,long>::Iterator end = querymap.end();
+
+            for(; begin != end; begin++)
+            {
+                MPair<string,long> m = *begin;
+                if(m.key > static_cast<TokenStr *>(right)->get_value())
+                {
+                    for(long element : m.value_list)
+                    {
+                        recnos.push_back(element);
+                    }
+                }
+            }
 
 
           //  MMap<string,long>::Iterator it = querymap.find(static_cast<TokenStr *>(right)->get_value());
         }
         else if(_relation == "<=")
         {
-            
-            recnos = querymap.equal_range(querymap.begin(), querymap.upper_bound(static_cast<TokenStr *>(right)->get_value()));
+            recnos = querymap.get(static_cast<TokenStr *>(right)->get_value());
+
+            MMap<string,long>::Iterator begin = querymap.begin();
+            MMap<string,long>::Iterator end = querymap.end();
+
+            for(; begin != end; begin++)
+            {
+                MPair<string,long> m = *begin;
+                if(m.key < static_cast<TokenStr *>(right)->get_value())
+                {
+                    for(long element : m.value_list)
+                    {
+                        recnos.push_back(element);
+                    }
+                }
+            }
 
             
         }
         else if(_relation == ">=")
         {
-            //just add them and start from after them  
-            recnos = querymap.equal_range(querymap.lower_bound(static_cast<TokenStr *>(right)->get_value()), querymap.end());
+            recnos = querymap.get(static_cast<TokenStr *>(right)->get_value());
 
+            MMap<string,long>::Iterator begin = querymap.begin();
+            MMap<string,long>::Iterator end = querymap.end();
+
+            for(; begin != end; begin++)
+            {
+                MPair<string,long> m = *begin;
+                if(m.key > static_cast<TokenStr *>(right)->get_value())
+                {
+                    for(long element : m.value_list)
+                    {
+                        recnos.push_back(element);
+                    }
+                }
+            }
         }
 
 
