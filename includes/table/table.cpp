@@ -287,6 +287,8 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
         vectorlong recnos = rpn();
 
+        recnums = recnos;
+
         FileRecord fileRecord;
 
         vectorstr resultrecord;
@@ -315,9 +317,6 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
             //insert the record into the result table
             result.insert_into(resultrecord);
-
-            recnums.push_back(recnos.at(i));
-
     
 
             resultrecord.clear();
