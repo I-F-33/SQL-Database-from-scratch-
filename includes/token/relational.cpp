@@ -34,6 +34,7 @@ ResultSet* Relational::eval(Map<string,int> field_names, vector<MMap<string,long
         }
         else if(_relation == "<=")
         {
+            
             recnos = querymap.equal_range(querymap.begin(), querymap.upper_bound(static_cast<TokenStr *>(right)->get_value()));
 
             

@@ -68,12 +68,16 @@ Table SQL::run_command(const mmap_ss& parse_map)
             if(fields[0] == "*")
             {
                t = result.select_all_condition(condition);
+                   recnos = result.select_recnos();
+
 
             }
             //else select the columns specified
             else
             {
                 t =  result.select(fields, condition);
+                    recnos = result.select_recnos();
+
 
             }
         }
@@ -83,18 +87,21 @@ Table SQL::run_command(const mmap_ss& parse_map)
             if(fields[0] == "*")
             {
                 t =  result.select_all();
+                    recnos = result.select_recnos();
+
 
             }
             //else select the columns specified
             else
             {
                 t = result.select_all_columns(fields);
+                    recnos = result.select_recnos();
+
             }
         }
         
     }
 
-    recnos = result.select_recnos();
 
     return t;
     

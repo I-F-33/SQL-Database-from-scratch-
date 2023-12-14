@@ -112,7 +112,7 @@ bool test_parentheses(bool debug){
     string command = "select * from student where (age < 25 and age > 20) and (lname > D and lname <= N) or (major = Communications)";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
   }
   return true;
@@ -163,7 +163,6 @@ bool test_parentheses(bool debug){
 // [----------] Global test environment tear-down
 // [==========] 2 tests from 2 test suites ran. (385 ms total)
 // [  PASSED  ] 2 tests.
-// PS D:\OneDrive\Desktop\CSFALL 2023\99_99_final_project-RiceKon> ."D:/OneDrive/Desktop/CSFALL 2023/99_99_final_project-RiceKon/build/bin/testB.exe"
 
 
 // ----------running testB.cpp---------
