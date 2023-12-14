@@ -312,7 +312,7 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
             //organize the record to the columns
             for(int j = 0; j < columns.size(); j++)
             {
-                resultrecord.push_back(record[field_names.get(columns[j])]);
+                resultrecord.push_back(record[field_names[columns[j]]]);
             }
 
             //insert the record into the result table
@@ -473,7 +473,7 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
             //organize the record to the columns
             for(int j = 0; j < columns.size(); j++)
             {
-                resultrecord.push_back(record[field_names.get(columns[j])]);
+                resultrecord.push_back(record[field_names[columns[j]]]);
             }
 
             //insert the record into the result table
