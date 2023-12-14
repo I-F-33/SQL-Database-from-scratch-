@@ -9,16 +9,18 @@ Queue<Token *> ShuntingYard::postfix()
     {
         Token *token = infix_queue.pop();
 
-        
+        //if token is a string, push it to the queue
         if (token->TypeOf() == TKSTRING )
         {
             result_queue.push(token);
         }
+        //if token is a relational operator, push it to the stack
         else if (token->TypeOf() == RELATIONAL)
         {
             operator_stack.push(token);
             
         }
+        //if token is a logical operator, pop all the operators from the stack that have higher precedence and push them to the queue
         else if(token->TypeOf() == LOGICAL)
         {
             if(operator_stack.empty())
@@ -36,10 +38,12 @@ Queue<Token *> ShuntingYard::postfix()
                 
             
         }
+        //if token is a left parenthesis, push it to the stack
         else if(token->TypeOf() == LEFTPAREN)
         {
             operator_stack.push(token);
         }
+        //if token is a right parenthesis, pop all the operators from the stack until a left parenthesis is found and push them to the queue
         else if(token->TypeOf() == RIGHTPAREN)
         {
             while(operator_stack.top()->TypeOf() != LEFTPAREN)
@@ -51,6 +55,8 @@ Queue<Token *> ShuntingYard::postfix()
         }
         
     }
+    //pop all the operators from the stack and push them to the queue
+    //if a left parenthesis is found, pop it from the stack and discard it
     while (!operator_stack.empty())
     {
         if(operator_stack.top()->TypeOf() != LEFTPAREN && operator_stack.top()->TypeOf() != RIGHTPAREN)

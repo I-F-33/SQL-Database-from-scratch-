@@ -7,30 +7,15 @@
 /// @post  A new resultset is created
 ResultSet* ResultSet::or_with(ResultSet* other)
 {
-    vectorlong result;
+    vectorlong result = {};
 
-    set<long> removedup;
+    vectorlong recnos = get_recnos();
+    vectorlong other_recnos = other->get_recnos();
 
-    //set_union(recnos.begin(), recnos.end(), other->get_recnos().begin(), other->get_recnos().end(), back_inserter(result));
+    sort(recnos.begin(), recnos.end());
+    sort(other_recnos.begin(), other_recnos.end());
 
-    for(long rec : recnos)
-    {
-        removedup.insert(rec);
-    }
-
-    for(long rec : other->get_recnos())
-    {
-        removedup.insert(rec);
-    }
-
-    for(long rec : removedup)
-    {
-        result.push_back(rec);
-    }
-
-    sort(result.begin(), result.end());
-
-
+    set_union(recnos.begin(), recnos.end(), other_recnos.begin(), other_recnos.end(), back_inserter(result));
 
     return new ResultSet(result);
 
@@ -42,20 +27,14 @@ ResultSet* ResultSet::or_with(ResultSet* other)
 /// @return  A new resultset that is the intersection of the two resultsets
 ResultSet* ResultSet::and_with(ResultSet* other)
 {
-    vectorlong result;
+    vectorlong result = {};
 
+    vectorlong recnos = get_recnos();
+    vectorlong other_recnos = other->get_recnos();
 
-    for(int i = 0; i < recnos.size(); i++)
-    {
-        for(int j = 0; j < other->get_recnos().size(); j++)
-        {
-            if(recnos[i] == other->get_recnos()[j])
-            {
-                result.push_back(recnos[i]);
-            }
-        }
-    }
+    sort(recnos.begin(), recnos.end());
+    sort(other_recnos.begin(), other_recnos.end());
 
-
+    set_intersection(recnos.begin(), recnos.end(), other_recnos.begin(), other_recnos.end(), back_inserter(result));
     return new ResultSet(result);
 }

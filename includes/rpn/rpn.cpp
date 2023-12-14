@@ -25,11 +25,12 @@ vectorlong RPN::operator()()
     {
         Token *token = _tokens.pop(); 
 
-        
+        //if token is a string, push it to the stack
         if (token->TypeOf() == TKSTRING)
         {
             stack.push(token);
         }
+        //if token is a relational operator, pop two strings from the stack and evaluate the relational operator
         else if (token->TypeOf() == RELATIONAL)
         {
             
@@ -40,6 +41,7 @@ vectorlong RPN::operator()()
 
             result_stack.push(result);
         }
+        //if token is a logical operator, pop two resultsets from the stack and evaluate the logical operator
         else if(token->TypeOf() == LOGICAL)
         {
 
@@ -51,9 +53,7 @@ vectorlong RPN::operator()()
 
     }
 
-    ResultSet* res = result_stack.pop();
-
-    vectorlong result_records = res->get_recnos();
+    vectorlong result_records = result_stack.pop()->get_recnos();
 
     return result_records;
 }
