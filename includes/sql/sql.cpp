@@ -101,7 +101,7 @@ Table SQL::run_command(const mmap_ss& parse_map)
         }
         
     }
-
+    
     
     return t;
     

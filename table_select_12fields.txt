@@ -1,4 +1,3 @@
-fname
 lname
-major
-age
+fname
+position

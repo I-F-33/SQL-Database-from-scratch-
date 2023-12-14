@@ -54,7 +54,7 @@ Queue<Token *> ShuntingYard::postfix()
                 }
 
                 //push the token to the stack
-                //top
+                //top is a left parenthesis
                 operator_stack.push(token);
             }
                 

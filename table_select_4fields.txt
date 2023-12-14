@@ -1,4 +1,2 @@
+team
 fname
-lname
-major
-age
