@@ -11,17 +11,11 @@ Queue<Token *> ShuntingYard::postfix()
 
         if (token->TypeOf() == TKSTRING )
         {
-            
             result_queue.push(token);
-
-            if(!operator_stack.empty() && operator_stack.top()->TypeOf() == RELATIONAL)
-            {
-                result_queue.push(operator_stack.pop());
-            }
         }
         else if (token->TypeOf() == RELATIONAL)
         {
-                operator_stack.push(token);
+            operator_stack.push(token);
             
         }
         else if(token->TypeOf() == LOGICAL)
@@ -31,23 +25,15 @@ Queue<Token *> ShuntingYard::postfix()
                 operator_stack.push(token);
             }
             else{
-                if(operator_stack.top()->TypeOf() == LEFTPAREN)
-                {
-                    operator_stack.push(token);
-                }
-                else if (operator_stack.top()->TypeOf() == RELATIONAL)
+                while(!operator_stack.empty() && operator_stack.top()->TypeOf() != LEFTPAREN)
                 {
                     result_queue.push(operator_stack.pop());
-                    operator_stack.push(token);
                 }
-                else if(operator_stack.top()->TypeOf() == LOGICAL)
-                {
-                    result_queue.push(operator_stack.pop());
-                    operator_stack.push(token);
-                }
-                
-                
+
+                operator_stack.push(token);
             }
+                
+            
         }
         else if(token->TypeOf() == LEFTPAREN)
         {
@@ -59,7 +45,6 @@ Queue<Token *> ShuntingYard::postfix()
             {
                 result_queue.push(operator_stack.pop());
             }
-            operator_stack.pop();
         }
         
     }
@@ -78,21 +63,15 @@ Queue<Token *> ShuntingYard::postfix(Queue<Token *> infix)
 
     while (!infix.empty())
     {
-        Token *token = infix.pop();
+        Token *token = infix_queue.pop();
 
         if (token->TypeOf() == TKSTRING )
         {
-            
             result_queue.push(token);
-
-            if(!operator_stack.empty() && operator_stack.top()->TypeOf() == RELATIONAL)
-            {
-                result_queue.push(operator_stack.pop());
-            }
         }
         else if (token->TypeOf() == RELATIONAL)
         {
-                operator_stack.push(token);
+            operator_stack.push(token);
             
         }
         else if(token->TypeOf() == LOGICAL)
@@ -102,23 +81,15 @@ Queue<Token *> ShuntingYard::postfix(Queue<Token *> infix)
                 operator_stack.push(token);
             }
             else{
-                if(operator_stack.top()->TypeOf() == LEFTPAREN)
-                {
-                    operator_stack.push(token);
-                }
-                else if (operator_stack.top()->TypeOf() == RELATIONAL)
+                while(!operator_stack.empty() && operator_stack.top()->TypeOf() != LEFTPAREN)
                 {
                     result_queue.push(operator_stack.pop());
-                    operator_stack.push(token);
                 }
-                else if(operator_stack.top()->TypeOf() == LOGICAL)
-                {
-                    result_queue.push(operator_stack.pop());
-                    operator_stack.push(token);
-                }
-                
-                
+
+                operator_stack.push(token);
             }
+                
+            
         }
         else if(token->TypeOf() == LEFTPAREN)
         {
@@ -130,7 +101,6 @@ Queue<Token *> ShuntingYard::postfix(Queue<Token *> infix)
             {
                 result_queue.push(operator_stack.pop());
             }
-            operator_stack.pop();
         }
         
     }
