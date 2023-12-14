@@ -36,7 +36,17 @@ ResultSet* ResultSet::and_with(ResultSet* other)
 {
     vectorlong result;
 
-    set_intersection(recnos.begin(), recnos.end(), other->get_recnos().begin(), other->get_recnos().end(), back_inserter(result));
+
+    for(int i = 0; i < recnos.size(); i++)
+    {
+        for(int j = 0; j < other->get_recnos().size(); j++)
+        {
+            if(recnos[i] == other->get_recnos()[j])
+            {
+                result.push_back(recnos[i]);
+            }
+        }
+    }
 
 
     return new ResultSet(result);
