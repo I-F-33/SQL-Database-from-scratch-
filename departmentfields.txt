@@ -1,3 +1,0 @@
-deptid
-deptname
-location

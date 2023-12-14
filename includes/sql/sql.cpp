@@ -84,8 +84,6 @@ Table SQL::run_command(const mmap_ss& parse_map)
             {
                 return result.select_all();
 
-                
-               
             }
             //else select the columns specified
             else

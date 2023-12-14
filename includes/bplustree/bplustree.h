@@ -288,6 +288,8 @@ class BPlusTree
     {
         int index = first_ge(data, data_count, entry);
 
+        bool found = data[index] == entry && index < data_count;
+
         if (data[index] == entry && !is_leaf())
         {
             return subset[index + 1]->get(entry);

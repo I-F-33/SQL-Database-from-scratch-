@@ -50,6 +50,7 @@ string s25 = "insert into department values \"D004\", \"English\", \"Building D\
   if(debug){
     cout<<"full table\n"; 
     cout<<sql.command("select * from student")<<endl; 
+    cout << sql.select_recnos();
 
     string command; 
     command = "select * from student where age < 30 and ((major = CS or major = Physics) and (lname < Y))";
@@ -67,17 +68,17 @@ string s25 = "insert into department values \"D004\", \"English\", \"Building D\
     command = "select * from student where (age < 30 and age > 20) and ((major = CS or major = Physics) or (lname < M))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos(); 
 
     command = "select * from student where ((age < 30 and age > 20) and major = Communications) or ((major = CS or major = Physics))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout <<   sql.select_recnos(); 
 
     command = "select * from student where ((age < 25 and age > 20) or major = Communications) or ((lname > D and lname <= H))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos(); 
 
     command = "select * from student where age < 25 or (age > 20 and major = Communications)";
     cout<<"command: "<<command<<endl; 

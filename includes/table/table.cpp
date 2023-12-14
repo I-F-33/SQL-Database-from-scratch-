@@ -537,6 +537,8 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
         open_fileRW(_file, table_file_name.c_str());
 
+        vectorstr record;
+
         //iterate through the record numbers
         for(int i = 0; i < recnos.size(); i++)
         {   
@@ -544,20 +546,13 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
             fileRecord.read(_file, recnos[i]);
 
             //get the record values
-            vectorstr record = fileRecord.get_record();
-
-            //organize the record to the columns
-            for(int j = 0; j < field_names_vectr.size(); j++)
-            {
-                resultrecord.push_back(record[field_names.get(field_names_vectr[j])]);
-            }
+            record = fileRecord.get_record();
 
             //insert the record into the result table
-            result.insert_into(resultrecord);
+            result.insert_into(record);
 
             result.recnums.push_back(recnos[i]);
 
-            resultrecord.clear();
         }
 
 
