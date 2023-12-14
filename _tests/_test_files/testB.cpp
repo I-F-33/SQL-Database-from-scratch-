@@ -44,64 +44,64 @@ bool test_parentheses(bool debug){
     command = "select * from student where age < 30 and ((major = CS or major = Physics) and (lname < Y))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where (fname = \"Anna Grace\" and lname = \"Del Rio\") or (age >= 22)";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
 
     //professor tests
     command = "select * from student where (age < 30 and age > 20) and ((major = CS or major = Physics) or (lname < M))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where ((age < 30 and age > 20) and major = Communications) or ((major = CS or major = Physics))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where ((age < 25 and age > 20) or major = Communications) or ((lname > D and lname <= H))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where age < 25 or (age > 20 and major = Communications)";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where (age < 25 or age > 20) and major = Communications"; 
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where (age < 25 and age > 20) and major = Communications"; //will give non-existent
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where ((age < 25 and age > 20) or major = Communications) or ((lname > D and lname <= N))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos(); 
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where (age < 25 and age > 20) and (lname > D and lname <= N) or (major = Communications)";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos();
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where (age < 25 and age > 20) and (lname > J) or (major = Math)";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos();
+    cout << sql.select_recnos() << endl; 
 
     command = "select * from student where ((age < 20 and age > 30)) and ((major = Art) or (major = Math))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    sql.select_recnos();
+    cout << sql.select_recnos() << endl; 
 
   }
 
@@ -121,74 +121,232 @@ bool test_parentheses(bool debug){
 
 
 
+// ----------running testB.cpp---------
+
+
+// [==========] Running 2 tests from 2 test suites.
+// [----------] Global test environment set-up.
+// [----------] 1 test from TEST_STUB
+// [ RUN      ] TEST_STUB.TestStub
+// [       OK ] TEST_STUB.TestStub (0 ms)
+// [----------] 1 test from TEST_STUB (1 ms total)
+
+// [----------] 1 test from TEST_SQL
+// [ RUN      ] TEST_SQL.TestSQL
 // full table
-// select all with no condition
-// 0               Anna Grace                  Del Rio                       CS                       22
-// 1                 Anna Kat                  The Bat                      Art                       33
-// 2                   Calvin                      Woo                  Physics                       22
-// 3                      Flo                      Yao                       CS                       20
-// 4                      Flo                  Jackson                     Math                       21
-// 5                    Lilli                   Sutton           Communications                       34
-// 6                   Oliver                     Knox                     Math                       25
+// Table name: student1 record number: 11
+// record                  age               major               fname               lname
+//     0:                   11                  CS                 Flo                 Yao
+//     1:                   12                Math                 Flo             Jackson
+//     2:                   13             Physics              Calvin                 Woo
+//     3:                   14                  CS           AnnaGrace              DelRio
+//     4:                   15                 Art             AnnaKat              TheBat
+//     5:                   16      Communications               Lilli              Sutton
+//     6:                   17                Math              Oliver                Knox
+//     8:                   19             History              Justin                Wang
+//     9:                   10                  CS                Blow                 Joe
+//    10:                   11                Math               Huang              Ricong
+//    11:                   39             Physics                Tots                 Flo
+
+// command: select * from student where age = 11 and lname > Y
+// Queue: Head -> [age]  [11]  [=]  [lname]  [Y]  [>]  [and]
+
+// Table name: student2 record number: 0
+// record                  age               major               fname               lname
+//     0:                   11                  CS                 Flo                 Yao
+
+// [0 ]
+
+// [       OK ] TEST_SQL.TestSQL (380 ms)
+// [----------] 1 test from TEST_SQL (382 ms total)
+
+// [----------] Global test environment tear-down
+// [==========] 2 tests from 2 test suites ran. (385 ms total)
+// [  PASSED  ] 2 tests.
+// PS D:\OneDrive\Desktop\CSFALL 2023\99_99_final_project-RiceKon> ."D:/OneDrive/Desktop/CSFALL 2023/99_99_final_project-RiceKon/build/bin/testB.exe"
+
+
+// ----------running testB.cpp---------
+
+
+// [==========] Running 2 tests from 2 test suites.
+// [----------] Global test environment set-up.
+// [----------] 1 test from TEST_STUB
+// [ RUN      ] TEST_STUB.TestStub
+// [       OK ] TEST_STUB.TestStub (0 ms)
+// [----------] 1 test from TEST_STUB (0 ms total)
+
+// [----------] 1 test from TEST_SQL
+// [ RUN      ] TEST_SQL.TestSQL
+// full table
+// Table name: student1 record number: 6
+// record                fname               lname               major                 age
+//     0:                  Flo                 Yao                  CS                  20
+//     1:                  Flo             Jackson                Math                  21
+//     2:               Calvin                 Woo             Physics                  22
+//     3:           Anna Grace             Del Rio                  CS                  22
+//     4:             Anna Kat             The Bat                 Art                  33
+//     5:                Lilli              Sutton      Communications                  34
+//     6:               Oliver                Knox                Math                  25
 
 // command: select * from student where age < 30 and ((major = CS or major = Physics) and (lname < Y))
-// 0                   Calvin                      Woo                  Physics                       22
-// 1               Anna Grace                  Del Rio                       CS                       22
+// Queue: Head -> [age]  [30]  [<]  [major]  [CS]  [=]  [major]  [Physics]  [=]  [or]  [lname]  [Y]  [<]  [and]  [and]  
+
+// Table name: student2 record number: 1
+// record                fname               lname               major                 age
+//     0:               Calvin                 Woo             Physics                  22
+//     1:           Anna Grace             Del Rio                  CS                  22
+
+// [2 3 ]
 
 // command: select * from student where (fname = "Anna Grace" and lname = "Del Rio")) or (age >= 22))
-// select all with condition
-// 0                   Calvin                      Woo                  Physics                       22
-// 1               Anna Grace                  Del Rio                       CS                       22
-// 2                   Oliver                     Knox                     Math                       25
-// 3                 Anna Kat                  The Bat                      Art                       33
-// 4                    Lilli                   Sutton           Communications                       34
+// Queue: Head -> [fname]  [Anna Grace]  [=]  [lname]  [Del Rio]  [=]  [and]  [age]  [22]  [>=]  [or]  
 
-// command: select * from student where (age <30 and age > 20) and ((major = CS or major = Physics) or (lname < M))
-// select all with condition
-// 0                      Flo                  Jackson                     Math                       21
-// 1                   Calvin                      Woo                  Physics                       22
-// 2               Anna Grace                  Del Rio                       CS                       22
-// 3                   Oliver                     Knox                     Math                       25
+// Table name: student3 record number: 4
+// record                fname               lname               major                 age
+//     0:               Calvin                 Woo             Physics                  22
+//     1:           Anna Grace             Del Rio                  CS                  22
+//     2:             Anna Kat             The Bat                 Art                  33
+//     3:                Lilli              Sutton      Communications                  34
+//     4:               Oliver                Knox                Math                  25
 
-// command: select * from student where ((age <30 and age > 20) and major = Communications) or ((major = CS or major = Physics))
-// select all with condition
-// 0                   Calvin                      Woo                  Physics                       22
-// 1                      Flo                      Yao                       CS                       20
-// 2               Anna Grace                  Del Rio                       CS                       22
+// [2 3 4 5 6 ]
+
+// command: select * from student where (age < 30 and age > 20) and ((major = CS or major = Physics) or (lname < M))
+// Queue: Head -> [age]  [30]  [<]  [age]  [20]  [>]  [and]  [major]  [CS]  [=]  [major]  [Physics]  [=]  [or]  [lname]  [M]  [<]  [or]  [and]  
+
+// Table name: student4 record number: 3
+// record                fname               lname               major                 age
+//     0:                  Flo             Jackson                Math                  21
+//     1:               Calvin                 Woo             Physics                  22
+//     2:           Anna Grace             Del Rio                  CS                  22
+//     3:               Oliver                Knox                Math                  25
+
+// [1 2 3 6 ]
+
+// command: select * from student where ((age < 30 and age > 20) and major = Communications) or ((major = CS or major = Physics))
+// Queue: Head -> [age]  [30]  [<]  [age]  [20]  [>]  [and]  [major]  [Communications]  [=]  [and]  [major]  [CS]  [=]  [major]  [Physics]  [=]  [or]  [or]  
+
+// Table name: student5 record number: 2
+// record                fname               lname               major                 age
+//     0:                  Flo                 Yao                  CS                  20
+//     1:               Calvin                 Woo             Physics                  22
+//     2:           Anna Grace             Del Rio                  CS                  22
+
+// [0 2 3 ]
 
 // command: select * from student where ((age < 25 and age > 20) or major = Communications) or ((lname > D and lname <= H))
-// select all with condition
-// 0               Anna Grace                  Del Rio                       CS                       22
-// 1                    Lilli                   Sutton           Communications                       34
-// 2                      Flo                  Jackson                     Math                       21
-// 3                   Calvin                      Woo                  Physics                       22
+// Queue: Head -> [age]  [25]  [<]  [age]  [20]  [>]  [and]  [major]  [Communications]  [=]  [or]  [lname]  [D]  [>]  [lname]  [H]  [<=]  [and]  [or]
+
+// Table name: student6 record number: 3
+// record                fname               lname               major                 age
+//     0:                  Flo             Jackson                Math                  21
+//     1:               Calvin                 Woo             Physics                  22
+//     2:           Anna Grace             Del Rio                  CS                  22
+//     3:                Lilli              Sutton      Communications                  34
+
+// [1 2 3 5 ]
 
 // command: select * from student where age < 25 or (age > 20 and major = Communications)
-// 0                    Lilli                   Sutton           Communications                       34
-// 1                      Flo                      Yao                       CS                       20
-// 2                      Flo                  Jackson                     Math                       21
-// 3                   Calvin                      Woo                  Physics                       22
-// 4               Anna Grace                  Del Rio                       CS                       22
+// Queue: Head -> [age]  [25]  [<]  [age]  [20]  [>]  [major]  [Communications]  [=]  [and]  [or]
 
-// [5] [0] [1] [2] [3]
+// Table name: student7 record number: 4
+// record                fname               lname               major                 age
+//     0:                  Flo                 Yao                  CS                  20
+//     1:                  Flo             Jackson                Math                  21
+//     2:               Calvin                 Woo             Physics                  22
+//     3:           Anna Grace             Del Rio                  CS                  22
+//     4:                Lilli              Sutton      Communications                  34
+
+// [0 1 2 3 5 ]
+
 // command: select * from student where (age < 25 or age > 20) and major = Communications
-// 0                    Lilli                   Sutton           Communications                       34
+// Queue: Head -> [age]  [25]  [<]  [age]  [20]  [>]  [or]  [major]  [Communications]  [=]  [and]
 
-// [5]
+// Table name: student8 record number: 0
+// record                fname               lname               major                 age
+//     0:                Lilli              Sutton      Communications                  34
+
+// [5 ]
+
 // command: select * from student where (age < 25 and age > 20) and major = Communications
+// Queue: Head -> [age]  [25]  [<]  [age]  [20]  [>]  [and]  [major]  [Communications]  [=]  [and]
 
+// Table name: student9 record number: 0
+// record                fname               lname               major                 age
+
+// []
 
 // command: select * from student where ((age < 25 and age > 20) or major = Communications) or ((lname > D and lname <= N))
-// 0               Anna Grace                  Del Rio                       CS                       22
-// 1                      Flo                  Jackson                     Math                       21
-// 2                   Oliver                     Knox                     Math                       25
-// 3                    Lilli                   Sutton           Communications                       34
-// 4                   Calvin                      Woo                  Physics                       22
+// Queue: Head -> [age]  [25]  [<]  [age]  [20]  [>]  [and]  [major]  [Communications]  [=]  [or]  [lname]  [D]  [>]  [lname]  [N]  [<=]  [and]  [or]
 
-// [3] [1] [6] [5] [2] 
+// Table name: student10 record number: 4
+// record                fname               lname               major                 age
+//     0:                  Flo             Jackson                Math                  21
+//     1:               Calvin                 Woo             Physics                  22
+//     2:           Anna Grace             Del Rio                  CS                  22
+//     3:                Lilli              Sutton      Communications                  34
+//     4:               Oliver                Knox                Math                  25
+
+// [1 2 3 5 6 ]
+
 // command: select * from student where (age < 25 and age > 20) and (lname > D and lname <= N) or (major = Communications)
-// 0                    Lilli                   Sutton           Communications                       34
+// Queue: Head -> [age]  [25]  [<]  [age]  [20]  [>]  [and]  [lname]  [D]  [>]  [lname]  [N]  [<=]  [and]  [and]  [major]  [Communications]  [=]  [or]
 
+// Table name: student11 record number: 2
+// record                fname               lname               major                 age
+//     0:                  Flo             Jackson                Math                  21
+//     1:           Anna Grace             Del Rio                  CS                  22
+//     2:                Lilli              Sutton      Communications                  34
+
+// [1 3 5 ]
+// command: select * from student where (age < 25 and age > 20) and (lname > J) or (major = Math)
+// Queue: Head -> [age]  [25]  [<]  [age]  [20]  [>]  [and]  [lname]  [J]  [>]  [and]  [major]  [Math]  [=]  [or]
+
+// Table name: student12 record number: 2
+// record                fname               lname               major                 age
+//     0:                  Flo             Jackson                Math                  21
+//     1:               Calvin                 Woo             Physics                  22
+//     2:               Oliver                Knox                Math                  25
+
+// [1 2 6 ]
+// command: select * from student where ((age < 20 and age > 30)) and ((major = Art) or (major = Math))
+// Queue: Head -> [age]  [20]  [<]  [age]  [30]  [>]  [and]  [major]  [Art]  [=]  [major]  [Math]  [=]  [or]  [and]  
+
+// Table name: student13 record number: 0
+// record                fname               lname               major                 age
+
+// []
+// full table
+// Queue: Head -> 
+
+// Table name: student14 record number: 6
+// record                fname               lname               major                 age
+//     0:                  Flo                 Yao                  CS                  20
+//     1:                  Flo             Jackson                Math                  21
+//     2:               Calvin                 Woo             Physics                  22
+//     3:           Anna Grace             Del Rio                  CS                  22
+//     4:             Anna Kat             The Bat                 Art                  33
+//     5:                Lilli              Sutton      Communications                  34
+//     6:               Oliver                Knox                Math                  25
+
+// command: select * from student where age >= 33
+// Queue: Head -> [age]  [33]  [>=]
+
+// Table name: student15 record number: 1
+// record                fname               lname               major                 age
+//     0:             Anna Kat             The Bat                 Art                  33
+//     1:                Lilli              Sutton      Communications                  34
+
+// [4 5 ]
+
+// [       OK ] TEST_SQL.TestSQL (1066 ms)
+// [----------] 1 test from TEST_SQL (1066 ms total)
+
+// [----------] Global test environment tear-down
+// [==========] 2 tests from 2 test suites ran. (1068 ms total)
+// [  PASSED  ] 2 tests.
+// PS D:\OneDrive\Desktop\CSFALL 2023\99_99_final_project-RiceKon> 
  TEST(TEST_STUB, TestStub) {
   
   //EXPECT_EQ(0, <your individual test functions are called here>);
