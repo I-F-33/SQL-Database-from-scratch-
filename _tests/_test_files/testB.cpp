@@ -7,40 +7,29 @@ using namespace std;
 
   
 bool test_parentheses(bool debug){
-  
-string s1 = "create table student fields fname, lname, major, age";
-string s2 = "insert into student values \"Flo\", \"Yao\", \"CS\", 20";
-string s3 = "insert into student values \"Flo\", \"Jackson\", \"Math\", 21";
-string s4 = "insert into student values \"Calvin\", \"Woo\", \"Physics\", 22";
-string s5 = "insert into student values \"Anna Grace\", \"Del Rio\", \"CS\", 22";
-string s6 = "insert into student values \"Anna Kat\", \"The Bat\", \"Art\", 33";
-string s7 = "insert into student values \"Lilli\", \"Sutton\", \"Communications\", 34";
-string s8 = "insert into student values \"Oliver\", \"Knox\", \"Math\", 25";
-string s9 = "insert into student values \"Johnathan\", \"Salinas\", \"Biology\", 18";
-string s10 = "insert into student values \"Justin\", \"Wang\", \"History\", 19";
-string s11 = "create table course fields course_id, course_name, credits";
-string s12 = "insert into course values \"CS101\", \"Introduction to Computer Science\", 3";
-string s13 = "insert into course values \"MATH201\", \"Calculus II\", 4";
-string s14 = "insert into course values \"PHYS101\", \"Physics for Beginners\", 3";
-string s15 = "insert into course values \"ENG202\", \"Advanced English Composition\", 3";
-string s16 = "create table enrollment fields studentid, courseid, grade";
-string s17 = "insert into enrollment values 1, \"CS101\", \"A\"";
-string s18 = "insert into enrollment values 2, \"MATH201\", \"B\"";
-string s19 = "insert into enrollment values 3, \"PHYS101\", \"C\"";
-string s20 = "insert into enrollment values 4, \"ENG202\", \"A\"";
-string s21 = "create table department fields deptid, deptname, location";
-string s22 = "insert into department values \"D001\", \"Computer Science\", \"Building A\"";
-string s23 = "insert into department values \"D002\", \"Mathematics\", \"Building B\"";
-string s24 = "insert into department values \"D003\", \"Physics\", \"Building C\"";
-string s25 = "insert into department values \"D004\", \"English\", \"Building D\"";
+   string s1 = "make table student fields fname, lname, major, age"; 
+    string s2 = "insert into student values Flo, Yao, CS, 20"; 
+    string s3 = "insert into student values \"Flo\", \"Jackson\", Math,21"; 
+    string s4 = "insert into student values Calvin, Woo, Physics,22"; 
+    string s5 = "insert into student values \"Anna Grace\", \"Del Rio\", CS, 22"; 
+    string s6 = "insert into student values \"Anna Kat\", \"The Bat\", Art, 33"; 
+    string s7 = "insert into student values Lilli, Sutton, Communications, 34"; 
+    string s8 = "insert into student values Oliver, Knox, Math, 25"; 
+    string s9 = "insert into student values Johnathan, Salinas, Biology, 18";
+    string s10 = "insert into student values Justin, Wang, History, 19"; 
 
+    vector<string> commands; 
+    commands.push_back(s1);  
 
+    //insertions
+    commands.push_back(s2); 
+    commands.push_back(s3); 
+    commands.push_back(s4); 
+    commands.push_back(s5);
+    commands.push_back(s6); 
+    commands.push_back(s7);
+    commands.push_back(s8); 
 
-    vector<string> commands = {
-      s1,s2,s3,s4,s5,s6,s7,s8,s9,s10,s11,s12,s13,s14,s15,s16,s17,s18,s19,s20,s21,s22,s23,s24,s25
-    };
-  
-    
     SQL sql; 
     for(int i = 0; i < commands.size(); i++){
       sql.command(commands[i]); 
@@ -50,7 +39,6 @@ string s25 = "insert into department values \"D004\", \"English\", \"Building D\
   if(debug){
     cout<<"full table\n"; 
     cout<<sql.command("select * from student")<<endl; 
-    cout << sql.select_recnos();
 
     string command; 
     command = "select * from student where age < 30 and ((major = CS or major = Physics) and (lname < Y))";
@@ -68,17 +56,17 @@ string s25 = "insert into department values \"D004\", \"English\", \"Building D\
     command = "select * from student where (age < 30 and age > 20) and ((major = CS or major = Physics) or (lname < M))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    cout << sql.select_recnos(); 
+    sql.select_recnos(); 
 
     command = "select * from student where ((age < 30 and age > 20) and major = Communications) or ((major = CS or major = Physics))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    cout <<   sql.select_recnos(); 
+    sql.select_recnos(); 
 
     command = "select * from student where ((age < 25 and age > 20) or major = Communications) or ((lname > D and lname <= H))";
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
-    cout << sql.select_recnos(); 
+    sql.select_recnos(); 
 
     command = "select * from student where age < 25 or (age > 20 and major = Communications)";
     cout<<"command: "<<command<<endl; 
@@ -116,7 +104,7 @@ string s25 = "insert into department values \"D004\", \"English\", \"Building D\
     sql.select_recnos();
 
   }
- 
+
   if(true){
     cout<<"full table\n";
     cout<<sql.command("select * from student")<<endl;
@@ -133,232 +121,73 @@ string s25 = "insert into department values \"D004\", \"English\", \"Building D\
 
 
 
-/*
-build git:(master) ✗  😊 $> tree ../includes/table
-../includes/table
-├── table.cpp
-├── table.h
-└── typedefs.h
-
-0 directories, 3 files
-build git:(master) ✗  😊 $> ./bin/basic_test       
-
-
-----------running basic_test.cpp---------
-
-
-[==========] Running 5 tests from 3 test cases.
-[----------] Global test environment set-up.
-[----------] 1 test from TABLE_BASIC
-[ RUN      ] TABLE_BASIC.TableBasic
-Here is table t: 
-
-Table name: student, records: 7
-                   record                    fname                    lname                      age
-
-                        0                      Joe                    Gomez                       20
-                        1                    Karen                   Orozco                       21
-                        2                      Flo                      Yao                       29
-                        3                     Jack                      Yao                       19
-                        4                      Flo                  Jackson                       20
-                        5                      Flo                    Gomez                       20
-                        6                    Karen                  Jackson                       15
-
-
-Here are all the Yaos:
-
-Table name: _select_table_1, records: 2
-                   record                    fname                    lname                      age
-
-                        0                      Flo                      Yao                       29
-                        1                     Jack                      Yao                       19
-
-
-
-here is the student table: 
-Table name: student, records: 7
-                   record                    fname                    lname                      age
-
-                        0                      Joe                    Gomez                       20
-                        1                    Karen                   Orozco                       21
-                        2                      Flo                      Yao                       29
-                        3                     Jack                      Yao                       19
-                        4                      Flo                  Jackson                       20
-                        5                      Flo                    Gomez                       20
-                        6                    Karen                  Jackson                       15
-
-
-
-20 year-olds:
-
-Table name: _select_table_4, records: 3
-                   record                      age                    fname                    lname
-
-                        0                       20                      Joe                    Gomez
-                        1                       20                      Flo                  Jackson
-                        2                       20                      Flo                    Gomez
-
-record numbers from original table: 0 4 5 
-
-
-older than 20 years old:
-
-Table name: _select_table_6, records: 2
-                   record                      age                    fname                    lname
-
-                        0                       21                    Karen                   Orozco
-                        1                       29                      Flo                      Yao
-
-record numbers from original table: 1 2 
-
-
-younger than 20 years old:
-
-Table name: _select_table_8, records: 2
-                   record                      age                    fname                    lname
-
-                        0                       15                    Karen                  Jackson
-                        1                       19                     Jack                      Yao
-
-record numbers from original table: 6 3 
-
-
-20 or younger:
-
-Table name: _select_table_10, records: 5
-                   record                      age                    fname                    lname
-
-                        0                       15                    Karen                  Jackson
-                        1                       19                     Jack                      Yao
-                        2                       20                      Joe                    Gomez
-                        3                       20                      Flo                  Jackson
-                        4                       20                      Flo                    Gomez
-
-record numbers from original table: 6 3 0 4 5 
-
-
-20 or older:
-
-Table name: _select_table_12, records: 5
-                   record                      age                    fname                    lname
-
-                        0                       20                      Joe                    Gomez
-                        1                       20                      Flo                  Jackson
-                        2                       20                      Flo                    Gomez
-                        3                       21                    Karen                   Orozco
-                        4                       29                      Flo                      Yao
-
-record numbers from original table: 0 4 5 1 2 
-
------ END TEST --------
-[       OK ] TABLE_BASIC.TableBasic (23 ms)
-[----------] 1 test from TABLE_BASIC (23 ms total)
-
-[----------] 2 tests from TABLE_INTERMEDIATE
-[ RUN      ] TABLE_INTERMEDIATE.TableRelational
-recnos from all the Yaos query: 2 3 
-all the Yaos: 
-
-Table name: _select_table_15, records: 2
-                   record                    lname                      age
-
-                        0                      Yao                       29
-                        1                      Yao                       19
-
-
-[       OK ] TABLE_INTERMEDIATE.TableRelational (7 ms)
-[ RUN      ] TABLE_INTERMEDIATE.TableLogical
-here is the table: 
-
-Table name: student, records: 7
-                   record                    fname                    lname                      age
-
-                        0                      Joe                    Gomez                       20
-                        1                    Karen                   Orozco                       21
-                        2                      Flo                      Yao                       29
-                        3                     Jack                      Yao                       19
-                        4                      Flo                  Jackson                       20
-                        5                      Flo                    Gomez                       20
-                        6                    Karen                  Jackson                       15
-
-
-recnos from all the 17 to 20 year olds: 0 3 4 5 
-all the 17 to 20 year olds : 
-
-Table name: _select_table_18, records: 4
-                   record                    lname                      age
-
-                        0                    Gomez                       20
-                        1                      Yao                       19
-                        2                  Jackson                       20
-                        3                    Gomez                       20
-
-
-[       OK ] TABLE_INTERMEDIATE.TableLogical (5 ms)
-[----------] 2 tests from TABLE_INTERMEDIATE (12 ms total)
-
-[----------] 2 tests from TABLE_ADVANCED
-[ RUN      ] TABLE_ADVANCED.TableFullCondition
-here is the table: 
-
-Table name: student, records: 7
-                   record                    fname                    lname                      age
-
-                        0                      Joe                    Gomez                       20
-                        1                    Karen                   Orozco                       21
-                        2                      Flo                      Yao                       29
-                        3                     Jack                      Yao                       19
-                        4                      Flo                  Jackson                       20
-                        5                      Flo                    Gomez                       20
-                        6                    Karen                  Jackson                       15
-
-
-recnos from all all the 17 to 20 year olds (non inclusive) along with all the Gomezes: 0 3 5 
-
-
-Table name: _select_table_21, records: 3
-                   record                    lname                      age
-
-                        0                    Gomez                       20
-                        1                      Yao                       19
-                        2                    Gomez                       20
-
-
-[       OK ] TABLE_ADVANCED.TableFullCondition (7 ms)
-[ RUN      ] TABLE_ADVANCED.TableStringCondition
-here is the table: 
-
-Table name: student, records: 7
-                   record                    fname                    lname                      age
-
-                        0                      Joe                    Gomez                       20
-                        1                    Karen                   Orozco                       21
-                        2                      Flo                      Yao                       29
-                        3                     Jack                      Yao                       19
-                        4                      Flo                  Jackson                       20
-                        5                      Flo                    Gomez                       20
-                        6                    Karen                  Jackson                       15
-
-
-recnos from all all younger than 17, all older than 20, who are Jacksons: 6 
-
-
-Table name: _select_table_24, records: 1
-                   record                    lname                      age
-
-                        0                  Jackson                       15
-
-
-[       OK ] TABLE_ADVANCED.TableStringCondition (5 ms)
-[----------] 2 tests from TABLE_ADVANCED (12 ms total)
-
-[----------] Global test environment tear-down
-[==========] 5 tests from 3 test cases ran. (47 ms total)
-[  PASSED  ] 5 tests.
-build git:(master) ✗  😊 $> 
-
-
- */
+// full table
+// select all with no condition
+// 0               Anna Grace                  Del Rio                       CS                       22
+// 1                 Anna Kat                  The Bat                      Art                       33
+// 2                   Calvin                      Woo                  Physics                       22
+// 3                      Flo                      Yao                       CS                       20
+// 4                      Flo                  Jackson                     Math                       21
+// 5                    Lilli                   Sutton           Communications                       34
+// 6                   Oliver                     Knox                     Math                       25
+
+// command: select * from student where age < 30 and ((major = CS or major = Physics) and (lname < Y))
+// 0                   Calvin                      Woo                  Physics                       22
+// 1               Anna Grace                  Del Rio                       CS                       22
+
+// command: select * from student where (fname = "Anna Grace" and lname = "Del Rio")) or (age >= 22))
+// select all with condition
+// 0                   Calvin                      Woo                  Physics                       22
+// 1               Anna Grace                  Del Rio                       CS                       22
+// 2                   Oliver                     Knox                     Math                       25
+// 3                 Anna Kat                  The Bat                      Art                       33
+// 4                    Lilli                   Sutton           Communications                       34
+
+// command: select * from student where (age <30 and age > 20) and ((major = CS or major = Physics) or (lname < M))
+// select all with condition
+// 0                      Flo                  Jackson                     Math                       21
+// 1                   Calvin                      Woo                  Physics                       22
+// 2               Anna Grace                  Del Rio                       CS                       22
+// 3                   Oliver                     Knox                     Math                       25
+
+// command: select * from student where ((age <30 and age > 20) and major = Communications) or ((major = CS or major = Physics))
+// select all with condition
+// 0                   Calvin                      Woo                  Physics                       22
+// 1                      Flo                      Yao                       CS                       20
+// 2               Anna Grace                  Del Rio                       CS                       22
+
+// command: select * from student where ((age < 25 and age > 20) or major = Communications) or ((lname > D and lname <= H))
+// select all with condition
+// 0               Anna Grace                  Del Rio                       CS                       22
+// 1                    Lilli                   Sutton           Communications                       34
+// 2                      Flo                  Jackson                     Math                       21
+// 3                   Calvin                      Woo                  Physics                       22
+
+// command: select * from student where age < 25 or (age > 20 and major = Communications)
+// 0                    Lilli                   Sutton           Communications                       34
+// 1                      Flo                      Yao                       CS                       20
+// 2                      Flo                  Jackson                     Math                       21
+// 3                   Calvin                      Woo                  Physics                       22
+// 4               Anna Grace                  Del Rio                       CS                       22
+
+// [5] [0] [1] [2] [3]
+// command: select * from student where (age < 25 or age > 20) and major = Communications
+// 0                    Lilli                   Sutton           Communications                       34
+
+// [5]
+// command: select * from student where (age < 25 and age > 20) and major = Communications
+
+
+// command: select * from student where ((age < 25 and age > 20) or major = Communications) or ((lname > D and lname <= N))
+// 0               Anna Grace                  Del Rio                       CS                       22
+// 1                      Flo                  Jackson                     Math                       21
+// 2                   Oliver                     Knox                     Math                       25
+// 3                    Lilli                   Sutton           Communications                       34
+// 4                   Calvin                      Woo                  Physics                       22
+
+// [3] [1] [6] [5] [2] 
+// command: select * from student where (age < 25 and age > 20) and (lname > D and lname <= N) or (major = Communications)
+// 0                    Lilli                   Sutton           Communications                       34
 
  TEST(TEST_STUB, TestStub) {
   

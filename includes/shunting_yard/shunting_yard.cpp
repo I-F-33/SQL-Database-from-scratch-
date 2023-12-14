@@ -9,6 +9,7 @@ Queue<Token *> ShuntingYard::postfix()
     {
         Token *token = infix_queue.pop();
 
+        
         if (token->TypeOf() == TKSTRING )
         {
             result_queue.push(token);
@@ -45,12 +46,17 @@ Queue<Token *> ShuntingYard::postfix()
             {
                 result_queue.push(operator_stack.pop());
             }
+
+            operator_stack.pop();
         }
         
     }
     while (!operator_stack.empty())
     {
-        result_queue.push(operator_stack.pop());
+        if(operator_stack.top()->TypeOf() != LEFTPAREN && operator_stack.top()->TypeOf() != RIGHTPAREN)
+            result_queue.push(operator_stack.pop());
+        else
+        operator_stack.pop();
     }
 
     return result_queue;

@@ -25,7 +25,7 @@ vectorlong RPN::operator()()
     {
         Token *token = _tokens.pop(); 
 
-
+        
         if (token->TypeOf() == TKSTRING)
         {
             stack.push(token);
