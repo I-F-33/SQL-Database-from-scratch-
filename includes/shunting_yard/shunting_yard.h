@@ -3,7 +3,6 @@
 #include "../token/token.h"
 #include "../queue/MyQueue.h"
 #include "../stack/MyStack.h"
-#include "../token/operator.h"
 #include "../token/logical.h"
 #include "../token/relational.h"
 #include "../token/tokenstr.h"

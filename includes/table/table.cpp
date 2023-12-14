@@ -268,8 +268,6 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
             //insert into the reuslt table
             result.insert_into(record);
 
-            result.recnums.push_back(i);
-
             //read the next record
             i++;
         }
@@ -455,10 +453,6 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
         open_fileRW(_file, table_file_name.c_str());
 
-        for(int i = 0; i < totalrecnums;i++)
-        {
-            result.recnums.push_back(i);
-        }
 
 
         //iterate through the record numbers
@@ -531,6 +525,8 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
         vectorlong recnos = rpn();
         
+        recnums = recnos;
+        
         fstream _file;
 
         string table_file_name = _table_name + ".bin";
@@ -551,7 +547,6 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
             //insert the record into the result table
             result.insert_into(record);
 
-            result.recnums.push_back(recnos[i]);
 
         }
 

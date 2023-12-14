@@ -14,8 +14,6 @@ Table SQL::command(const string& command)
 
     t = run_command(parse_map);
 
-    recnos = t.select_recnos();
-
     return t;
     
   
@@ -43,6 +41,8 @@ Table SQL::run_command(const mmap_ss& parse_map)
 
     Table result(table_name[0]);
 
+    Table t;
+
     //if the command is insert
     if(command[0] == "insert")
     {
@@ -67,13 +67,13 @@ Table SQL::run_command(const mmap_ss& parse_map)
             //if fields is a "*" then select all columns
             if(fields[0] == "*")
             {
-               return result.select_all_condition(condition);
+               t = result.select_all_condition(condition);
 
             }
             //else select the columns specified
             else
             {
-                return result.select(fields, condition);
+                t =  result.select(fields, condition);
 
             }
         }
@@ -82,18 +82,20 @@ Table SQL::run_command(const mmap_ss& parse_map)
             //if fields is a "*" then select all columns
             if(fields[0] == "*")
             {
-                return result.select_all();
+                t =  result.select_all();
 
             }
             //else select the columns specified
             else
             {
-                return result.select_all_columns(fields);
+                t = result.select_all_columns(fields);
             }
         }
         
     }
 
-    return result;
+    recnos = result.select_recnos();
+
+    return t;
     
 }
