@@ -17,6 +17,7 @@ vectorlong RPN::operator()()
 {
     Stack<Token *> stack;
     Stack<ResultSet*> result_stack;
+    Stack<Token*> operator_stack;
 
 
     ResultSet* result;    
@@ -46,6 +47,14 @@ vectorlong RPN::operator()()
             result = static_cast<Logical*>(token)->eval(result_stack.pop(), result_stack.pop());
 
             result_stack.push(result);
+        }
+        else if(token->TypeOf() == LEFTPAREN)
+        {
+            operator_stack.push(token);
+        }
+        else if(token->TypeOf() == RIGHTPAREN)
+        {
+            operator_stack.pop();
         }
         
 
