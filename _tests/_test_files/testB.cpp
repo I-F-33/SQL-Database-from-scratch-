@@ -109,7 +109,8 @@ bool test_parentheses(bool debug){
     cout<<"full table\n";
     cout<<sql.command("select * from student")<<endl;
     
-    string command = "select * from student where (age < 25 and age > 20) and (lname > D and lname <= N) or (major = Communications)";
+    string command = "select * from student where (age > 15 and age < 26) or (major = Art or major = Math) and (lname > D and lname <= N)";
+
     cout<<"command: "<<command<<endl; 
     cout<<sql.command(command)<<endl; 
     cout << sql.select_recnos() << endl; 

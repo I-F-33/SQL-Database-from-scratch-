@@ -12,6 +12,23 @@ public:
 
     string get_logical() const { return _logical; }
 
+    int get_prec() const
+    {
+        if(_logical == "and" || _logical == "AND")
+        {
+            return 2;
+        }
+        else if(_logical == "or" || _logical == "OR")
+        {
+            return 1;
+        }
+        else
+        {
+            cout << "What is this??" << endl;
+        }
+        return -1;
+    }
+
     ResultSet* eval(ResultSet* left, ResultSet* right); // TODO: implement
 
     void Print(ostream &outs = cout) const

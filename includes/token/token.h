@@ -23,6 +23,9 @@ public:
     {
         return _type;
     }
+
+
+    
     string get_value() const { return _value; }
 
     void set_string(string str) { _value = str; }
