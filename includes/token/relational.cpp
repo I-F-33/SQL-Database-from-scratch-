@@ -11,7 +11,7 @@ ResultSet* Relational::eval(Map<string,int> field_names, vector<MMap<string,long
         vectorlong recnos;
 
 
-        if(_relation == "=")
+       if(_relation == "=")
         {
             //get the record numbers
             recnos = querymap.get(static_cast<TokenStr *>(right)->get_value());
@@ -19,86 +19,27 @@ ResultSet* Relational::eval(Map<string,int> field_names, vector<MMap<string,long
         }
         else if(_relation == "<")
         {
-            //bounds
-            MMap<string,long>::Iterator begin = querymap.begin();
-            MMap<string,long>::Iterator end = querymap.end();
-
-            for(; begin != end; begin++)
-            {
-                MPair<string,long> m = *begin;
-                if(m.key < static_cast<TokenStr *>(right)->get_value())
-                {
-                    for(long element : m.value_list)
-                    {
-                        recnos.push_back(element);
-                    }
-                }
-            }
-
+             recnos = querymap.equal_range(querymap.begin(), querymap.lower_bound(static_cast<TokenStr *>(right)->get_value()));
 
         }
         else if(_relation == ">")
         {
 
-            MMap<string,long>::Iterator begin = querymap.begin();
-            MMap<string,long>::Iterator end = querymap.end();
-
-            for(; begin != end; begin++)
-            {
-                MPair<string,long> m = *begin;
-                if(m.key > static_cast<TokenStr *>(right)->get_value())
-                {   
-                    cout << "m.key: " << m.key << endl;
-                    for(long element : m.value_list)
-                    {
-                        recnos.push_back(element);
-                    }
-                }
-            }
-
+             recnos = querymap.equal_range(querymap.upper_bound(static_cast<TokenStr *>(right)->get_value()), querymap.end());
 
           //  MMap<string,long>::Iterator it = querymap.find(static_cast<TokenStr *>(right)->get_value());
         }
         else if(_relation == "<=")
         {
-            recnos = querymap.get(static_cast<TokenStr *>(right)->get_value());
-
-            MMap<string,long>::Iterator begin = querymap.begin();
-            MMap<string,long>::Iterator end = querymap.end();
-
-            for(; begin != end; begin++)
-            {
-                MPair<string,long> m = *begin;
-                if(m.key < static_cast<TokenStr *>(right)->get_value())
-                {
-                    for(long element : m.value_list)
-                    {
-                        recnos.push_back(element);
-                    }
-                }
-            }
+             recnos = querymap.equal_range(querymap.begin(), querymap.upper_bound(static_cast<TokenStr *>(right)->get_value()));
 
             
         }
         else if(_relation == ">=")
         {
-            recnos = querymap.get(static_cast<TokenStr *>(right)->get_value());
-
-            MMap<string,long>::Iterator begin = querymap.begin();
-            MMap<string,long>::Iterator end = querymap.end();
-
-            for(; begin != end; begin++)
-            {
-                MPair<string,long> m = *begin;
-                if(m.key > static_cast<TokenStr *>(right)->get_value())
-                {
-                    for(long element : m.value_list)
-                    {
-                        recnos.push_back(element);
-                    }
-                }
-            }
+                       recnos = querymap.equal_range(querymap.lower_bound(static_cast<TokenStr *>(right)->get_value()), querymap.end());
         }
+
 
 
         return new ResultSet(recnos);
