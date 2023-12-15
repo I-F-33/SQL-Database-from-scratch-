@@ -360,22 +360,27 @@
 
                     break;
                 case WHERE:
-                    if(s != "\"" && !quoted_string_flag)
+                    if((s == "\"" )&& !quoted_string_flag)
                     {
+                        quoted_string_flag = true;
+                    }
+                    else if((s != "\"" )&& !quoted_string_flag) 
+                    {
+                        if(s != "," && s != "\"")
                         _ptree.insert("condition", s);
                     }
-                    else if(s != "\"" && quoted_string_flag)
+                    else if((s != "\"")&& quoted_string_flag)
                     {
-                        if(quoted_string.empty())
+                         if(s == "." || s == "_")
                         {
-                            quoted_string += s;
+                            quoted_string = quoted_string + s;
+
                         }
                         else
                         {
-                            if(s == "." || s == "_")
+                            if(quoted_string.empty())
                             {
-                                quoted_string = quoted_string + s;
-
+                                quoted_string += s;
                             }
                             else
                             {
@@ -385,16 +390,12 @@
 
                         }
                     }
-                    else if(s == "\"" && quoted_string_flag)
+                    else if((s == "\"") && quoted_string_flag)
                     {
                         _ptree.insert("condition", quoted_string);
                         quoted_string.clear();
-                        quoted_string_flag = false;
+                        quoted_string_flag = quoted_string_flag == false ? true : false;
                         
-                    }
-                    else if(s == "\"" && !quoted_string_flag)
-                    {
-                        quoted_string_flag = true;
                     }
 
                     break;
