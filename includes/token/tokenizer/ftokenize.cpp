@@ -11,7 +11,7 @@ FTokenizer::FTokenizer(char* fname)
         _pos = 0;
         //setting up stokenizer
         _more = get_new_block();
-;
+
 
 
 

@@ -16,7 +16,7 @@ using namespace std;
 
 
 
-const int MAKE_TABLE_COMMANDS = 12;
+const int MAKE_TABLE_COMMANDS = 15;
 const int SELECT_COMMANDS = 21;
 
 bool sql_basic(bool debug = false)
@@ -38,6 +38,8 @@ bool sql_basic(bool debug = false)
 /*10*/     "insert into student values \"Mary Ann\",   Davis,	Math,	30",
 /*11*/     "insert into student values John,           Marks,	CS,	     22",
 /*12*/     "insert into student values \"Benny\",	     Barker, 	Science,	24",
+/*13*/     "insert into student values \"Tommy\",  Jackson, 	CS, 		40",
+/*14*/     "insert into student values \"Sornuel\",	     Jackson, 	Math,	27",
 
 
 /*11*/     "select * from employee",
@@ -68,16 +70,10 @@ bool sql_basic(bool debug = false)
      }
 
      
-     
-     for (int i = MAKE_TABLE_COMMANDS; i < command_list.size(); i++)
-     {
-          cout << "\n>" << command_list[i] << endl;
-          if (debug)
-               cout<< sql.command(command_list[i])<<endl;
-          else
-               t = sql.command(command_list[i]);
-          cout << "basic_test: records selected: "<<sql.select_recnos() << endl;
-     }
+     cout << sql.command("select * from employee") << endl;
+
+     cout << "select * from student where fname > \"Samuel L.\"" << endl;
+     cout << sql.command("select * from student where fname > \"Sammuel L.\"") << endl;
 
      cout << "----- END TEST --------" << endl;
      return true;

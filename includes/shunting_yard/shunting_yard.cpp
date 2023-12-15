@@ -87,6 +87,13 @@ Queue<Token *> ShuntingYard::postfix()
         operator_stack.pop();
     }
 
+    for(Token *t : result_queue)
+    {
+        cout << "[" << t->get_value() << "]" << " ";
+    }
+
+    cout << endl;
+
     return result_queue;
 }
 

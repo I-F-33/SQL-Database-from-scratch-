@@ -372,7 +372,16 @@
                         }
                         else
                         {
-                            quoted_string = quoted_string + " " + s;
+                            if(s == "." || s == "_")
+                            {
+                                quoted_string = quoted_string + s;
+
+                            }
+                            else
+                            {
+                                quoted_string = quoted_string + " " + s;
+
+                            }
 
                         }
                     }

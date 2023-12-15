@@ -339,6 +339,8 @@ Table::Table(const std::string& fname, const vectorstr& ftype): totalrecnums(0),
 
         Queue<Token*> postfix = sy.postfix();
 
+       
+
         return select(columns, postfix);
         
 

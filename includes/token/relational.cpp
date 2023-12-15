@@ -47,7 +47,8 @@ ResultSet* Relational::eval(Map<string,int> field_names, vector<MMap<string,long
             {
                 MPair<string,long> m = *begin;
                 if(m.key > static_cast<TokenStr *>(right)->get_value())
-                {
+                {   
+                    cout << "m.key: " << m.key << endl;
                     for(long element : m.value_list)
                     {
                         recnos.push_back(element);
