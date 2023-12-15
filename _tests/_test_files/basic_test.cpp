@@ -59,21 +59,21 @@ bool sql_basic(bool debug = false)
 
      Table t;
 
-     cout << ">" << command_list[0] << endl;
      sql.command(command_list[0]);
      cout << "basic_test: table created." << endl<<endl;
 
      for (int i = 1; i < MAKE_TABLE_COMMANDS; i++)
      {
-          cout << ">" << command_list[i] << endl;
           sql.command(command_list[i]);
      }
 
      
-     cout << sql.command("select * from employee") << endl;
-
-     cout << "select * from student where fname > \"Samuel L.\"" << endl;
-     cout << sql.command("select * from student where fname > \"Sammuel L.\"") << endl;
+     cout << sql.command("select * from student") << endl;
+     
+     cout << "testing: x or y and z" << endl;
+     cout << "select * from student where fname <= \"Benny\"" << endl;
+     cout << sql.command("select * from student where fname > B") << endl;
+     cout << sql.select_recnos() << endl;
 
      cout << "----- END TEST --------" << endl;
      return true;
