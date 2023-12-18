@@ -35,7 +35,7 @@ Queue<Token *> ShuntingYard::postfix()
                     if(operator_stack.top()->TypeOf() == LOGICAL)
                     {   
                         //if the top of the stack has higher precedence than the token, push it to the queue
-                        if(static_cast<Logical*>(operator_stack.top())->get_prec() > static_cast<Logical*>(token)->get_prec())
+                        if(static_cast<Logical*>(operator_stack.top())->get_prec() >= static_cast<Logical*>(token)->get_prec())
                         {
                             result_queue.push(operator_stack.pop());
                         }
@@ -84,7 +84,7 @@ Queue<Token *> ShuntingYard::postfix()
         if(operator_stack.top()->TypeOf() != LEFTPAREN && operator_stack.top()->TypeOf() != RIGHTPAREN)
             result_queue.push(operator_stack.pop());
         else
-        operator_stack.pop();
+            operator_stack.pop();
     }
 
     for(Token *t : result_queue)

@@ -44,9 +44,8 @@ using namespace std;
      
     }
  
- cout << "select x or y and z" << endl;
- cout << sql.command("select from players where rank >= 2 or age < 25 and team > B") << endl;
-
+ cout << "select where (x and y) or (p or q) and z" << endl;
+ cout << sql.command("select * from players where lname < Godert") << endl;
   }
   
   return true;

@@ -72,8 +72,9 @@ bool sql_basic(bool debug = false)
      
      cout << "testing: x or y and z" << endl;
      cout << "select * from student where fname <= \"Benny\"" << endl;
-     cout << sql.command("select * from student where fname > B") << endl;
+     cout << sql.command("select * from student where (lname < \"Mary Ann\") and age < 24 and (lname < B or major > Math)") << endl;
      cout << sql.select_recnos() << endl;
+
 
      cout << "----- END TEST --------" << endl;
      return true;
